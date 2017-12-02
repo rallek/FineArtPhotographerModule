@@ -1,0 +1,6 @@
+{# Purpose of this template: Display album items within an external context #}
+{% for albumItem in items %}
+    <h3>{{ albumItem|rkfineartphotographermodule_formattedTitle }}</h3>
+    <p><a href="{{ path('rkfineartphotographermodule_albumitem_display', {'id': albumItem.getId()}) }}" title="{{ __('Read more')|e('html_attr') }}">{{ __('Read more') }}</a>
+    </p>
+{% endfor %}

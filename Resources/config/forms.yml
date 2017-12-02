@@ -1,0 +1,121 @@
+services:
+    # Form types
+    
+    rk_fineartphotographer_module.form.type.albumquicknav:
+        class: RK\FineArtPhotographerModule\Form\Type\QuickNavigation\AlbumQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.listentries_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.albumitemquicknav:
+        class: RK\FineArtPhotographerModule\Form\Type\QuickNavigation\AlbumItemQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+            - "@rk_fineartphotographer_module.listentries_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.handler.common:
+        abstract: true
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@form.factory"
+            - "@request_stack"
+            - "@router"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_users_module.current_user"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.controller_helper"
+            - "@rk_fineartphotographer_module.model_helper"
+            - "@rk_fineartphotographer_module.workflow_helper"
+            - "@rk_fineartphotographer_module.hook_helper"
+            - "@rk_fineartphotographer_module.translatable_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        calls:
+            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
+    
+    
+    rk_fineartphotographer_module.form.handler.album:
+        class: RK\FineArtPhotographerModule\Form\Handler\Album\EditHandler
+        parent: rk_fineartphotographer_module.form.handler.common
+    
+    rk_fineartphotographer_module.form.type.album:
+        class: RK\FineArtPhotographerModule\Form\Type\AlbumType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.collection_filter_helper"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_fineartphotographer_module.translatable_helper"
+            - "@rk_fineartphotographer_module.listentries_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.handler.albumitem:
+        class: RK\FineArtPhotographerModule\Form\Handler\AlbumItem\EditHandler
+        parent: rk_fineartphotographer_module.form.handler.common
+    
+    rk_fineartphotographer_module.form.type.albumitem:
+        class: RK\FineArtPhotographerModule\Form\Type\AlbumItemType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.collection_filter_helper"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_fineartphotographer_module.translatable_helper"
+            - "@rk_fineartphotographer_module.listentries_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.block.itemlist:
+        class: RK\FineArtPhotographerModule\Block\Form\Type\ItemListBlockType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.block.item:
+        class: RK\FineArtPhotographerModule\Block\Form\Type\ItemBlockType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.albumfinder:
+        class: RK\FineArtPhotographerModule\Form\Type\Finder\AlbumFinderType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.albumitemfinder:
+        class: RK\FineArtPhotographerModule\Form\Type\Finder\AlbumItemFinderType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+        tags:
+            - { name: form.type }
+    
+    rk_fineartphotographer_module.form.type.config:
+        class: RK\FineArtPhotographerModule\Form\Type\ConfigType
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.listentries_helper"
+        tags:
+            - { name: form.type }

@@ -1,0 +1,122 @@
+services:
+    # Helper services
+    rk_fineartphotographer_module.category_helper:
+        class: RK\FineArtPhotographerModule\Helper\CategoryHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_categories_module.category_registry_repository"
+            - "@zikula_categories_module.api.category_permission"
+    
+    rk_fineartphotographer_module.collection_filter_helper:
+        class: RK\FineArtPhotographerModule\Helper\CollectionFilterHelper
+        arguments:
+            - "@request_stack"
+            - "@zikula_users_module.current_user"
+            - "@rk_fineartphotographer_module.category_helper"
+            - "@=service('zikula_extensions_module.api.variable').get('RKFineArtPhotographerModule', 'showOnlyOwnEntries', false)"
+    
+    rk_fineartphotographer_module.controller_helper:
+        class: RK\FineArtPhotographerModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@router"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.collection_filter_helper"
+            - "@rk_fineartphotographer_module.model_helper"
+            - "@rk_fineartphotographer_module.image_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+    
+    rk_fineartphotographer_module.entity_display_helper:
+        class: RK\FineArtPhotographerModule\Helper\EntityDisplayHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@rk_fineartphotographer_module.listentries_helper"
+    
+    rk_fineartphotographer_module.feature_activation_helper:
+        class: RK\FineArtPhotographerModule\Helper\FeatureActivationHelper
+    
+    rk_fineartphotographer_module.hook_helper:
+        class: RK\FineArtPhotographerModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    rk_fineartphotographer_module.image_helper:
+        class: RK\FineArtPhotographerModule\Helper\ImageHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@zikula_extensions_module.api.variable"
+    
+    rk_fineartphotographer_module.listentries_helper:
+        class: RK\FineArtPhotographerModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    rk_fineartphotographer_module.model_helper:
+        class: RK\FineArtPhotographerModule\Helper\ModelHelper
+        arguments:
+            - "@rk_fineartphotographer_module.entity_factory"
+    
+    rk_fineartphotographer_module.search_helper:
+        class: RK\FineArtPhotographerModule\Helper\SearchHelper
+        arguments:
+            - "@translator.default"
+            - "@zikula_permissions_module.api.permission"
+            - "@session"
+            - "@request_stack"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.controller_helper"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+            - "@rk_fineartphotographer_module.category_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: RKFineArtPhotographerModule }
+    
+    rk_fineartphotographer_module.translatable_helper:
+        class: RK\FineArtPhotographerModule\Helper\TranslatableHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_settings_module.locale_api"
+            - "@rk_fineartphotographer_module.entity_factory"
+    
+    rk_fineartphotographer_module.upload_helper:
+        class: RK\FineArtPhotographerModule\Helper\UploadHelper
+        arguments:
+            - "@translator.default"
+            - "@filesystem"
+            - "@session"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@=service('zikula_extensions_module.api.variable').getAll('RKFineArtPhotographerModule')"
+            - "%datadir%"
+    
+    rk_fineartphotographer_module.view_helper:
+        class: RK\FineArtPhotographerModule\Helper\ViewHelper
+        arguments:
+            - "@twig"
+            - "@twig.loader"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_core.common.theme.pagevars"
+            - "@rk_fineartphotographer_module.controller_helper"
+    
+    rk_fineartphotographer_module.workflow_helper:
+        class: RK\FineArtPhotographerModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@workflow.registry"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_users_module.current_user"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@rk_fineartphotographer_module.listentries_helper"

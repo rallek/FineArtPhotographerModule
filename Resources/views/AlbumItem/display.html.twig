@@ -1,0 +1,75 @@
+{# purpose of this template: album items user display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : 'base' %}
+{% extends 'RKFineArtPhotographerModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ albumItem|rkfineartphotographermodule_formattedTitle|default(__('Album item')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = albumItem|rkfineartphotographermodule_formattedTitle|default(__('Album item')) %}
+    {{ templateTitle|notifyFilters('rkfineartphotographermodule.filter_hooks.albumitems.filter')|safeHtml }}{% if routeArea == 'admin' %} <small>({{ albumItem.workflowState|rkfineartphotographermodule_objectState(false)|lower }})</small>{% endif %}
+{% endblock %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="rkfineartphotographermodule-albumitem rkfineartphotographermodule-display">
+
+    {% set itemActions = knp_menu_get('RKFineArtPhotographerModule:ItemActionsMenu:menu', [], {entity: albumItem, area: routeArea, context: 'display'}) %}
+    <div class="btn-group btn-group-sm item-actions" role="group" aria-label="{{ __('Actions') }}">
+        {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
+    </div>
+    <dl>
+        {% if albumItem.workflowState is not empty and routeArea == 'admin' %}
+            <dt>{{ __('State') }}</dt>
+            <dd>{{ albumItem.workflowState|rkfineartphotographermodule_listEntry('albumItem', 'workflowState') }}</dd>
+        {% endif %}
+        {% if albumItem.image is not empty %}
+            <dt>{{ __('Image') }}</dt>
+            <dd>{% if albumItem.imageMeta|default %}
+            <a href="{{ albumItem.imageUrl }}" title="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if albumItem.imageMeta.isImage %} class="image-link"{% endif %}>
+            {% if albumItem.imageMeta.isImage %}
+                {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumItemImage') %}
+                <img src="{{ albumItem.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+            {% else %}
+                {{ __('Download') }} ({{ albumItem.imageMeta.size|rkfineartphotographermodule_fileSize(albumItem.image.getPathname(), false, false) }})
+            {% endif %}
+            </a>
+            {% endif %}
+            </dd>
+        {% endif %}
+        {% if albumItem.imageTitle is not empty %}
+            <dt>{{ __('Image title') }}</dt>
+            <dd>{{ albumItem.imageTitle }}</dd>
+        {% endif %}
+        {% if albumItem.imageDescription is not empty %}
+            <dt>{{ __('Image description') }}</dt>
+            <dd>{{ albumItem.imageDescription|safeHtml }}</dd>
+        {% endif %}
+        {% if albumItem.album|default %}
+            <dt>{{ __('Album') }}</dt>
+            <dd>
+              {% if not isQuickView %}
+                  <a href="{{ path('rkfineartphotographermodule_album_' ~ routeArea ~ 'display', {'id': albumItem.album.getId()}) }}">{% spaceless %}
+                    {{ albumItem.album|rkfineartphotographermodule_formattedTitle }}
+                  {% endspaceless %}</a>
+                  <a id="albumItem{{ albumItem.album.getKey() }}Display" href="{{ path('rkfineartphotographermodule_album_' ~ routeArea ~ 'display', {'id': albumItem.album.getId(), raw: 1}) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="rkfineartphotographer-inline-window hidden" data-modal-title="{{ albumItem.album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"><i class="fa fa-id-card-o"></i></a>
+              {% else %}
+                  {{ albumItem.album|rkfineartphotographermodule_formattedTitle }}
+              {% endif %}
+            </dd>
+        {% endif %}
+        
+    </dl>
+
+    {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
+        {{ include('@RKFineArtPhotographerModule/Helper/includeCategoriesDisplay.html.twig', {obj: albumItem}) }}
+    {% endif %}
+    {{ include('@RKFineArtPhotographerModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: albumItem}) }}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='rkfineartphotographermodule.ui_hooks.albumitems.display_view', id=albumItem.getKey(), urlObject=currentUrlObject, outputAsArray=true) %}
+    {% if hooks is iterable and hooks|length > 0 %}
+        {% for area, hook in hooks %}
+            <div class="z-displayhook" data-area="{{ area|e('html_attr') }}">{{ hook|raw }}</div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

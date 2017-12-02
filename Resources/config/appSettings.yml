@@ -1,0 +1,5 @@
+services:
+    rk_fineartphotographer_module.app_settings:
+        class: RK\FineArtPhotographerModule\AppSettings
+        arguments:
+            - "@zikula_extensions_module.api.variable"

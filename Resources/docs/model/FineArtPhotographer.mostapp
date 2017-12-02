@@ -1,0 +1,90 @@
+application "FineArtPhotographer" {
+    vendor "RK"
+    author "Ralf Koester"
+    email "ralf@familie-koester.de"
+    url "http://k62.de"
+    prefix "faph"
+    generatorSettings {
+        settingsContainer "Settings"
+        targetCoreVersion ZK15
+        generateModerationBlock false
+        generateModerationPanel false
+        generatePendingContentSupport false
+        generateCsvTemplates false
+        generateXmlTemplates false
+        generateJsonTemplates false
+        generateKmlTemplates false
+        generateIcsTemplates false
+        filterHookProvider ENABLED
+        separateAdminTemplates true
+        viewActionsStyle BUTTON_GROUP
+        displayActionsStyle BUTTON_GROUP
+    }
+    entities {
+        entity "album" leading categorisable {
+            nameMultiple "albums"
+            displayPattern "#albumDate#, #albumTitle#"
+            hasArchive false
+            ownerPermission true
+            formAwareHookProvider ENABLED
+            uiHooksProvider ENABLED
+            fields {
+                string "albumTitle" translatable {
+                    documentation "Choose a title for your album. The event name seem to be a good choice."
+                },
+                datetime "albumDate" translatable {
+                    components DATE
+                },
+                text "albumDescription" translatable {
+                    mandatory false
+                    displayType DISPLAY
+                }
+            ,
+                upload "albumImage" {
+                    minRatio 2.95
+                    maxRatio 3.05
+                    allowSquare false
+                    allowPortrait false
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            ,
+                deleteAction "Delete"
+            }
+        },
+        entity "albumItem" categorisable {
+            nameMultiple "albumItems"
+            displayPattern "#imageTitel#"
+            ownerPermission true
+            fields {
+                upload "image",
+                string "imageTitle" translatable {
+                    mandatory false
+                }
+            ,
+                text "imageDescription" translatable {
+                    mandatory false
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit",
+                deleteAction "Delete"
+            }
+        }
+    }
+    relations {
+        one2many bidirectional {
+            source "album"
+            sourceAlias "album"
+            target "albumItem"
+            targetAlias "albumItems"
+        }
+    }
+}

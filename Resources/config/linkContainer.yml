@@ -1,0 +1,11 @@
+services:
+    rk_fineartphotographer_module.link_container:
+        class: RK\FineArtPhotographerModule\Container\LinkContainer
+        arguments:
+            - "@translator.default"
+            - "@router"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_fineartphotographer_module.controller_helper"
+        tags:
+            - { name: zikula.link_container }

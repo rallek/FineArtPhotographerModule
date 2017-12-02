@@ -1,0 +1,61 @@
+{# Purpose of this template: Display one certain album item within an external context #}
+{{ pageAddAsset('javascript', asset('magnific-popup/jquery.magnific-popup.min.js')) }}
+{{ pageAddAsset('stylesheet', asset('magnific-popup/magnific-popup.css')) }}
+{{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.js')) }}
+<div id="albumItem{{ albumItem.getKey() }}" class="rkfineartphotographermodule-external-albumitem">
+{% if displayMode == 'link' %}
+    <p class="rkfineartphotographermodule-external-link">
+    <a href="{{ path('rkfineartphotographermodule_albumitem_display', {'id': albumItem.getId()}) }}" title="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}">
+    {{ albumItem|rkfineartphotographermodule_formattedTitle|notifyFilters('fineartphotographer.filter_hooks.albumitems.filter')|safeHtml }}
+    </a>
+    </p>
+{% endif %}
+{% if hasPermission('RKFineArtPhotographerModule::', '::', 'ACCESS_EDIT') %}
+    {# for normal users without edit permission show only the actual file per default #}
+    {% if displayMode == 'embed' %}
+        <p class="rkfineartphotographermodule-external-title">
+            <strong>{{ albumItem|rkfineartphotographermodule_formattedTitle|notifyFilters('fineartphotographer.filter_hooks.albumitems.filter')|safeHtml }}</strong>
+        </p>
+    {% endif %}
+{% endif %}
+
+{% if displayMode == 'link' %}
+{% elseif displayMode == 'embed' %}
+    <div class="rkfineartphotographermodule-external-snippet">
+        {% if albumItem.imageMeta|default %}
+        <a href="{{ albumItem.imageUrl }}" title="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if albumItem.imageMeta.isImage %} class="image-link"{% endif %}>
+        {% if albumItem.imageMeta.isImage %}
+            {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumItemImage') %}
+            <img src="{{ albumItem.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+        {% else %}
+            {{ __('Download') }} ({{ albumItem.imageMeta.size|rkfineartphotographermodule_fileSize(albumItem.image.getPathname(), false, false) }})
+        {% endif %}
+        </a>
+        {% endif %}
+    </div>
+
+    {# you can distinguish the context like this: #}
+    {# % if source == 'block' %}
+        ... detail block
+    {% elseif source == 'contentType' %}
+        ... detail content type
+    {% elseif source == 'scribite' %}
+        ...
+    {% endif % #}
+
+    {# you can enable more details about the item: #}
+    {#
+        <p class="rkfineartphotographermodule-external-description">
+            {% if albumItem.imageDescription is not empty %}{{ albumItem.imageDescription }}<br />{% endif %}
+            {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
+                <dl class="category-list">
+                {% for propName, catMapping in albumItem.categories %}
+                    <dt>{{ propName }}</dt>
+                    <dd>{{ catMapping.category.display_name[app.request.locale]|default(catMapping.category.name) }}</dd>
+                {% endfor %}
+                </dl>
+            {% endif %}
+        </p>
+    #}
+{% endif %}
+</div>

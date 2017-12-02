@@ -1,0 +1,170 @@
+{# purpose of this template: album items admin list view #}
+{% extends 'RKFineArtPhotographerModule::adminBase.html.twig' %}
+{% block title own ? __('My album items') : __('Album items list') %}
+{% block admin_page_icon 'list-alt' %}
+{% block content %}
+<div class="rkfineartphotographermodule-albumitem rkfineartphotographermodule-view">
+
+    {{ block('page_nav_links') }}
+
+    {{ include('@RKFineArtPhotographerModule/AlbumItem/Admin/viewQuickNav.html.twig') }}{# see template file for available options #}
+
+    {% if routeArea == 'admin' %}
+    <form action="{{ path('rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'handleselectedentries') }}" method="post" id="albumItemsViewForm" class="form-horizontal" role="form">
+        <div>
+    {% endif %}
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover{% if routeArea == 'admin' %} table-condensed{% endif %}">
+            <colgroup>
+                {% if routeArea == 'admin' %}
+                    <col id="cSelect" />
+                {% endif %}
+                <col id="cItemActionsStart" />
+                {% if routeArea == 'admin' %}
+                <col id="cWorkflowState" />
+                {% endif %}
+                <col id="cImage" />
+                <col id="cImageTitle" />
+                <col id="cImageDescription" />
+                <col id="cAlbum" />
+            </colgroup>
+            <thead>
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <th id="hSelect" scope="col" class="text-center z-w02">
+                        <input type="checkbox" class="rkfineartphotographer-mass-toggle" />
+                    </th>
+                {% endif %}
+                <th id="hItemActionsStart" scope="col" class="z-order-unsorted z-w02">{{ __('Actions') }}</th>
+                {% if routeArea == 'admin' %}
+                <th id="hWorkflowState" scope="col" class="text-left">
+                    <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
+                </th>
+                {% endif %}
+                <th id="hImage" scope="col" class="text-left">
+                    <a href="{{ sort.image.url }}" title="{{ __f('Sort by %s', {'%s': 'image'}) }}" class="{{ sort.image.class }}">{{ __('Image') }}</a>
+                </th>
+                <th id="hImageTitle" scope="col" class="text-left">
+                    <a href="{{ sort.imageTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'image title'}) }}" class="{{ sort.imageTitle.class }}">{{ __('Image title') }}</a>
+                </th>
+                <th id="hImageDescription" scope="col" class="text-left">
+                    <a href="{{ sort.imageDescription.url }}" title="{{ __f('Sort by %s', {'%s': 'image description'}) }}" class="{{ sort.imageDescription.class }}">{{ __('Image description') }}</a>
+                </th>
+                <th id="hAlbum" scope="col" class="text-left">
+                    <a href="{{ sort.album.url }}" title="{{ __f('Sort by %s', {'%s': 'album'}) }}" class="{{ sort.album.class }}">{{ __('Album') }}</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+        
+        {% for albumItem in items %}
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <td headers="hSelect" class="text-center z-w02">
+                        <input type="checkbox" name="items[]" value="{{ albumItem.getKey() }}" class="rkfineartphotographer-toggle-checkbox" />
+                    </td>
+                {% endif %}
+                <td id="itemActions{{ albumItem.getKey() }}Start" headers="hItemActionsStart" class="actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('RKFineArtPhotographerModule:ItemActionsMenu:menu', [], {entity: albumItem, area: routeArea, context: 'view'}) %}
+                    <div class="btn-group-vertical btn-group-sm item-actions" role="group" aria-label="{{ __('Actions') }}">
+                        {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
+                    </div>
+                </td>
+                {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
+                    {{ albumItem.workflowState|rkfineartphotographermodule_objectState }}
+                </td>
+                {% endif %}<td headers="hImage" class="text-left">
+                    {% if albumItem.imageMeta|default %}
+                    <a href="{{ albumItem.imageUrl }}" title="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if albumItem.imageMeta.isImage %} class="image-link"{% endif %}>
+                    {% if albumItem.imageMeta.isImage %}
+                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumItemImage') %}
+                        <img src="{{ albumItem.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+                    {% else %}
+                        {{ __('Download') }} ({{ albumItem.imageMeta.size|rkfineartphotographermodule_fileSize(albumItem.image.getPathname(), false, false) }})
+                    {% endif %}
+                    </a>
+                    {% endif %}
+                </td>
+                <td headers="hImageTitle" class="text-left">
+                    {{ albumItem.imageTitle }}
+                </td>
+                <td headers="hImageDescription" class="text-left">
+                    {{ albumItem.imageDescription|striptags|truncate(50) }}
+                </td>
+                <td headers="hAlbum" class="text-left">
+                    {% if albumItem.album|default %}
+                        <a href="{{ path('rkfineartphotographermodule_album_' ~ routeArea ~ 'display', {'id': albumItem.album.getId()}) }}">{% spaceless %}
+                          {{ albumItem.album|rkfineartphotographermodule_formattedTitle }}
+                        {% endspaceless %}</a>
+                        <a id="albumItem{{ albumItem.getKey() }}_rel_{{ albumItem.album.getKey() }}Display" href="{{ path('rkfineartphotographermodule_album_' ~ routeArea ~ 'display', {'id': albumItem.album.getId(), raw: 1}) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="rkfineartphotographer-inline-window hidden" data-modal-title="{{ albumItem.album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"><i class="fa fa-id-card-o"></i></a>
+                    {% else %}
+                        {{ __('Not set.') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}7{% else %}6{% endif %}">
+            {{ __('No album items found.') }}
+              </td>
+            </tr>
+        {% endfor %}
+        
+            </tbody>
+        </table>
+        </div>
+        
+        {% if all != 1 and pager|default %}
+            {{ pager({rowcount: pager.amountOfItems, limit: pager.itemsPerPage, display: 'page', route: 'rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'view'}) }}
+        {% endif %}
+    {% if routeArea == 'admin' %}
+            <fieldset>
+                <label for="rKFineArtPhotographerModuleAction" class="col-sm-3 control-label">{{ __('With selected album items') }}</label>
+                <div class="col-sm-6">
+                    <select id="rKFineArtPhotographerModuleAction" name="action" class="form-control input-sm">
+                        <option value="">{{ __('Choose action') }}</option>
+                        <option value="delete" title="{{ __('Delete content permanently.') }}">{{ __('Delete') }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" value="{{ __('Submit') }}" class="btn btn-default btn-sm" />
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    {% endif %}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block page_nav_links %}
+    <p>
+        {% if canBeCreated %}
+            {% if hasPermission('RKFineArtPhotographerModule:AlbumItem:', '::', 'ACCESS_EDIT') %}
+                {% set createTitle = __('Create album item') %}
+                <a href="{{ path('rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'edit') }}" title="{{ createTitle|e('html_attr') }}"><i class="fa fa-plus"></i> {{ createTitle }}</a>
+            {% endif %}
+        {% endif %}
+        {% if all == 1 %}
+            {% set linkTitle = __('Back to paginated view') %}
+            {% set routeArgs = own ? {own: 1} : {} %}
+            <a href="{{ path('rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-table"></i> {{ linkTitle }}</a>
+        {% else %}
+            {% set linkTitle = __('Show all entries') %}
+            {% set routeArgs = own ? {all: 1, own: 1} : {all: 1} %}
+            <a href="{{ path('rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-table"></i> {{ linkTitle }}</a>
+        {% endif %}
+    </p>
+{% endblock %}
+{% block display_hooks %}
+    
+    {# here you can activate calling display hooks for the view page if you need it #}
+    {# % if routeArea != 'admin' %}
+        {% set hooks = notifyDisplayHooks(eventName='rkfineartphotographermodule.ui_hooks.albumitems.display_view', urlObject=currentUrlObject, outputAsArray=true) %}
+        {% if hooks is iterable and hooks|length > 0 %}
+            {% for area, hook in hooks %}
+                <div class="z-displayhook" data-area="{{ area|e('html_attr') }}">{{ hook|raw }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endif % #}
+{% endblock %}

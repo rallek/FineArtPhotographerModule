@@ -1,0 +1,137 @@
+{# purpose of this template: build the user form to edit an instance of album item #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : 'base' %}
+{% extends 'RKFineArtPhotographerModule::' ~ baseTemplate ~ '.html.twig' %}
+
+{% block title mode == 'create' ? __('Create album item') : __('Edit album item') %}
+{% block content %}
+    <div class="rkfineartphotographermodule-albumitem rkfineartphotographermodule-edit">
+        {% form_theme form with [
+            '@RKFineArtPhotographerModule/Form/bootstrap_3.html.twig',
+            'ZikulaFormExtensionBundle:Form:form_div_layout.html.twig'
+        ] %}
+        {{ form_start(form, {attr: {id: 'albumItemEditForm', class: 'rkfineartphotographer-edit-form'}}) }}
+        {{ form_errors(form) }}
+        {% if translationsEnabled == true %}
+            <div class="zikula-bootstrap-tab-container">
+                <ul class="{{ form.vars.id|lower }}-translation-locales nav nav-tabs">
+                    {% for language in supportedLanguages %}
+                        <li{% if language == app.request.locale %} class="active"{% endif %}>
+                            <a href="#" data-toggle="tab" data-target=".{{ form.vars.id|lower }}-translations-fields-{{ language }}">
+                                {% if not form.vars.valid %}
+                                    <span class="label label-danger"><i class="fa fa-warning"></i> <span class="sr-only">{{ __('Errors') }}</span></span>
+                                {% endif %}
+                                {% set hasRequiredFields = language in localesWithMandatoryFields %}
+                                {% if hasRequiredFields %}<span class="required">{% endif %}{{ language|languageName|safeHtml }}{% if hasRequiredFields %}</span>{% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="{{ form.vars.id|lower }}-translation-fields tab-content">
+                    {% for language in supportedLanguages %}
+                        <div class="{{ form.vars.id|lower }}-translations-fields-{{ language }} tab-pane fade{% if language == app.request.locale %} active in{% endif %}">
+                            <fieldset>
+                                <legend>{{ language|languageName|safeHtml }}</legend>
+                                {% if language == app.request.locale %}
+                                    {{ form_row(form.imageTitle) }}
+                                    {{ form_row(form.imageDescription) }}
+                                {% else %}
+                                    {{ form_row(attribute(form, 'translations' ~ language)) }}
+                                {% endif %}
+                            </fieldset>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            {% set language = app.request.locale %}
+            <fieldset>
+                <legend>{{ language|languageName|safeHtml }}</legend>
+                {{ form_row(form.imageTitle) }}
+                {{ form_row(form.imageDescription) }}
+            </fieldset>
+        {% endif %}
+        <fieldset>
+            <legend>{{ __('Further properties') }}</legend>
+            {{ form_row(form.image) }}
+        </fieldset>
+        
+        {{ include(
+            '@RKFineArtPhotographerModule/Album/includeSelectOne.html.twig',
+            {group: 'albumitem', heading: __('Album'), alias: 'album', mandatory: false, idPrefix: 'faphAlbumItem_Album', linkingItem: albumitem, displayMode: 'choices'}
+        ) }}
+        {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
+            {{ include('@RKFineArtPhotographerModule/Helper/includeCategoriesEdit.html.twig', {obj: albumitem}) }}
+        {% endif %}
+        {% if mode != 'create' %}
+            {{ include('@RKFineArtPhotographerModule/Helper/includeStandardFieldsEdit.html.twig', {obj: albumitem}) }}
+        {% endif %}
+        
+        {% if formHookTemplates|length > 0 %}
+            <fieldset>
+                {% for hookTemplate in formHookTemplates %}
+                    {{ include(hookTemplate.0, hookTemplate.1, ignore_missing = true) }}
+                {% endfor %}
+            </fieldset>
+        {% endif %}
+        
+        {% if form.moderationSpecificCreator is defined %}
+            <fieldset id="moderationFieldsSection">
+                <legend>{{ __('Moderation') }} <i class="fa fa-expand"></i></legend>
+                <div id="moderationFieldsContent">
+                    {{ form_row(form.moderationSpecificCreator) }}
+                    {{ form_row(form.moderationSpecificCreationDate) }}
+                </div>
+            </fieldset>
+        {% endif %}
+        
+        
+        {# include possible submit actions #}
+        <div class="form-group form-buttons">
+            <div class="col-sm-offset-3 col-sm-9">
+                {% for action in actions %}
+                    {{ form_widget(attribute(form, action.id)) }}
+                    {% if mode == 'create' and action.id == 'submit' and form.submitrepeat is defined %}
+                        {{ form_widget(attribute(form, 'submitrepeat')) }}
+                    {% endif %}
+                {% endfor %}
+                {{ form_widget(form.reset) }}
+                {{ form_widget(form.cancel) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+        {% set hookId = mode != 'create' ? albumitem.id : null %}
+        {% set hooks = notifyDisplayHooks(eventName='rkfineartphotographermodule.ui_hooks.albumitems.form_edit', id=hookId, outputAsArray=true) %}
+        {% if hooks is iterable and hooks|length > 0 %}
+            {% for area, hook in hooks %}
+                <div class="z-displayhook" data-area="{{ area|e('html_attr') }}">{{ hook|raw }}</div>
+            {% endfor %}
+        {% endif %}
+        
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.Validation.js'), 98) }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.EditFunctions.js'), 99) }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.InlineEditing.js'), 99) }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.AutoCompletion.js'), 99) }}
+    {% set formInitScript %}
+        <script>
+        /* <![CDATA[ */
+            var rKFineArtPhotographerInlineEditHandlers = [];
+            var rKFineArtPhotographerEditHandler = null;
+            
+            ( function($) {
+                $(document).ready(function() {
+                    rKFineArtPhotographerInitEditForm('{{ mode }}', '{% if mode != 'create' %}{{ albumitem.id }}{% endif %}');
+                    rKFineArtPhotographerInitUploadField('rkfineartphotographermodule_albumitem_image_image');
+                    {% if form.moderationSpecificCreator is defined %}
+                        initUserLiveSearch('rkfineartphotographermodule_albumitem_moderationSpecificCreator');
+                    {% endif %}
+                });
+            })(jQuery);
+        /* ]]> */
+        </script>
+    {% endset %}
+    {{ pageAddAsset('footer', formInitScript) }}
+{% endblock %}

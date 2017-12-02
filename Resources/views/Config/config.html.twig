@@ -1,0 +1,146 @@
+{# purpose of this template: module configuration page #}
+{% extends 'RKFineArtPhotographerModule::adminBase.html.twig' %}
+{% block title __('Settings') %}
+{% block admin_page_icon 'wrench' %}
+{% block content %}
+    <div class="rkfineartphotographermodule-config">
+        {% form_theme form with [
+            '@RKFineArtPhotographerModule/Form/bootstrap_3.html.twig',
+            'ZikulaFormExtensionBundle:Form:form_div_layout.html.twig'
+        ] %}
+        {{ form_start(form) }}
+        <div class="zikula-bootstrap-tab-container">
+            <ul class="nav nav-tabs">
+                {% set tabTitle = __('List views') %}
+                <li role="presentation" class="active">
+                    <a id="vars1Tab" href="#tab1" title="{{ tabTitle|e('html_attr') }}" role="tab" data-toggle="tab">{{ tabTitle }}</a>
+                </li>
+                {% set tabTitle = __('Images') %}
+                <li role="presentation" class=" dropdown">
+                    <a id="imagesTabDrop" class="dropdown-toggle" href="#" data-toggle="dropdown" aria-controls="imagesTabDropSections" aria-expanded="false" title="{{ tabTitle|e('html_attr') }}">{{ tabTitle }}<span class="caret"></span></a>
+                    <ul id="imagesTabDropSections" class="dropdown-menu" aria-labelledby="imagesTabDrop">
+                    <li>
+                        <a id="imagesAlbumAlbumImageTab" href="#tabImagesAlbumAlbumImage" role="tab" data-toggle="tab" aria-controls="tabImagesAlbumAlbumImage">{{ __('Albums album image') }}</a>
+                    </li>
+                    <li>
+                        <a id="imagesAlbumItemImageTab" href="#tabImagesAlbumItemImage" role="tab" data-toggle="tab" aria-controls="tabImagesAlbumItemImage">{{ __('Album items image') }}</a>
+                    </li>
+                    </ul>
+                </li>
+                {% set tabTitle = __('Integration') %}
+                <li role="presentation">
+                    <a id="vars3Tab" href="#tab3" title="{{ tabTitle|e('html_attr') }}" role="tab" data-toggle="tab">{{ tabTitle }}</a>
+                </li>
+                {% set tabTitle = __('Workflows') %}
+                <li role="presentation">
+                    <a id="workflowsTab" href="#tabWorkflows" title="{{ tabTitle|e('html_attr') }}" role="tab" data-toggle="tab">{{ tabTitle }}</a>
+                </li>
+            </ul>
+
+            {{ form_errors(form) }}
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="tab1" aria-labelledby="vars1Tab">
+                    {% set tabTitle = __('List views') %}
+                    <fieldset>
+                        <legend>{{ tabTitle }}</legend>
+                    
+                        <p class="alert alert-info">{{ __('Here you can configure parameters for list views.')|nl2br }}</p>
+                    
+                        {{ form_row(form.albumEntriesPerPage) }}
+                        {{ form_row(form.linkOwnAlbumsOnAccountPage) }}
+                        {{ form_row(form.albumItemEntriesPerPage) }}
+                        {{ form_row(form.linkOwnAlbumItemsOnAccountPage) }}
+                    </fieldset>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tabImagesAlbumAlbumImage" aria-labelledby="imagesAlbumAlbumImageTab">
+                    {% set tabTitle = __('Image settings for albums album image') %}
+                    <fieldset>
+                        <legend>{{ tabTitle }}</legend>
+                
+                        {{ form_row(form.enableShrinkingForAlbumAlbumImage) }}
+                        <div id="shrinkDetailsAlbumAlbumImage">
+                        {{ form_row(form.shrinkWidthAlbumAlbumImage) }}
+                        {{ form_row(form.shrinkHeightAlbumAlbumImage) }}
+                        </div>
+                        {{ form_row(form.thumbnailModeAlbumAlbumImage) }}
+                        {{ form_row(form.thumbnailWidthAlbumAlbumImageView) }}
+                        {{ form_row(form.thumbnailHeightAlbumAlbumImageView) }}
+                        {{ form_row(form.thumbnailWidthAlbumAlbumImageDisplay) }}
+                        {{ form_row(form.thumbnailHeightAlbumAlbumImageDisplay) }}
+                        {{ form_row(form.thumbnailWidthAlbumAlbumImageEdit) }}
+                        {{ form_row(form.thumbnailHeightAlbumAlbumImageEdit) }}
+                    </fieldset>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tabImagesAlbumItemImage" aria-labelledby="imagesAlbumItemImageTab">
+                    {% set tabTitle = __('Image settings for album items image') %}
+                    <fieldset>
+                        <legend>{{ tabTitle }}</legend>
+                
+                        {{ form_row(form.enableShrinkingForAlbumItemImage) }}
+                        <div id="shrinkDetailsAlbumItemImage">
+                        {{ form_row(form.shrinkWidthAlbumItemImage) }}
+                        {{ form_row(form.shrinkHeightAlbumItemImage) }}
+                        </div>
+                        {{ form_row(form.thumbnailModeAlbumItemImage) }}
+                        {{ form_row(form.thumbnailWidthAlbumItemImageView) }}
+                        {{ form_row(form.thumbnailHeightAlbumItemImageView) }}
+                        {{ form_row(form.thumbnailWidthAlbumItemImageDisplay) }}
+                        {{ form_row(form.thumbnailHeightAlbumItemImageDisplay) }}
+                        {{ form_row(form.thumbnailWidthAlbumItemImageEdit) }}
+                        {{ form_row(form.thumbnailHeightAlbumItemImageEdit) }}
+                    </fieldset>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab3" aria-labelledby="vars3Tab">
+                    {% set tabTitle = __('Integration') %}
+                    <fieldset>
+                        <legend>{{ tabTitle }}</legend>
+                    
+                        <p class="alert alert-info">{{ __('These options allow you to configure integration aspects.')|nl2br }}</p>
+                    
+                        {{ form_row(form.enabledFinderTypes) }}
+                    </fieldset>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tabWorkflows" aria-labelledby="workflowsTab">
+                    {% set tabTitle = __('Workflows') %}
+                    <fieldset>
+                        <legend>{{ tabTitle }}</legend>
+                
+                        <p class="alert alert-info">{{ __('Here you can inspect and amend the existing workflows.') }}</p>
+                
+                        <h4>{{ __('Albums') }}</h4>
+                        <p><a href="{{ path('zikula_workflow_editor_index', {workflow: 'rkfineartphotographermodule_none'}) }}" title="{{ __('Edit workflow for albums') }}" target="_blank"><i class="fa fa-cubes"></i> {{ __('Edit albums workflow') }}</a>
+                        <h4>{{ __('Album items') }}</h4>
+                        <p><a href="{{ path('zikula_workflow_editor_index', {workflow: 'rkfineartphotographermodule_none'}) }}" title="{{ __('Edit workflow for album items') }}" target="_blank"><i class="fa fa-cubes"></i> {{ __('Edit album items workflow') }}</a>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-buttons">
+            <div class="col-sm-offset-3 col-sm-9">
+                {{ form_widget(form.save) }}
+                {{ form_widget(form.reset) }}
+                {{ form_widget(form.cancel) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.Config.js')) }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.Validation.js'), 98) }}
+    {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.EditFunctions.js'), 99) }}
+    {% set formInitScript %}
+        <script>
+        /* <![CDATA[ */
+            ( function($) {
+                $(document).ready(function() {
+                    rKFineArtPhotographerInitEditForm('edit', '1');
+                });
+            })(jQuery);
+        /* ]]> */
+        </script>
+    {% endset %}
+    {{ pageAddAsset('footer', formInitScript) }}
+{% endblock %}

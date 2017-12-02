@@ -1,0 +1,51 @@
+body {
+    background-color: #ddd;
+    margin: 10px;
+    text-align: left;
+}
+
+#rkfineartphotographermoduleItemContainer {
+    background-color: #eee;
+    height: 300px;
+    overflow: auto;
+    padding: 5px;
+}
+
+#rkfineartphotographermoduleItemContainer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#rkfineartphotographermoduleItemContainer a {
+    color: #000;
+    margin: 0.1em 0.2em;
+    text-decoration: underline;
+}
+#rkfineartphotographermoduleItemContainer a:hover,
+#rkfineartphotographermoduleItemContainer a:focus,
+#rkfineartphotographermoduleItemContainer a:active {
+    color: #900;
+    text-decoration: none;
+}
+
+#rkfineartphotographermoduleItemContainer a img {
+    border: none;
+}
+
+#rkfineartphotographermoduleItemContainer a img {
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    padding: 0.5em;
+}
+#rkfineartphotographermoduleItemContainer a:hover img,
+#rkfineartphotographermoduleItemContainer a:focus img,
+#rkfineartphotographermoduleItemContainer a:active img {
+    background-color: #fff;
+}
+
+.rkfineartphotographermodule-finderform fieldset,
+.rkfineartphotographermodule-finderform fieldset legend {
+    background-color: #fff;
+    border: none;
+}

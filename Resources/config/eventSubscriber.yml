@@ -1,0 +1,88 @@
+services:
+    # Event subscribers and listeners
+    rk_fineartphotographer_module.entity_lifecycle_listener:
+        class: RK\FineArtPhotographerModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+            - "@event_dispatcher"
+            - "@logger"
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    rk_fineartphotographer_module.kernel_listener:
+        class: RK\FineArtPhotographerModule\Listener\KernelListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.installer_listener:
+        class: RK\FineArtPhotographerModule\Listener\InstallerListener
+        arguments:
+            - "@rk_fineartphotographer_module.entity_factory"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.moduledispatch_listener:
+        class: RK\FineArtPhotographerModule\Listener\ModuleDispatchListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.mailer_listener:
+        class: RK\FineArtPhotographerModule\Listener\MailerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.theme_listener:
+        class: RK\FineArtPhotographerModule\Listener\ThemeListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.userlogin_listener:
+        class: RK\FineArtPhotographerModule\Listener\UserLoginListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.userlogout_listener:
+        class: RK\FineArtPhotographerModule\Listener\UserLogoutListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.user_listener:
+        class: RK\FineArtPhotographerModule\Listener\UserListener
+        arguments:
+            - "@translator.default"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@zikula_users_module.current_user"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.userregistration_listener:
+        class: RK\FineArtPhotographerModule\Listener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.users_listener:
+        class: RK\FineArtPhotographerModule\Listener\UsersListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.group_listener:
+        class: RK\FineArtPhotographerModule\Listener\GroupListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.thirdparty_listener:
+        class: RK\FineArtPhotographerModule\Listener\ThirdPartyListener
+        arguments:
+            - "@filesystem"
+            - "@request_stack"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_fineartphotographer_module.workflow_events_listener:
+        class: RK\FineArtPhotographerModule\Listener\WorkflowEventsListener
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+        tags:
+            - { name: kernel.event_subscriber }
+    

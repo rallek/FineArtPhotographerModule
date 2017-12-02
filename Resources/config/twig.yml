@@ -1,0 +1,13 @@
+services:
+    # Twig extension
+    rk_fineartphotographer_module.twig_extension:
+        class: RK\FineArtPhotographerModule\Twig\TwigExtension
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_fineartphotographer_module.entity_display_helper"
+            - "@rk_fineartphotographer_module.workflow_helper"
+            - "@rk_fineartphotographer_module.listentries_helper"
+        public: false
+        tags:
+            - { name: twig.extension }

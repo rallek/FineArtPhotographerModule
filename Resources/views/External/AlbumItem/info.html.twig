@@ -1,0 +1,26 @@
+{# Purpose of this template: Display item information for previewing from other modules #}
+<dl id="albumItem{{ albumItem.getKey() }}">
+<dt>{{ albumItem|rkfineartphotographermodule_formattedTitle|notifyFilters('fineartphotographer.filter_hooks.albumitems.filter')|safeHtml }}</dt>
+<dd>{% if albumItem.imageMeta|default %}
+<a href="{{ albumItem.imageUrl }}" title="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if albumItem.imageMeta.isImage %} class="image-link"{% endif %}>
+{% if albumItem.imageMeta.isImage %}
+    {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumItemImage') %}
+    <img src="{{ albumItem.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+{% else %}
+    {{ __('Download') }} ({{ albumItem.imageMeta.size|rkfineartphotographermodule_fileSize(albumItem.image.getPathname(), false, false) }})
+{% endif %}
+</a>
+{% endif %}
+</dd>
+{% if albumItem.imageDescription is not empty %}<dd>{{ albumItem.imageDescription }}</dd>{% endif %}
+{% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
+    <dd>
+        <dl class="category-list">
+        {% for propName, catMapping in albumItem.categories %}
+            <dt>{{ propName }}</dt>
+            <dd>{{ catMapping.category.display_name[app.request.locale]|default(catMapping.category.name) }}</dd>
+        {% endfor %}
+        </dl>
+    </dd>
+{% endif %}
+</dl>

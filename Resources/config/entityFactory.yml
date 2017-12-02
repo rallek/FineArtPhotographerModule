@@ -1,0 +1,13 @@
+services:
+    # Entity factory
+    rk_fineartphotographer_module.entity_factory:
+        class: RK\FineArtPhotographerModule\Entity\Factory\EntityFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@rk_fineartphotographer_module.entity_initialiser"
+            - "@rk_fineartphotographer_module.collection_filter_helper"
+            - "@rk_fineartphotographer_module.feature_activation_helper"
+    
+    # Entity initialiser
+    rk_fineartphotographer_module.entity_initialiser:
+        class: RK\FineArtPhotographerModule\Entity\Factory\EntityInitialiser

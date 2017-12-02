@@ -1,0 +1,104 @@
+{# Purpose of this template: Display a popup selector of album items for scribite integration #}
+{% set useFinder = true %}
+{% extends 'RKFineArtPhotographerModule::raw.html.twig' %}
+{% block title __('Search and select album item') %}
+{% block content %}
+    <div class="container">
+        <div class="zikula-bootstrap-tab-container">
+            <ul class="nav nav-tabs">
+            {% set activatedObjectTypes = getModVar('RKFineArtPhotographerModule', 'enabledFinderTypes', []) %}
+            {% if 'album' in activatedObjectTypes %}
+                <li{{ objectType == 'album' ? ' class="active"' : '' }}><a href="{{ path('rkfineartphotographermodule_external_finder', {objectType: 'album', editor: editorName}) }}" title="{{ __('Search and select album') }}">{{ __('Albums') }}</a></li>
+            {% endif %}
+            {% if 'albumItem' in activatedObjectTypes %}
+                <li{{ objectType == 'albumItem' ? ' class="active"' : '' }}><a href="{{ path('rkfineartphotographermodule_external_finder', {objectType: 'albumItem', editor: editorName}) }}" title="{{ __('Search and select album item') }}">{{ __('Album items') }}</a></li>
+            {% endif %}
+            </ul>
+        </div>
+        {% form_theme finderForm with [
+            '@RKFineArtPhotographerModule/Form/bootstrap_3.html.twig',
+            'ZikulaFormExtensionBundle:Form:form_div_layout.html.twig'
+        ] %}
+        {{ form_start(finderForm, {attr: {id: 'rKFineArtPhotographerModuleSelectorForm'}}) }}
+        {{ form_errors(finderForm) }}
+        <fieldset>
+            <legend>{{ __('Search and select album item') }}</legend>
+            {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
+                {{ form_row(finderForm.categories) }}
+            {% endif %}
+            {{ form_row(finderForm.onlyImages) }}
+            <div id="imageFieldRow">
+                {{ form_row(finderForm.imageField) }}
+            </div>
+            {{ form_row(finderForm.pasteAs) }}
+            <br />
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{ __('Album item') }}:</label>
+                <div class="col-sm-9">
+                    <div id="rkfineartphotographermoduleItemContainer">
+                        {% if not onlyImages %}
+                            <ul>
+                        {% endif %}
+                            {% for albumItem in items %}
+                                {% if not onlyImages or (attribute(albumItem, imageField) is not empty and attribute(albumItem, imageField ~ 'Meta').isImage) %}
+                                {% if not onlyImages %}
+                                    <li>
+                                {% endif %}
+                                    {% set itemId = albumItem.getKey() %}
+                                    <a href="#" data-itemid="{{ itemId }}">
+                                        {% if onlyImages %}
+                                            {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumItem' ~ imageField[:1]|upper ~ imageField[1:]) %}
+                                            <img src="{{ attribute(albumItem, imageField).getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-rounded" />
+                                        {% else %}
+                                            {{ albumItem|rkfineartphotographermodule_formattedTitle }}
+                                        {% endif %}
+                                    </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('rkfineartphotographermodule_albumitem_display', {'id': albumItem.getId()}) }}" />
+                                    <input type="hidden" id="url{{ itemId }}" value="{{ url('rkfineartphotographermodule_albumitem_display', {'id': albumItem.getId()}) }}" />
+                                    <input type="hidden" id="title{{ itemId }}" value="{{ albumItem|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" />
+                                    <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if albumItem.imageDescription is not empty %}{{ albumItem.imageDescription }}{% endif %}
+                                    {% endset %}{{ description|striptags|e('html_attr') }}" />
+                                    {% if onlyImages %}
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="{{ app.request.basePath }}/{{ attribute(albumItem, imageField).getPathname() }}" />
+                                    {% endif %}
+                                {% if not onlyImages %}
+                                    </li>
+                                {% endif %}
+                                {% endif %}
+                            {% else %}
+                                {% if not onlyImages %}<li>{% endif %}{{ __('No album items found.') }}{% if not onlyImages %}</li>{% endif %}
+                            {% endfor %}
+                        {% if not onlyImages %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_row(finderForm.sort) }}
+            {{ form_row(finderForm.sortdir) }}
+            {{ form_row(finderForm.num) }}
+            <div id="searchTermRow">
+                {{ form_row(finderForm.q) }}
+            </div>
+            <div>
+                {{ pager({display: 'page', rowcount: pager.numitems, limit: pager.itemsperpage, posvar: 'pos', maxpages: 10, route: 'rkfineartphotographermodule_external_finder'}) }}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    {{ form_widget(finderForm.update) }}
+                    {{ form_widget(finderForm.cancel) }}
+                </div>
+            </div>
+        </fieldset>
+        {{ form_end(finderForm) }}
+    </div>
+
+    {#
+    <div class="rkfineartphotographermodule-finderform">
+        <fieldset>
+            {{ render(controller('RKFineArtPhotographerModule:AlbumItem:edit')) }}
+        </fieldset>
+    </div>
+    #}
+{% endblock %}

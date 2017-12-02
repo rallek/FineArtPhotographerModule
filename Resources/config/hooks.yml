@@ -1,0 +1,69 @@
+services:
+    rk_fineartphotographer_module.hook_subscriber.filter_hooks.albums:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.filter_hooks.albums' }
+
+    rk_fineartphotographer_module.hook_subscriber.form_aware_hook.albums:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.form_aware_hook.albums' }
+
+    rk_fineartphotographer_module.hook_subscriber.ui_hooks.albums:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.ui_hooks.albums' }
+
+    rk_fineartphotographer_module.hook_subscriber.filter_hooks.albumitems:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumItemFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.filter_hooks.albumitems' }
+
+    rk_fineartphotographer_module.hook_subscriber.form_aware_hook.albumitems:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumItemFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.form_aware_hook.albumitems' }
+
+    rk_fineartphotographer_module.hook_subscriber.ui_hooks.albumitems:
+        class: RK\FineArtPhotographerModule\HookSubscriber\AlbumItemUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rkfineartphotographermodule.ui_hooks.albumitems' }
+
+    rk_fineartphotographer_module.hook_provider.filter_hooks.provider:
+        class: RK\FineArtPhotographerModule\HookProvider\FilterHooksProvider
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_provider, areaName: 'provider.rkfineartphotographermodule.filter_hooks.fineartphotographer' }
+
+    rk_fineartphotographer_module.hook_provider.form_aware_hook.albums:
+        class: RK\FineArtPhotographerModule\HookProvider\AlbumFormAwareHookProvider
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@form.factory"
+        tags:
+            - { name: zikula.hook_provider, areaName: 'provider.rkfineartphotographermodule.form_aware_hook.albums' }
+
+    rk_fineartphotographer_module.hook_provider.ui_hooks.albums:
+        class: RK\FineArtPhotographerModule\HookProvider\AlbumUiHooksProvider
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@rk_fineartphotographer_module.entity_factory"
+            - "@twig"
+        tags:
+            - { name: zikula.hook_provider, areaName: 'provider.rkfineartphotographermodule.ui_hooks.albums' }
+

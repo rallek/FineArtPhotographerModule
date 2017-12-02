@@ -1,0 +1,32 @@
+workflow:
+    workflows:
+        rkfineartphotographermodule_none:
+            type: state_machine
+            marking_store:
+                type: single_state
+                arguments:
+                    - workflowState
+            supports:
+                - RK\FineArtPhotographerModule\Entity\AlbumEntity
+                - RK\FineArtPhotographerModule\Entity\AlbumItemEntity
+            places:
+                - initial
+                - deferred
+                - approved
+                - deleted
+            transitions:
+                defer:
+                    from: initial
+                    to: deferred
+                submit:
+                    from: [initial, deferred]
+                    to: approved
+                updateapproved:
+                    from: approved
+                    to: approved
+                updatedeferred:
+                    from: deferred
+                    to: deferred
+                delete:
+                    from: [deferred, approved]
+                    to: deleted
