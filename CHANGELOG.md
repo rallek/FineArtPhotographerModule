@@ -1,3 +1,3 @@
 # CHANGELOG
 
-Changes in RKFineArtPhotographerModule 1.0.0
+Changes in RKFineArtPhotographerModule 0.1.0

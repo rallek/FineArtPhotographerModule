@@ -100,7 +100,8 @@ abstract class AbstractEntityDisplayHelper
      */
     protected function formatAlbumItem(AlbumItemEntity $entity)
     {
-        return $this->translator->__f('%imageTitel%', [
+        return $this->translator->__f('%imageTitle%', [
+            '%imageTitle%' => $entity->getImageTitle()
         ]);
     }
     
