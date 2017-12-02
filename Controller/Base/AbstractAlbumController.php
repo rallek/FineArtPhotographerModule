@@ -138,9 +138,9 @@ abstract class AbstractAlbumController extends AbstractController
         
         $sortableColumns->addColumns([
             new Column('workflowState'),
+            new Column('titleImage'),
             new Column('albumTitle'),
             new Column('albumDate'),
-            new Column('albumImage'),
             new Column('createdBy'),
             new Column('createdDate'),
             new Column('updatedBy'),

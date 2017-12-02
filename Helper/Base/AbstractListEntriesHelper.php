@@ -146,7 +146,7 @@ abstract class AbstractListEntriesHelper
                 break;
             case 'appSettings':
                 switch ($fieldName) {
-                    case 'thumbnailModeAlbumAlbumImage':
+                    case 'thumbnailModeAlbumTitleImage':
                         $result = false;
                         break;
                     case 'thumbnailModeAlbumItemImage':
@@ -195,8 +195,8 @@ abstract class AbstractListEntriesHelper
                 break;
             case 'appSettings':
                 switch ($fieldName) {
-                    case 'thumbnailModeAlbumAlbumImage':
-                        $entries = $this->getThumbnailModeAlbumAlbumImageEntriesForAppSettings();
+                    case 'thumbnailModeAlbumTitleImage':
+                        $entries = $this->getThumbnailModeAlbumTitleImageEntriesForAppSettings();
                         break;
                     case 'thumbnailModeAlbumItemImage':
                         $entries = $this->getThumbnailModeAlbumItemImageEntriesForAppSettings();
@@ -293,11 +293,11 @@ abstract class AbstractListEntriesHelper
     }
     
     /**
-     * Get 'thumbnail mode album album image' list entries.
+     * Get 'thumbnail mode album title image' list entries.
      *
      * @return array Array with desired list entries
      */
-    public function getThumbnailModeAlbumAlbumImageEntriesForAppSettings()
+    public function getThumbnailModeAlbumTitleImageEntriesForAppSettings()
     {
         $states = [];
         $states[] = [

@@ -22,9 +22,9 @@
                 {% if routeArea == 'admin' %}
                 <col id="cWorkflowState" />
                 {% endif %}
+                <col id="cTitleImage" />
                 <col id="cAlbumTitle" />
                 <col id="cAlbumDate" />
-                <col id="cAlbumImage" />
             </colgroup>
             <thead>
             <tr>
@@ -39,14 +39,14 @@
                     <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
                 </th>
                 {% endif %}
+                <th id="hTitleImage" scope="col" class="text-left">
+                    <a href="{{ sort.titleImage.url }}" title="{{ __f('Sort by %s', {'%s': 'title image'}) }}" class="{{ sort.titleImage.class }}">{{ __('Title image') }}</a>
+                </th>
                 <th id="hAlbumTitle" scope="col" class="text-left">
                     <a href="{{ sort.albumTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'album title'}) }}" class="{{ sort.albumTitle.class }}">{{ __('Album title') }}</a>
                 </th>
                 <th id="hAlbumDate" scope="col" class="text-left">
                     <a href="{{ sort.albumDate.url }}" title="{{ __f('Sort by %s', {'%s': 'album date'}) }}" class="{{ sort.albumDate.class }}">{{ __('Album date') }}</a>
-                </th>
-                <th id="hAlbumImage" scope="col" class="text-left">
-                    <a href="{{ sort.albumImage.url }}" title="{{ __f('Sort by %s', {'%s': 'album image'}) }}" class="{{ sort.albumImage.class }}">{{ __('Album image') }}</a>
                 </th>
             </tr>
             </thead>
@@ -68,23 +68,23 @@
                 {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
                     {{ album.workflowState|rkfineartphotographermodule_objectState }}
                 </td>
-                {% endif %}<td headers="hAlbumTitle" class="text-left">
+                {% endif %}<td headers="hTitleImage" class="text-left">
+                    {% if album.titleImage is not empty and album.titleImageMeta|default %}
+                                <a href="{{ album.titleImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.titleImageMeta.isImage %} class="image-link"{% endif %}>
+                    {% if album.titleImageMeta.isImage %}
+                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumTitleImage') %}
+                        <img src="{{ album.titleImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+                    {% else %}
+                        {{ __('Download') }} ({{ album.titleImageMeta.size|rkfineartphotographermodule_fileSize(album.titleImage.getPathname(), false, false) }})
+                    {% endif %}
+                    </a>
+                    {% else %}&nbsp;{% endif %}
+                </td>
+                <td headers="hAlbumTitle" class="text-left">
                     {{ album.albumTitle }}
                 </td>
                 <td headers="hAlbumDate" class="text-left">
                     {{ album.albumDate|localizeddate('medium', 'none') }}
-                </td>
-                <td headers="hAlbumImage" class="text-left">
-                    {% if album.albumImageMeta|default %}
-                    <a href="{{ album.albumImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.albumImageMeta.isImage %} class="image-link"{% endif %}>
-                    {% if album.albumImageMeta.isImage %}
-                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumAlbumImage') %}
-                        <img src="{{ album.albumImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
-                    {% else %}
-                        {{ __('Download') }} ({{ album.albumImageMeta.size|rkfineartphotographermodule_fileSize(album.albumImage.getPathname(), false, false) }})
-                    {% endif %}
-                    </a>
-                    {% endif %}
                 </td>
             </tr>
         {% else %}

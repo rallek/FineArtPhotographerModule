@@ -71,9 +71,9 @@ abstract class AbstractAppSettings
      *
      * @Assert\NotNull()
      * @Assert\Type(type="bool")
-     * @var boolean $enableShrinkingForAlbumAlbumImage
+     * @var boolean $enableShrinkingForAlbumTitleImage
      */
-    protected $enableShrinkingForAlbumAlbumImage = false;
+    protected $enableShrinkingForAlbumTitleImage = false;
     
     /**
      * The maximum image width in pixels.
@@ -82,9 +82,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $shrinkWidthAlbumAlbumImage
+     * @var integer $shrinkWidthAlbumTitleImage
      */
-    protected $shrinkWidthAlbumAlbumImage = 800;
+    protected $shrinkWidthAlbumTitleImage = 800;
     
     /**
      * The maximum image height in pixels.
@@ -93,18 +93,18 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $shrinkHeightAlbumAlbumImage
+     * @var integer $shrinkHeightAlbumTitleImage
      */
-    protected $shrinkHeightAlbumAlbumImage = 600;
+    protected $shrinkHeightAlbumTitleImage = 600;
     
     /**
      * Thumbnail mode (inset or outbound).
      *
      * @Assert\NotBlank()
-     * @FineArtPhotographerAssert\ListEntry(entityName="appSettings", propertyName="thumbnailModeAlbumAlbumImage", multiple=false)
-     * @var string $thumbnailModeAlbumAlbumImage
+     * @FineArtPhotographerAssert\ListEntry(entityName="appSettings", propertyName="thumbnailModeAlbumTitleImage", multiple=false)
+     * @var string $thumbnailModeAlbumTitleImage
      */
-    protected $thumbnailModeAlbumAlbumImage = 'inset';
+    protected $thumbnailModeAlbumTitleImage = 'inset';
     
     /**
      * Thumbnail width on view pages in pixels.
@@ -113,9 +113,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailWidthAlbumAlbumImageView
+     * @var integer $thumbnailWidthAlbumTitleImageView
      */
-    protected $thumbnailWidthAlbumAlbumImageView = 32;
+    protected $thumbnailWidthAlbumTitleImageView = 32;
     
     /**
      * Thumbnail height on view pages in pixels.
@@ -124,9 +124,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailHeightAlbumAlbumImageView
+     * @var integer $thumbnailHeightAlbumTitleImageView
      */
-    protected $thumbnailHeightAlbumAlbumImageView = 24;
+    protected $thumbnailHeightAlbumTitleImageView = 24;
     
     /**
      * Thumbnail width on display pages in pixels.
@@ -135,9 +135,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailWidthAlbumAlbumImageDisplay
+     * @var integer $thumbnailWidthAlbumTitleImageDisplay
      */
-    protected $thumbnailWidthAlbumAlbumImageDisplay = 240;
+    protected $thumbnailWidthAlbumTitleImageDisplay = 240;
     
     /**
      * Thumbnail height on display pages in pixels.
@@ -146,9 +146,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailHeightAlbumAlbumImageDisplay
+     * @var integer $thumbnailHeightAlbumTitleImageDisplay
      */
-    protected $thumbnailHeightAlbumAlbumImageDisplay = 180;
+    protected $thumbnailHeightAlbumTitleImageDisplay = 180;
     
     /**
      * Thumbnail width on edit pages in pixels.
@@ -157,9 +157,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailWidthAlbumAlbumImageEdit
+     * @var integer $thumbnailWidthAlbumTitleImageEdit
      */
-    protected $thumbnailWidthAlbumAlbumImageEdit = 240;
+    protected $thumbnailWidthAlbumTitleImageEdit = 240;
     
     /**
      * Thumbnail height on edit pages in pixels.
@@ -168,9 +168,9 @@ abstract class AbstractAppSettings
      * @Assert\NotBlank()
      * @Assert\NotEqualTo(value=0)
      * @Assert\LessThan(value=100000000000)
-     * @var integer $thumbnailHeightAlbumAlbumImageEdit
+     * @var integer $thumbnailHeightAlbumTitleImageEdit
      */
-    protected $thumbnailHeightAlbumAlbumImageEdit = 180;
+    protected $thumbnailHeightAlbumTitleImageEdit = 180;
     
     /**
      * Whether to enable shrinking huge images to maximum dimensions. Stores downscaled version of the original image.
@@ -398,242 +398,242 @@ abstract class AbstractAppSettings
     }
     
     /**
-     * Returns the enable shrinking for album album image.
+     * Returns the enable shrinking for album title image.
      *
      * @return boolean
      */
-    public function getEnableShrinkingForAlbumAlbumImage()
+    public function getEnableShrinkingForAlbumTitleImage()
     {
-        return $this->enableShrinkingForAlbumAlbumImage;
+        return $this->enableShrinkingForAlbumTitleImage;
     }
     
     /**
-     * Sets the enable shrinking for album album image.
+     * Sets the enable shrinking for album title image.
      *
-     * @param boolean $enableShrinkingForAlbumAlbumImage
+     * @param boolean $enableShrinkingForAlbumTitleImage
      *
      * @return void
      */
-    public function setEnableShrinkingForAlbumAlbumImage($enableShrinkingForAlbumAlbumImage)
+    public function setEnableShrinkingForAlbumTitleImage($enableShrinkingForAlbumTitleImage)
     {
-        if (boolval($this->enableShrinkingForAlbumAlbumImage) !== boolval($enableShrinkingForAlbumAlbumImage)) {
-            $this->enableShrinkingForAlbumAlbumImage = boolval($enableShrinkingForAlbumAlbumImage);
+        if (boolval($this->enableShrinkingForAlbumTitleImage) !== boolval($enableShrinkingForAlbumTitleImage)) {
+            $this->enableShrinkingForAlbumTitleImage = boolval($enableShrinkingForAlbumTitleImage);
         }
     }
     
     /**
-     * Returns the shrink width album album image.
+     * Returns the shrink width album title image.
      *
      * @return integer
      */
-    public function getShrinkWidthAlbumAlbumImage()
+    public function getShrinkWidthAlbumTitleImage()
     {
-        return $this->shrinkWidthAlbumAlbumImage;
+        return $this->shrinkWidthAlbumTitleImage;
     }
     
     /**
-     * Sets the shrink width album album image.
+     * Sets the shrink width album title image.
      *
-     * @param integer $shrinkWidthAlbumAlbumImage
+     * @param integer $shrinkWidthAlbumTitleImage
      *
      * @return void
      */
-    public function setShrinkWidthAlbumAlbumImage($shrinkWidthAlbumAlbumImage)
+    public function setShrinkWidthAlbumTitleImage($shrinkWidthAlbumTitleImage)
     {
-        if (intval($this->shrinkWidthAlbumAlbumImage) !== intval($shrinkWidthAlbumAlbumImage)) {
-            $this->shrinkWidthAlbumAlbumImage = intval($shrinkWidthAlbumAlbumImage);
+        if (intval($this->shrinkWidthAlbumTitleImage) !== intval($shrinkWidthAlbumTitleImage)) {
+            $this->shrinkWidthAlbumTitleImage = intval($shrinkWidthAlbumTitleImage);
         }
     }
     
     /**
-     * Returns the shrink height album album image.
+     * Returns the shrink height album title image.
      *
      * @return integer
      */
-    public function getShrinkHeightAlbumAlbumImage()
+    public function getShrinkHeightAlbumTitleImage()
     {
-        return $this->shrinkHeightAlbumAlbumImage;
+        return $this->shrinkHeightAlbumTitleImage;
     }
     
     /**
-     * Sets the shrink height album album image.
+     * Sets the shrink height album title image.
      *
-     * @param integer $shrinkHeightAlbumAlbumImage
+     * @param integer $shrinkHeightAlbumTitleImage
      *
      * @return void
      */
-    public function setShrinkHeightAlbumAlbumImage($shrinkHeightAlbumAlbumImage)
+    public function setShrinkHeightAlbumTitleImage($shrinkHeightAlbumTitleImage)
     {
-        if (intval($this->shrinkHeightAlbumAlbumImage) !== intval($shrinkHeightAlbumAlbumImage)) {
-            $this->shrinkHeightAlbumAlbumImage = intval($shrinkHeightAlbumAlbumImage);
+        if (intval($this->shrinkHeightAlbumTitleImage) !== intval($shrinkHeightAlbumTitleImage)) {
+            $this->shrinkHeightAlbumTitleImage = intval($shrinkHeightAlbumTitleImage);
         }
     }
     
     /**
-     * Returns the thumbnail mode album album image.
+     * Returns the thumbnail mode album title image.
      *
      * @return string
      */
-    public function getThumbnailModeAlbumAlbumImage()
+    public function getThumbnailModeAlbumTitleImage()
     {
-        return $this->thumbnailModeAlbumAlbumImage;
+        return $this->thumbnailModeAlbumTitleImage;
     }
     
     /**
-     * Sets the thumbnail mode album album image.
+     * Sets the thumbnail mode album title image.
      *
-     * @param string $thumbnailModeAlbumAlbumImage
+     * @param string $thumbnailModeAlbumTitleImage
      *
      * @return void
      */
-    public function setThumbnailModeAlbumAlbumImage($thumbnailModeAlbumAlbumImage)
+    public function setThumbnailModeAlbumTitleImage($thumbnailModeAlbumTitleImage)
     {
-        if ($this->thumbnailModeAlbumAlbumImage !== $thumbnailModeAlbumAlbumImage) {
-            $this->thumbnailModeAlbumAlbumImage = isset($thumbnailModeAlbumAlbumImage) ? $thumbnailModeAlbumAlbumImage : '';
+        if ($this->thumbnailModeAlbumTitleImage !== $thumbnailModeAlbumTitleImage) {
+            $this->thumbnailModeAlbumTitleImage = isset($thumbnailModeAlbumTitleImage) ? $thumbnailModeAlbumTitleImage : '';
         }
     }
     
     /**
-     * Returns the thumbnail width album album image view.
+     * Returns the thumbnail width album title image view.
      *
      * @return integer
      */
-    public function getThumbnailWidthAlbumAlbumImageView()
+    public function getThumbnailWidthAlbumTitleImageView()
     {
-        return $this->thumbnailWidthAlbumAlbumImageView;
+        return $this->thumbnailWidthAlbumTitleImageView;
     }
     
     /**
-     * Sets the thumbnail width album album image view.
+     * Sets the thumbnail width album title image view.
      *
-     * @param integer $thumbnailWidthAlbumAlbumImageView
+     * @param integer $thumbnailWidthAlbumTitleImageView
      *
      * @return void
      */
-    public function setThumbnailWidthAlbumAlbumImageView($thumbnailWidthAlbumAlbumImageView)
+    public function setThumbnailWidthAlbumTitleImageView($thumbnailWidthAlbumTitleImageView)
     {
-        if (intval($this->thumbnailWidthAlbumAlbumImageView) !== intval($thumbnailWidthAlbumAlbumImageView)) {
-            $this->thumbnailWidthAlbumAlbumImageView = intval($thumbnailWidthAlbumAlbumImageView);
+        if (intval($this->thumbnailWidthAlbumTitleImageView) !== intval($thumbnailWidthAlbumTitleImageView)) {
+            $this->thumbnailWidthAlbumTitleImageView = intval($thumbnailWidthAlbumTitleImageView);
         }
     }
     
     /**
-     * Returns the thumbnail height album album image view.
+     * Returns the thumbnail height album title image view.
      *
      * @return integer
      */
-    public function getThumbnailHeightAlbumAlbumImageView()
+    public function getThumbnailHeightAlbumTitleImageView()
     {
-        return $this->thumbnailHeightAlbumAlbumImageView;
+        return $this->thumbnailHeightAlbumTitleImageView;
     }
     
     /**
-     * Sets the thumbnail height album album image view.
+     * Sets the thumbnail height album title image view.
      *
-     * @param integer $thumbnailHeightAlbumAlbumImageView
+     * @param integer $thumbnailHeightAlbumTitleImageView
      *
      * @return void
      */
-    public function setThumbnailHeightAlbumAlbumImageView($thumbnailHeightAlbumAlbumImageView)
+    public function setThumbnailHeightAlbumTitleImageView($thumbnailHeightAlbumTitleImageView)
     {
-        if (intval($this->thumbnailHeightAlbumAlbumImageView) !== intval($thumbnailHeightAlbumAlbumImageView)) {
-            $this->thumbnailHeightAlbumAlbumImageView = intval($thumbnailHeightAlbumAlbumImageView);
+        if (intval($this->thumbnailHeightAlbumTitleImageView) !== intval($thumbnailHeightAlbumTitleImageView)) {
+            $this->thumbnailHeightAlbumTitleImageView = intval($thumbnailHeightAlbumTitleImageView);
         }
     }
     
     /**
-     * Returns the thumbnail width album album image display.
+     * Returns the thumbnail width album title image display.
      *
      * @return integer
      */
-    public function getThumbnailWidthAlbumAlbumImageDisplay()
+    public function getThumbnailWidthAlbumTitleImageDisplay()
     {
-        return $this->thumbnailWidthAlbumAlbumImageDisplay;
+        return $this->thumbnailWidthAlbumTitleImageDisplay;
     }
     
     /**
-     * Sets the thumbnail width album album image display.
+     * Sets the thumbnail width album title image display.
      *
-     * @param integer $thumbnailWidthAlbumAlbumImageDisplay
+     * @param integer $thumbnailWidthAlbumTitleImageDisplay
      *
      * @return void
      */
-    public function setThumbnailWidthAlbumAlbumImageDisplay($thumbnailWidthAlbumAlbumImageDisplay)
+    public function setThumbnailWidthAlbumTitleImageDisplay($thumbnailWidthAlbumTitleImageDisplay)
     {
-        if (intval($this->thumbnailWidthAlbumAlbumImageDisplay) !== intval($thumbnailWidthAlbumAlbumImageDisplay)) {
-            $this->thumbnailWidthAlbumAlbumImageDisplay = intval($thumbnailWidthAlbumAlbumImageDisplay);
+        if (intval($this->thumbnailWidthAlbumTitleImageDisplay) !== intval($thumbnailWidthAlbumTitleImageDisplay)) {
+            $this->thumbnailWidthAlbumTitleImageDisplay = intval($thumbnailWidthAlbumTitleImageDisplay);
         }
     }
     
     /**
-     * Returns the thumbnail height album album image display.
+     * Returns the thumbnail height album title image display.
      *
      * @return integer
      */
-    public function getThumbnailHeightAlbumAlbumImageDisplay()
+    public function getThumbnailHeightAlbumTitleImageDisplay()
     {
-        return $this->thumbnailHeightAlbumAlbumImageDisplay;
+        return $this->thumbnailHeightAlbumTitleImageDisplay;
     }
     
     /**
-     * Sets the thumbnail height album album image display.
+     * Sets the thumbnail height album title image display.
      *
-     * @param integer $thumbnailHeightAlbumAlbumImageDisplay
+     * @param integer $thumbnailHeightAlbumTitleImageDisplay
      *
      * @return void
      */
-    public function setThumbnailHeightAlbumAlbumImageDisplay($thumbnailHeightAlbumAlbumImageDisplay)
+    public function setThumbnailHeightAlbumTitleImageDisplay($thumbnailHeightAlbumTitleImageDisplay)
     {
-        if (intval($this->thumbnailHeightAlbumAlbumImageDisplay) !== intval($thumbnailHeightAlbumAlbumImageDisplay)) {
-            $this->thumbnailHeightAlbumAlbumImageDisplay = intval($thumbnailHeightAlbumAlbumImageDisplay);
+        if (intval($this->thumbnailHeightAlbumTitleImageDisplay) !== intval($thumbnailHeightAlbumTitleImageDisplay)) {
+            $this->thumbnailHeightAlbumTitleImageDisplay = intval($thumbnailHeightAlbumTitleImageDisplay);
         }
     }
     
     /**
-     * Returns the thumbnail width album album image edit.
+     * Returns the thumbnail width album title image edit.
      *
      * @return integer
      */
-    public function getThumbnailWidthAlbumAlbumImageEdit()
+    public function getThumbnailWidthAlbumTitleImageEdit()
     {
-        return $this->thumbnailWidthAlbumAlbumImageEdit;
+        return $this->thumbnailWidthAlbumTitleImageEdit;
     }
     
     /**
-     * Sets the thumbnail width album album image edit.
+     * Sets the thumbnail width album title image edit.
      *
-     * @param integer $thumbnailWidthAlbumAlbumImageEdit
+     * @param integer $thumbnailWidthAlbumTitleImageEdit
      *
      * @return void
      */
-    public function setThumbnailWidthAlbumAlbumImageEdit($thumbnailWidthAlbumAlbumImageEdit)
+    public function setThumbnailWidthAlbumTitleImageEdit($thumbnailWidthAlbumTitleImageEdit)
     {
-        if (intval($this->thumbnailWidthAlbumAlbumImageEdit) !== intval($thumbnailWidthAlbumAlbumImageEdit)) {
-            $this->thumbnailWidthAlbumAlbumImageEdit = intval($thumbnailWidthAlbumAlbumImageEdit);
+        if (intval($this->thumbnailWidthAlbumTitleImageEdit) !== intval($thumbnailWidthAlbumTitleImageEdit)) {
+            $this->thumbnailWidthAlbumTitleImageEdit = intval($thumbnailWidthAlbumTitleImageEdit);
         }
     }
     
     /**
-     * Returns the thumbnail height album album image edit.
+     * Returns the thumbnail height album title image edit.
      *
      * @return integer
      */
-    public function getThumbnailHeightAlbumAlbumImageEdit()
+    public function getThumbnailHeightAlbumTitleImageEdit()
     {
-        return $this->thumbnailHeightAlbumAlbumImageEdit;
+        return $this->thumbnailHeightAlbumTitleImageEdit;
     }
     
     /**
-     * Sets the thumbnail height album album image edit.
+     * Sets the thumbnail height album title image edit.
      *
-     * @param integer $thumbnailHeightAlbumAlbumImageEdit
+     * @param integer $thumbnailHeightAlbumTitleImageEdit
      *
      * @return void
      */
-    public function setThumbnailHeightAlbumAlbumImageEdit($thumbnailHeightAlbumAlbumImageEdit)
+    public function setThumbnailHeightAlbumTitleImageEdit($thumbnailHeightAlbumTitleImageEdit)
     {
-        if (intval($this->thumbnailHeightAlbumAlbumImageEdit) !== intval($thumbnailHeightAlbumAlbumImageEdit)) {
-            $this->thumbnailHeightAlbumAlbumImageEdit = intval($thumbnailHeightAlbumAlbumImageEdit);
+        if (intval($this->thumbnailHeightAlbumTitleImageEdit) !== intval($thumbnailHeightAlbumTitleImageEdit)) {
+            $this->thumbnailHeightAlbumTitleImageEdit = intval($thumbnailHeightAlbumTitleImageEdit);
         }
     }
     
@@ -921,35 +921,35 @@ abstract class AbstractAppSettings
         if (isset($moduleVars['linkOwnAlbumItemsOnAccountPage'])) {
             $this->setLinkOwnAlbumItemsOnAccountPage($moduleVars['linkOwnAlbumItemsOnAccountPage']);
         }
-        if (isset($moduleVars['enableShrinkingForAlbumAlbumImage'])) {
-            $this->setEnableShrinkingForAlbumAlbumImage($moduleVars['enableShrinkingForAlbumAlbumImage']);
+        if (isset($moduleVars['enableShrinkingForAlbumTitleImage'])) {
+            $this->setEnableShrinkingForAlbumTitleImage($moduleVars['enableShrinkingForAlbumTitleImage']);
         }
-        if (isset($moduleVars['shrinkWidthAlbumAlbumImage'])) {
-            $this->setShrinkWidthAlbumAlbumImage($moduleVars['shrinkWidthAlbumAlbumImage']);
+        if (isset($moduleVars['shrinkWidthAlbumTitleImage'])) {
+            $this->setShrinkWidthAlbumTitleImage($moduleVars['shrinkWidthAlbumTitleImage']);
         }
-        if (isset($moduleVars['shrinkHeightAlbumAlbumImage'])) {
-            $this->setShrinkHeightAlbumAlbumImage($moduleVars['shrinkHeightAlbumAlbumImage']);
+        if (isset($moduleVars['shrinkHeightAlbumTitleImage'])) {
+            $this->setShrinkHeightAlbumTitleImage($moduleVars['shrinkHeightAlbumTitleImage']);
         }
-        if (isset($moduleVars['thumbnailModeAlbumAlbumImage'])) {
-            $this->setThumbnailModeAlbumAlbumImage($moduleVars['thumbnailModeAlbumAlbumImage']);
+        if (isset($moduleVars['thumbnailModeAlbumTitleImage'])) {
+            $this->setThumbnailModeAlbumTitleImage($moduleVars['thumbnailModeAlbumTitleImage']);
         }
-        if (isset($moduleVars['thumbnailWidthAlbumAlbumImageView'])) {
-            $this->setThumbnailWidthAlbumAlbumImageView($moduleVars['thumbnailWidthAlbumAlbumImageView']);
+        if (isset($moduleVars['thumbnailWidthAlbumTitleImageView'])) {
+            $this->setThumbnailWidthAlbumTitleImageView($moduleVars['thumbnailWidthAlbumTitleImageView']);
         }
-        if (isset($moduleVars['thumbnailHeightAlbumAlbumImageView'])) {
-            $this->setThumbnailHeightAlbumAlbumImageView($moduleVars['thumbnailHeightAlbumAlbumImageView']);
+        if (isset($moduleVars['thumbnailHeightAlbumTitleImageView'])) {
+            $this->setThumbnailHeightAlbumTitleImageView($moduleVars['thumbnailHeightAlbumTitleImageView']);
         }
-        if (isset($moduleVars['thumbnailWidthAlbumAlbumImageDisplay'])) {
-            $this->setThumbnailWidthAlbumAlbumImageDisplay($moduleVars['thumbnailWidthAlbumAlbumImageDisplay']);
+        if (isset($moduleVars['thumbnailWidthAlbumTitleImageDisplay'])) {
+            $this->setThumbnailWidthAlbumTitleImageDisplay($moduleVars['thumbnailWidthAlbumTitleImageDisplay']);
         }
-        if (isset($moduleVars['thumbnailHeightAlbumAlbumImageDisplay'])) {
-            $this->setThumbnailHeightAlbumAlbumImageDisplay($moduleVars['thumbnailHeightAlbumAlbumImageDisplay']);
+        if (isset($moduleVars['thumbnailHeightAlbumTitleImageDisplay'])) {
+            $this->setThumbnailHeightAlbumTitleImageDisplay($moduleVars['thumbnailHeightAlbumTitleImageDisplay']);
         }
-        if (isset($moduleVars['thumbnailWidthAlbumAlbumImageEdit'])) {
-            $this->setThumbnailWidthAlbumAlbumImageEdit($moduleVars['thumbnailWidthAlbumAlbumImageEdit']);
+        if (isset($moduleVars['thumbnailWidthAlbumTitleImageEdit'])) {
+            $this->setThumbnailWidthAlbumTitleImageEdit($moduleVars['thumbnailWidthAlbumTitleImageEdit']);
         }
-        if (isset($moduleVars['thumbnailHeightAlbumAlbumImageEdit'])) {
-            $this->setThumbnailHeightAlbumAlbumImageEdit($moduleVars['thumbnailHeightAlbumAlbumImageEdit']);
+        if (isset($moduleVars['thumbnailHeightAlbumTitleImageEdit'])) {
+            $this->setThumbnailHeightAlbumTitleImageEdit($moduleVars['thumbnailHeightAlbumTitleImageEdit']);
         }
         if (isset($moduleVars['enableShrinkingForAlbumItemImage'])) {
             $this->setEnableShrinkingForAlbumItemImage($moduleVars['enableShrinkingForAlbumItemImage']);
@@ -995,16 +995,16 @@ abstract class AbstractAppSettings
         $this->variableApi->set('RKFineArtPhotographerModule', 'linkOwnAlbumsOnAccountPage', $this->getLinkOwnAlbumsOnAccountPage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'albumItemEntriesPerPage', $this->getAlbumItemEntriesPerPage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'linkOwnAlbumItemsOnAccountPage', $this->getLinkOwnAlbumItemsOnAccountPage());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'enableShrinkingForAlbumAlbumImage', $this->getEnableShrinkingForAlbumAlbumImage());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkWidthAlbumAlbumImage', $this->getShrinkWidthAlbumAlbumImage());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkHeightAlbumAlbumImage', $this->getShrinkHeightAlbumAlbumImage());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailModeAlbumAlbumImage', $this->getThumbnailModeAlbumAlbumImage());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumAlbumImageView', $this->getThumbnailWidthAlbumAlbumImageView());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumAlbumImageView', $this->getThumbnailHeightAlbumAlbumImageView());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumAlbumImageDisplay', $this->getThumbnailWidthAlbumAlbumImageDisplay());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumAlbumImageDisplay', $this->getThumbnailHeightAlbumAlbumImageDisplay());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumAlbumImageEdit', $this->getThumbnailWidthAlbumAlbumImageEdit());
-        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumAlbumImageEdit', $this->getThumbnailHeightAlbumAlbumImageEdit());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'enableShrinkingForAlbumTitleImage', $this->getEnableShrinkingForAlbumTitleImage());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkWidthAlbumTitleImage', $this->getShrinkWidthAlbumTitleImage());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkHeightAlbumTitleImage', $this->getShrinkHeightAlbumTitleImage());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailModeAlbumTitleImage', $this->getThumbnailModeAlbumTitleImage());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumTitleImageView', $this->getThumbnailWidthAlbumTitleImageView());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumTitleImageView', $this->getThumbnailHeightAlbumTitleImageView());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumTitleImageDisplay', $this->getThumbnailWidthAlbumTitleImageDisplay());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumTitleImageDisplay', $this->getThumbnailHeightAlbumTitleImageDisplay());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailWidthAlbumTitleImageEdit', $this->getThumbnailWidthAlbumTitleImageEdit());
+        $this->variableApi->set('RKFineArtPhotographerModule', 'thumbnailHeightAlbumTitleImageEdit', $this->getThumbnailHeightAlbumTitleImageEdit());
         $this->variableApi->set('RKFineArtPhotographerModule', 'enableShrinkingForAlbumItemImage', $this->getEnableShrinkingForAlbumItemImage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkWidthAlbumItemImage', $this->getShrinkWidthAlbumItemImage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'shrinkHeightAlbumItemImage', $this->getShrinkHeightAlbumItemImage());

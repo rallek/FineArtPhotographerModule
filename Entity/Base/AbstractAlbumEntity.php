@@ -62,6 +62,41 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     protected $workflowState = 'initial';
     
     /**
+     * Title image meta data array.
+     *
+     * @ORM\Column(type="array")
+     * @Assert\Type(type="array")
+     * @var array $titleImageMeta
+     */
+    protected $titleImageMeta = [];
+    
+    /**
+     * should be in landscape 3:1
+     *
+     * @ORM\Column(length=255, nullable=true)
+     * @Assert\Length(min="0", max="255")
+     * @Assert\File(
+     *    mimeTypes = {"image/*"}
+     * )
+     * @Assert\Image(
+     *    minRatio = 2.95,
+     *    maxRatio = 3.05,
+     *    allowSquare = false,
+     *    allowPortrait = false
+     * )
+     * @var string $titleImage
+     */
+    protected $titleImage = null;
+    
+    /**
+     * Full title image path as url.
+     *
+     * @Assert\Type(type="string")
+     * @var string $titleImageUrl
+     */
+    protected $titleImageUrl = '';
+    
+    /**
      * Choose a title for your album. The event name seem to be a good choice.
      *
      * @Gedmo\Translatable
@@ -89,40 +124,6 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
      * @var text $albumDescription
      */
     protected $albumDescription = '';
-    
-    /**
-     * Album image meta data array.
-     *
-     * @ORM\Column(type="array")
-     * @Assert\Type(type="array")
-     * @var array $albumImageMeta
-     */
-    protected $albumImageMeta = [];
-    
-    /**
-     * @ORM\Column(length=255)
-     * @Assert\NotBlank()
-     * @Assert\Length(min="0", max="255")
-     * @Assert\File(
-     *    mimeTypes = {"image/*"}
-     * )
-     * @Assert\Image(
-     *    minRatio = 2.95,
-     *    maxRatio = 3.05,
-     *    allowSquare = false,
-     *    allowPortrait = false
-     * )
-     * @var string $albumImage
-     */
-    protected $albumImage = null;
-    
-    /**
-     * Full album image path as url.
-     *
-     * @Assert\Type(type="string")
-     * @var string $albumImageUrl
-     */
-    protected $albumImageUrl = '';
     
     
     /**
@@ -240,6 +241,78 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     }
     
     /**
+     * Returns the title image.
+     *
+     * @return string
+     */
+    public function getTitleImage()
+    {
+        return $this->titleImage;
+    }
+    
+    /**
+     * Sets the title image.
+     *
+     * @param string $titleImage
+     *
+     * @return void
+     */
+    public function setTitleImage($titleImage)
+    {
+        if ($this->titleImage !== $titleImage) {
+            $this->titleImage = $titleImage;
+        }
+    }
+    
+    /**
+     * Returns the title image url.
+     *
+     * @return string
+     */
+    public function getTitleImageUrl()
+    {
+        return $this->titleImageUrl;
+    }
+    
+    /**
+     * Sets the title image url.
+     *
+     * @param string $titleImageUrl
+     *
+     * @return void
+     */
+    public function setTitleImageUrl($titleImageUrl)
+    {
+        if ($this->titleImageUrl !== $titleImageUrl) {
+            $this->titleImageUrl = $titleImageUrl;
+        }
+    }
+    
+    /**
+     * Returns the title image meta.
+     *
+     * @return array
+     */
+    public function getTitleImageMeta()
+    {
+        return $this->titleImageMeta;
+    }
+    
+    /**
+     * Sets the title image meta.
+     *
+     * @param array $titleImageMeta
+     *
+     * @return void
+     */
+    public function setTitleImageMeta($titleImageMeta = [])
+    {
+        if ($this->titleImageMeta !== $titleImageMeta) {
+            $this->titleImageMeta = $titleImageMeta;
+        }
+    }
+    
+    /**
      * Returns the album title.
      *
      * @return string
@@ -318,78 +391,6 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     {
         if ($this->albumDescription !== $albumDescription) {
             $this->albumDescription = isset($albumDescription) ? $albumDescription : '';
-        }
-    }
-    
-    /**
-     * Returns the album image.
-     *
-     * @return string
-     */
-    public function getAlbumImage()
-    {
-        return $this->albumImage;
-    }
-    
-    /**
-     * Sets the album image.
-     *
-     * @param string $albumImage
-     *
-     * @return void
-     */
-    public function setAlbumImage($albumImage)
-    {
-        if ($this->albumImage !== $albumImage) {
-            $this->albumImage = isset($albumImage) ? $albumImage : '';
-        }
-    }
-    
-    /**
-     * Returns the album image url.
-     *
-     * @return string
-     */
-    public function getAlbumImageUrl()
-    {
-        return $this->albumImageUrl;
-    }
-    
-    /**
-     * Sets the album image url.
-     *
-     * @param string $albumImageUrl
-     *
-     * @return void
-     */
-    public function setAlbumImageUrl($albumImageUrl)
-    {
-        if ($this->albumImageUrl !== $albumImageUrl) {
-            $this->albumImageUrl = isset($albumImageUrl) ? $albumImageUrl : '';
-        }
-    }
-    
-    /**
-     * Returns the album image meta.
-     *
-     * @return array
-     */
-    public function getAlbumImageMeta()
-    {
-        return $this->albumImageMeta;
-    }
-    
-    /**
-     * Sets the album image meta.
-     *
-     * @param array $albumImageMeta
-     *
-     * @return void
-     */
-    public function setAlbumImageMeta($albumImageMeta = [])
-    {
-        if ($this->albumImageMeta !== $albumImageMeta) {
-            $this->albumImageMeta = isset($albumImageMeta) ? $albumImageMeta : '';
         }
     }
     
@@ -617,9 +618,9 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
         $this->setWorkflowState('initial');
     
         // reset upload fields
-        $this->setAlbumImage(null);
-        $this->setAlbumImageMeta([]);
-        $this->setAlbumImageUrl('');
+        $this->setTitleImage(null);
+        $this->setTitleImageMeta([]);
+        $this->setTitleImageUrl('');
     
         $this->setCreatedBy(null);
         $this->setCreatedDate(null);

@@ -141,7 +141,7 @@ abstract class AbstractAlbumFinderType extends AbstractType
             'required' => false
         ]);
         $builder->add('imageField', HiddenType::class, [
-            'data' => 'albumImage'
+            'data' => 'titleImage'
         ]);
     }
 
@@ -184,9 +184,9 @@ abstract class AbstractAlbumFinderType extends AbstractType
                 'label' => $this->__('Sort by') . ':',
                 'empty_data' => '',
                 'choices' => [
+                    $this->__('Title image') => 'titleImage',
                     $this->__('Album title') => 'albumTitle',
                     $this->__('Album date') => 'albumDate',
-                    $this->__('Album image') => 'albumImage',
                     $this->__('Creation date') => 'createdDate',
                     $this->__('Creator') => 'createdBy',
                     $this->__('Update date') => 'updatedDate',

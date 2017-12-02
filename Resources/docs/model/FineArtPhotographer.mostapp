@@ -31,6 +31,15 @@ application "FineArtPhotographer" {
             formAwareHookProvider ENABLED
             uiHooksProvider ENABLED
             fields {
+                upload "titleImage" {
+                    documentation "should be in landscape 3:1"
+                    mandatory false
+                    minRatio 2.95
+                    maxRatio 3.05
+                    allowSquare false
+                    allowPortrait false
+                }
+            ,
                 string "albumTitle" translatable {
                     documentation "Choose a title for your album. The event name seem to be a good choice."
                 },
@@ -40,13 +49,6 @@ application "FineArtPhotographer" {
                 text "albumDescription" translatable {
                     mandatory false
                     displayType DISPLAY
-                }
-            ,
-                upload "albumImage" {
-                    minRatio 2.95
-                    maxRatio 3.05
-                    allowSquare false
-                    allowPortrait false
                 }
             }
             actions {

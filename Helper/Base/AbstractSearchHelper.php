@@ -183,9 +183,9 @@ abstract class AbstractSearchHelper implements SearchableInterface
             switch ($objectType) {
                 case 'album':
                     $whereArray[] = 'tbl.workflowState';
+                    $whereArray[] = 'tbl.titleImage';
                     $whereArray[] = 'tbl.albumTitle';
                     $whereArray[] = 'tbl.albumDescription';
-                    $whereArray[] = 'tbl.albumImage';
                     break;
                 case 'albumItem':
                     $whereArray[] = 'tbl.workflowState';

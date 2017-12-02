@@ -55,7 +55,7 @@
             {% endif %}
             <fieldset>
                 <legend>{{ __('Further properties') }}</legend>
-                {{ form_row(attribute(subFields, 'albumImage')) }}
+                {{ form_row(attribute(subFields, 'titleImage')) }}
             </fieldset>
         {% elseif displayMode == 'choices' %}
             {{ form_row(attribute(form, alias)) }}

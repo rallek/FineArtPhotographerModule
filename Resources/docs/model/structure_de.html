@@ -207,6 +207,29 @@
                 </td>
             </tr>
             <tr>
+                <th id="hEntityAlbumFieldTitleImage" scope="row" headers="hEntityAlbumFieldName">Title image</th>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldType">Upload</td>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldMandatory">false</td>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldDefault"></td>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldDisplayType">ALL</td>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldConstraints">
+                    <ul>
+                        <li>Hat eine Länge von 255 Zeichen.</li>
+                        <li>Die erlaubten Dateierweiterungen sind "gif, jpeg, jpg, png".</li>
+                        <li>Die erlaubten MIME-Typen sind "image/*".</li>
+                        <li>Das Seitenverhältnis von Bildern (Breite / Höhe) muß zwischen 2.95 und 3.05 liegen.</li>
+                        <li>Es ist nur Querformat (kein Quadrat- oder Hochformat) erlaubt.</li>
+                    </ul>
+                </td>
+                <td headers="hEntityAlbumFieldTitleImage hEntityAlbumFieldRemarks">
+                    <ul>
+                        <li>should be in landscape 3:1 </li>
+                        <li>Dieses Feld ist nicht  eindeutig und erlaubt null Null-Werte.</li>
+                        <li>Die hochgeladenen Dateien werden im Unterordner "titleimage" gespeichert und behalten ihren originalen Dateinamen, der bei Bedarf um einen Zähler erweitert wird..</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <th id="hEntityAlbumFieldAlbumTitle" scope="row" headers="hEntityAlbumFieldName">Album title</th>
                 <td headers="hEntityAlbumFieldAlbumTitle hEntityAlbumFieldType">Zeichenkette</td>
                 <td headers="hEntityAlbumFieldAlbumTitle hEntityAlbumFieldMandatory">true</td>
@@ -255,28 +278,6 @@
                 </td>
                 <td headers="hEntityAlbumFieldAlbumDescription hEntityAlbumFieldRemarks">
                     <ul>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <th id="hEntityAlbumFieldAlbumImage" scope="row" headers="hEntityAlbumFieldName">Album image</th>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldType">Upload</td>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldMandatory">true</td>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldDefault"></td>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldDisplayType">ALL</td>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldConstraints">
-                    <ul>
-                        <li>Hat eine Länge von 255 Zeichen.</li>
-                        <li>Die erlaubten Dateierweiterungen sind "gif, jpeg, jpg, png".</li>
-                        <li>Die erlaubten MIME-Typen sind "image/*".</li>
-                        <li>Das Seitenverhältnis von Bildern (Breite / Höhe) muß zwischen 2.95 und 3.05 liegen.</li>
-                        <li>Es ist nur Querformat (kein Quadrat- oder Hochformat) erlaubt.</li>
-                    </ul>
-                </td>
-                <td headers="hEntityAlbumFieldAlbumImage hEntityAlbumFieldRemarks">
-                    <ul>
-                        <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
-                        <li>Die hochgeladenen Dateien werden im Unterordner "albumimage" gespeichert und behalten ihren originalen Dateinamen, der bei Bedarf um einen Zähler erweitert wird..</li>
                     </ul>
                 </td>
             </tr>
@@ -1013,16 +1014,16 @@
         </thead>
         <tbody>
             <tr>
-                <th id="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage" scope="row" headers="hVariablesImagesFieldName">Enable shrinking for album album image</th>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldType">Boolesches</td>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldMandatory">false</td>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldDefault">false</td>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage" scope="row" headers="hVariablesImagesFieldName">Enable shrinking for album title image</th>
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldType">Boolesches</td>
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldMandatory">false</td>
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldDefault">false</td>
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldConstraints">
                     <ul>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumAlbumImage hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldEnableShrinkingForAlbumTitleImage hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Whether to enable shrinking huge images to maximum dimensions. Stores downscaled version of the original image. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1030,17 +1031,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldShrinkWidthAlbumAlbumImage" scope="row" headers="hVariablesImagesFieldName">Shrink width album album image</th>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldDefault">800</td>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldShrinkWidthAlbumTitleImage" scope="row" headers="hVariablesImagesFieldName">Shrink width album title image</th>
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldDefault">800</td>
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldShrinkWidthAlbumAlbumImage hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldShrinkWidthAlbumTitleImage hVariablesImagesFieldRemarks">
                     <ul>
                         <li>The maximum image width in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1048,17 +1049,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldShrinkHeightAlbumAlbumImage" scope="row" headers="hVariablesImagesFieldName">Shrink height album album image</th>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldDefault">600</td>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldShrinkHeightAlbumTitleImage" scope="row" headers="hVariablesImagesFieldName">Shrink height album title image</th>
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldDefault">600</td>
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldShrinkHeightAlbumAlbumImage hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldShrinkHeightAlbumTitleImage hVariablesImagesFieldRemarks">
                     <ul>
                         <li>The maximum image height in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1066,17 +1067,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailModeAlbumAlbumImage" scope="row" headers="hVariablesImagesFieldName">Thumbnail mode album album image</th>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldType">Liste</td>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldDefault"></td>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailModeAlbumTitleImage" scope="row" headers="hVariablesImagesFieldName">Thumbnail mode album title image</th>
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldType">Liste</td>
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldDefault"></td>
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 255 Zeichen.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailModeAlbumAlbumImage hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailModeAlbumTitleImage hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail mode (inset or outbound). </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1086,17 +1087,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album album image view</th>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldDefault">32</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album title image view</th>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldDefault">32</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageView hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageView hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail width on view pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1104,17 +1105,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album album image view</th>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldDefault">24</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album title image view</th>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldDefault">24</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageView hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageView hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail height on view pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1122,17 +1123,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album album image display</th>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldDefault">240</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album title image display</th>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldDefault">240</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageDisplay hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageDisplay hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail width on display pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1140,17 +1141,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album album image display</th>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldDefault">180</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album title image display</th>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldDefault">180</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageDisplay hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageDisplay hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail height on display pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1158,17 +1159,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album album image edit</th>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldDefault">240</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit" scope="row" headers="hVariablesImagesFieldName">Thumbnail width album title image edit</th>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldDefault">240</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailWidthAlbumAlbumImageEdit hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailWidthAlbumTitleImageEdit hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail width on edit pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
@@ -1176,17 +1177,17 @@
                 </td>
             </tr>
             <tr>
-                <th id="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album album image edit</th>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldType">Ganzzahl</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldMandatory">true</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldDefault">180</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldDisplayType">ALL</td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldConstraints">
+                <th id="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit" scope="row" headers="hVariablesImagesFieldName">Thumbnail height album title image edit</th>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldType">Ganzzahl</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldMandatory">true</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldDefault">180</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldDisplayType">ALL</td>
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 11.</li>
                     </ul>
                 </td>
-                <td headers="hVariablesImagesFieldThumbnailHeightAlbumAlbumImageEdit hVariablesImagesFieldRemarks">
+                <td headers="hVariablesImagesFieldThumbnailHeightAlbumTitleImageEdit hVariablesImagesFieldRemarks">
                     <ul>
                         <li>Thumbnail height on edit pages in pixels. </li>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>

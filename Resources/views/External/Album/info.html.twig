@@ -1,16 +1,16 @@
 {# Purpose of this template: Display item information for previewing from other modules #}
 <dl id="album{{ album.getKey() }}">
 <dt>{{ album|rkfineartphotographermodule_formattedTitle|notifyFilters('fineartphotographer.filter_hooks.albums.filter')|safeHtml }}</dt>
-<dd>{% if album.albumImageMeta|default %}
-<a href="{{ album.albumImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.albumImageMeta.isImage %} class="image-link"{% endif %}>
-{% if album.albumImageMeta.isImage %}
-    {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumAlbumImage') %}
-    <img src="{{ album.albumImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+<dd>{% if album.titleImage is not empty and album.titleImageMeta|default %}
+            <a href="{{ album.titleImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.titleImageMeta.isImage %} class="image-link"{% endif %}>
+{% if album.titleImageMeta.isImage %}
+    {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumTitleImage') %}
+    <img src="{{ album.titleImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
 {% else %}
-    {{ __('Download') }} ({{ album.albumImageMeta.size|rkfineartphotographermodule_fileSize(album.albumImage.getPathname(), false, false) }})
+    {{ __('Download') }} ({{ album.titleImageMeta.size|rkfineartphotographermodule_fileSize(album.titleImage.getPathname(), false, false) }})
 {% endif %}
 </a>
-{% endif %}
+{% else %}&nbsp;{% endif %}
 </dd>
 {% if album.albumDescription is not empty %}<dd>{{ album.albumDescription }}</dd>{% endif %}
 {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}

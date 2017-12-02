@@ -155,8 +155,8 @@ abstract class AbstractConfigType extends AbstractType
     public function addImagesFields(FormBuilderInterface $builder, array $options = [])
     {
         
-        $builder->add('enableShrinkingForAlbumAlbumImage', CheckboxType::class, [
-            'label' => $this->__('Enable shrinking for album album image') . ':',
+        $builder->add('enableShrinkingForAlbumTitleImage', CheckboxType::class, [
+            'label' => $this->__('Enable shrinking for album title image') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Whether to enable shrinking huge images to maximum dimensions. Stores downscaled version of the original image.')
@@ -169,8 +169,8 @@ abstract class AbstractConfigType extends AbstractType
             'required' => false,
         ]);
         
-        $builder->add('shrinkWidthAlbumAlbumImage', IntegerType::class, [
-            'label' => $this->__('Shrink width album album image') . ':',
+        $builder->add('shrinkWidthAlbumTitleImage', IntegerType::class, [
+            'label' => $this->__('Shrink width album title image') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('The maximum image width in pixels.')
@@ -187,8 +187,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('shrinkHeightAlbumAlbumImage', IntegerType::class, [
-            'label' => $this->__('Shrink height album album image') . ':',
+        $builder->add('shrinkHeightAlbumTitleImage', IntegerType::class, [
+            'label' => $this->__('Shrink height album title image') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('The maximum image height in pixels.')
@@ -205,15 +205,15 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $listEntries = $this->listHelper->getEntries('appSettings', 'thumbnailModeAlbumAlbumImage');
+        $listEntries = $this->listHelper->getEntries('appSettings', 'thumbnailModeAlbumTitleImage');
         $choices = [];
         $choiceAttributes = [];
         foreach ($listEntries as $entry) {
             $choices[$entry['text']] = $entry['value'];
             $choiceAttributes[$entry['text']] = ['title' => $entry['title']];
         }
-        $builder->add('thumbnailModeAlbumAlbumImage', ChoiceType::class, [
-            'label' => $this->__('Thumbnail mode album album image') . ':',
+        $builder->add('thumbnailModeAlbumTitleImage', ChoiceType::class, [
+            'label' => $this->__('Thumbnail mode album title image') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail mode (inset or outbound).')
@@ -232,8 +232,8 @@ abstract class AbstractConfigType extends AbstractType
             'expanded' => false
         ]);
         
-        $builder->add('thumbnailWidthAlbumAlbumImageView', IntegerType::class, [
-            'label' => $this->__('Thumbnail width album album image view') . ':',
+        $builder->add('thumbnailWidthAlbumTitleImageView', IntegerType::class, [
+            'label' => $this->__('Thumbnail width album title image view') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail width on view pages in pixels.')
@@ -250,8 +250,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('thumbnailHeightAlbumAlbumImageView', IntegerType::class, [
-            'label' => $this->__('Thumbnail height album album image view') . ':',
+        $builder->add('thumbnailHeightAlbumTitleImageView', IntegerType::class, [
+            'label' => $this->__('Thumbnail height album title image view') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail height on view pages in pixels.')
@@ -268,8 +268,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('thumbnailWidthAlbumAlbumImageDisplay', IntegerType::class, [
-            'label' => $this->__('Thumbnail width album album image display') . ':',
+        $builder->add('thumbnailWidthAlbumTitleImageDisplay', IntegerType::class, [
+            'label' => $this->__('Thumbnail width album title image display') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail width on display pages in pixels.')
@@ -286,8 +286,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('thumbnailHeightAlbumAlbumImageDisplay', IntegerType::class, [
-            'label' => $this->__('Thumbnail height album album image display') . ':',
+        $builder->add('thumbnailHeightAlbumTitleImageDisplay', IntegerType::class, [
+            'label' => $this->__('Thumbnail height album title image display') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail height on display pages in pixels.')
@@ -304,8 +304,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('thumbnailWidthAlbumAlbumImageEdit', IntegerType::class, [
-            'label' => $this->__('Thumbnail width album album image edit') . ':',
+        $builder->add('thumbnailWidthAlbumTitleImageEdit', IntegerType::class, [
+            'label' => $this->__('Thumbnail width album title image edit') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail width on edit pages in pixels.')
@@ -322,8 +322,8 @@ abstract class AbstractConfigType extends AbstractType
             'input_group' => ['right' => $this->__('pixels')]
         ]);
         
-        $builder->add('thumbnailHeightAlbumAlbumImageEdit', IntegerType::class, [
-            'label' => $this->__('Thumbnail height album album image edit') . ':',
+        $builder->add('thumbnailHeightAlbumTitleImageEdit', IntegerType::class, [
+            'label' => $this->__('Thumbnail height album title image edit') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
                 'title' => $this->__('Thumbnail height on edit pages in pixels.')

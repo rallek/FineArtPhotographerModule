@@ -416,7 +416,7 @@ abstract class AbstractControllerHelper
             // initialise Imagine runtime options
             if ($objectType == 'album') {
                 $thumbRuntimeOptions = [];
-                $thumbRuntimeOptions[$objectType . 'AlbumImage'] = $this->imageHelper->getRuntimeOptions($objectType, 'albumImage', $context, $args);
+                $thumbRuntimeOptions[$objectType . 'TitleImage'] = $this->imageHelper->getRuntimeOptions($objectType, 'titleImage', $context, $args);
                 $parameters['thumbRuntimeOptions'] = $thumbRuntimeOptions;
             }
             if ($objectType == 'albumItem') {

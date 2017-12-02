@@ -460,7 +460,7 @@ abstract class AbstractUploadHelper
     
         switch ($objectType) {
             case 'album':
-                $basePath .= 'albums/albumimage/';
+                $basePath .= 'albums/titleimage/';
                 break;
             case 'albumItem':
                 $basePath .= 'albumitems/image/';
@@ -520,7 +520,7 @@ abstract class AbstractUploadHelper
     {
         $result = true;
     
-        $result &= $this->checkAndCreateUploadFolder('album', 'albumImage', 'gif, jpeg, jpg, png');
+        $result &= $this->checkAndCreateUploadFolder('album', 'titleImage', 'gif, jpeg, jpg, png');
     
         $result &= $this->checkAndCreateUploadFolder('albumItem', 'image', 'gif, jpeg, jpg, png');
     

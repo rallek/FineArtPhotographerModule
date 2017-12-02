@@ -55,7 +55,7 @@
         {% endif %}
         <fieldset>
             <legend>{{ __('Further properties') }}</legend>
-            {{ form_row(form.albumImage) }}
+            {{ form_row(form.titleImage) }}
         </fieldset>
         
         {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
@@ -121,7 +121,7 @@
             ( function($) {
                 $(document).ready(function() {
                     rKFineArtPhotographerInitEditForm('{{ mode }}', '{% if mode != 'create' %}{{ album.id }}{% endif %}');
-                    rKFineArtPhotographerInitUploadField('rkfineartphotographermodule_album_albumImage_albumImage');
+                    rKFineArtPhotographerInitUploadField('rkfineartphotographermodule_album_titleImage_titleImage');
                     {% if form.moderationSpecificCreator is defined %}
                         initUserLiveSearch('rkfineartphotographermodule_album_moderationSpecificCreator');
                     {% endif %}

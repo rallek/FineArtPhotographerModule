@@ -342,7 +342,7 @@ abstract class AbstractEntityLifecycleListener implements EventSubscriber, Conta
         $uploadFields = [];
         switch ($objectType) {
             case 'album':
-                $uploadFields = ['albumImage'];
+                $uploadFields = ['titleImage'];
                 break;
             case 'albumItem':
                 $uploadFields = ['image'];

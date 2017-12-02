@@ -139,7 +139,7 @@ abstract class AbstractAlbumType extends AbstractType
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $entity = $event->getData();
-            foreach (['albumImage'] as $uploadFieldName) {
+            foreach (['titleImage'] as $uploadFieldName) {
                 $entity[$uploadFieldName] = [
                     $uploadFieldName => $entity[$uploadFieldName] instanceof File ? $entity[$uploadFieldName]->getPathname() : null
                 ];
@@ -147,7 +147,7 @@ abstract class AbstractAlbumType extends AbstractType
         });
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             $entity = $event->getData();
-            foreach (['albumImage'] as $uploadFieldName) {
+            foreach (['titleImage'] as $uploadFieldName) {
                 if (is_array($entity[$uploadFieldName])) {
                     $entity[$uploadFieldName] = $entity[$uploadFieldName][$uploadFieldName];
                 }
@@ -222,14 +222,18 @@ abstract class AbstractAlbumType extends AbstractType
             }
         }
         
-        $builder->add('albumImage', UploadType::class, [
-            'label' => $this->__('Album image') . ':',
-            'help' => [$this->__f('Note: the image aspect ratio (width / height) must be between %min% and %max%.', ['%min%' => 2.95, '%max%' => 3.05]), $this->__('Note: only landscape dimension (no square or portrait) is allowed.')],
+        $builder->add('titleImage', UploadType::class, [
+            'label' => $this->__('Title image') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('should be in landscape 3:1')
+            ],
+            'help' => [$this->__('should be in landscape 3:1'), $this->__f('Note: the image aspect ratio (width / height) must be between %min% and %max%.', ['%min%' => 2.95, '%max%' => 3.05]), $this->__('Note: only landscape dimension (no square or portrait) is allowed.')],
             'attr' => [
                 'class' => ' validate-upload',
-                'title' => $this->__('Enter the album image of the album')
+                'title' => $this->__('Enter the title image of the album')
             ],
-            'required' => true && $options['mode'] == 'create',
+            'required' => false && $options['mode'] == 'create',
             'entity' => $options['entity'],
             'allowed_extensions' => 'gif, jpeg, jpg, png',
             'allowed_size' => ''
@@ -366,7 +370,7 @@ abstract class AbstractAlbumType extends AbstractType
                     return $this->entityFactory->createAlbum();
                 },
                 'error_mapping' => [
-                    'albumImage' => 'albumImage.albumImage',
+                    'titleImage' => 'titleImage.titleImage',
                 ],
                 'mode' => 'create',
                 'actions' => [],
