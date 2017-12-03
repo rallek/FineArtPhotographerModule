@@ -190,6 +190,7 @@ abstract class AbstractSearchHelper implements SearchableInterface
                 case 'albumItem':
                     $whereArray[] = 'tbl.workflowState';
                     $whereArray[] = 'tbl.image';
+                    $whereArray[] = 'tbl.copyright';
                     $whereArray[] = 'tbl.imageTitle';
                     $whereArray[] = 'tbl.imageDescription';
                     break;

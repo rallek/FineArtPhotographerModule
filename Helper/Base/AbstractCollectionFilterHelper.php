@@ -416,6 +416,8 @@ abstract class AbstractCollectionFilterHelper
             $parameters['searchWorkflowState'] = $fragment;
             $filters[] = 'tbl.image = :searchImage';
             $parameters['searchImage'] = $fragment;
+            $filters[] = 'tbl.copyright LIKE :searchCopyright';
+            $parameters['searchCopyright'] = '%' . $fragment . '%';
             $filters[] = 'tbl.imageTitle LIKE :searchImageTitle';
             $parameters['searchImageTitle'] = '%' . $fragment . '%';
             $filters[] = 'tbl.imageDescription LIKE :searchImageDescription';

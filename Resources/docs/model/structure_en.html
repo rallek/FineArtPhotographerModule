@@ -490,7 +490,7 @@
             </tr>
             <tr>
                 <th id="hAlbumBehaviourFormAwareHookProvider" scope="row" headers="hAlbumBehaviourName1">Form aware hooks provider</th>
-                <td headers="hAlbumBehaviourFormAwareHookProvider hAlbumBehaviourValue1" class="text-center">ENABLED &ndash; hook provider available</td>
+                <td headers="hAlbumBehaviourFormAwareHookProvider hAlbumBehaviourValue1" class="text-center">DISABLED &ndash; no hook provider available</td>
                 <th id="hAlbumBehaviourUiHooksProvider" scope="row" headers="hAlbumBehaviourName2">UI hooks provider</th>
                 <td headers="hAlbumBehaviourUiHooksProvider hAlbumBehaviourValue2" class="text-center">ENABLED &ndash; hook provider available</td>
             </tr>
@@ -628,6 +628,24 @@
                     <ul>
                         <li>This field is not  unique and allows no  null values.</li>
                         <li>Uploaded files are stored in the "image" subfolder and keep their original file name which is extended by a counter if needed..</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th id="hEntityAlbumItemFieldCopyright" scope="row" headers="hEntityAlbumItemFieldName">Copyright</th>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldType">String</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldMandatory">false</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldDefault"></td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldDisplayType">ALL</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldConstraints">
+                    <ul>
+                        <li>Has a length of 255 chars.</li>
+                    </ul>
+                </td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldRemarks">
+                    <ul>
+                        <li>You may want to label your image with your copyright. </li>
+                        <li>This field is not  unique and allows no  null values.</li>
                     </ul>
                 </td>
             </tr>
@@ -1520,7 +1538,7 @@
             </tr>
             <tr>
                 <td headers="hSettingName1">Filter hooks provider</td>
-                <td headers="hSettingValue1" class="text-center">ENABLED &ndash; hook provider available</td>
+                <td headers="hSettingValue1" class="text-center">DISABLED &ndash; no hook provider available</td>
                 <td headers="hSettingName2">Separate admin templates</td>
                 <td headers="hSettingValue2" class="text-center"><i class="fa fa-check"></i>
                 </td>

@@ -33,6 +33,10 @@
             {% endif %}
             </dd>
         {% endif %}
+        {% if albumItem.copyright is not empty %}
+            <dt>{{ __('Copyright') }}</dt>
+            <dd>{{ albumItem.copyright }}</dd>
+        {% endif %}
         {% if albumItem.imageTitle is not empty %}
             <dt>{{ __('Image title') }}</dt>
             <dd>{{ albumItem.imageTitle }}</dd>

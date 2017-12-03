@@ -33,7 +33,7 @@
             <div class="col-sm-9">
                 <select id="{$baseID}Id" name="id" class="form-control">
                     {foreach item='albumItem' from=$items}
-                        <option value="{$albumItem->getKey()}"{if $selectedId eq $albumItem->getKey()} selected="selected"{/if}>{$albumItem->getImageTitle()}</option>
+                        <option value="{$albumItem->getKey()}"{if $selectedId eq $albumItem->getKey()} selected="selected"{/if}>{$albumItem->getCopyright()}</option>
                     {foreachelse}
                         <option value="0">{gt text='No entries found.'}</option>
                     {/foreach}
@@ -46,6 +46,7 @@
                 <select id="{$baseID}Sort" name="sort" class="form-control">
                     <option value="workflowState"{if $sort eq 'workflowState'} selected="selected"{/if}>{gt text='Workflow state'}</option>
                     <option value="image"{if $sort eq 'image'} selected="selected"{/if}>{gt text='Image'}</option>
+                    <option value="copyright"{if $sort eq 'copyright'} selected="selected"{/if}>{gt text='Copyright'}</option>
                     <option value="imageTitle"{if $sort eq 'imageTitle'} selected="selected"{/if}>{gt text='Image title'}</option>
                     <option value="imageDescription"{if $sort eq 'imageDescription'} selected="selected"{/if}>{gt text='Image description'}</option>
                     <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>

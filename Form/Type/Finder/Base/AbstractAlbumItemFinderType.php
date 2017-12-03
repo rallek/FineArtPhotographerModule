@@ -185,6 +185,7 @@ abstract class AbstractAlbumItemFinderType extends AbstractType
                 'empty_data' => '',
                 'choices' => [
                     $this->__('Image') => 'image',
+                    $this->__('Copyright') => 'copyright',
                     $this->__('Image title') => 'imageTitle',
                     $this->__('Image description') => 'imageDescription',
                     $this->__('Creation date') => 'createdDate',

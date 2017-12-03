@@ -24,6 +24,7 @@
                 <col id="cWorkflowState" />
                 {% endif %}
                 <col id="cImage" />
+                <col id="cCopyright" />
                 <col id="cImageTitle" />
                 <col id="cImageDescription" />
                 <col id="cAlbum" />
@@ -43,6 +44,9 @@
                 {% endif %}
                 <th id="hImage" scope="col" class="text-left">
                     <a href="{{ sort.image.url }}" title="{{ __f('Sort by %s', {'%s': 'image'}) }}" class="{{ sort.image.class }}">{{ __('Image') }}</a>
+                </th>
+                <th id="hCopyright" scope="col" class="text-left">
+                    <a href="{{ sort.copyright.url }}" title="{{ __f('Sort by %s', {'%s': 'copyright'}) }}" class="{{ sort.copyright.class }}">{{ __('Copyright') }}</a>
                 </th>
                 <th id="hImageTitle" scope="col" class="text-left">
                     <a href="{{ sort.imageTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'image title'}) }}" class="{{ sort.imageTitle.class }}">{{ __('Image title') }}</a>
@@ -85,6 +89,9 @@
                     </a>
                     {% endif %}
                 </td>
+                <td headers="hCopyright" class="text-left">
+                    {{ albumItem.copyright }}
+                </td>
                 <td headers="hImageTitle" class="text-left">
                     {{ albumItem.imageTitle }}
                 </td>
@@ -104,7 +111,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}7{% else %}6{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}8{% else %}7{% endif %}">
             {{ __('No album items found.') }}
               </td>
             </tr>

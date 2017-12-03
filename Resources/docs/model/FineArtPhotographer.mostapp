@@ -16,7 +16,7 @@ application "FineArtPhotographer" {
         generateJsonTemplates false
         generateKmlTemplates false
         generateIcsTemplates false
-        filterHookProvider ENABLED
+        filterHookProvider DISABLED
         separateAdminTemplates true
         viewActionsStyle BUTTON_GROUP
         displayActionsStyle BUTTON_GROUP
@@ -28,7 +28,7 @@ application "FineArtPhotographer" {
             displayPattern "#albumDate#, #albumTitle#"
             hasArchive false
             ownerPermission true
-            formAwareHookProvider ENABLED
+            formAwareHookProvider DISABLED
             uiHooksProvider ENABLED
             fields {
                 upload "titleImage" {
@@ -66,6 +66,11 @@ application "FineArtPhotographer" {
             ownerPermission true
             fields {
                 upload "image",
+                string "copyright" {
+                    documentation "You may want to label your image with your copyright."
+                    mandatory false
+                }
+            ,
                 string "imageTitle" translatable {
                     mandatory false
                 }

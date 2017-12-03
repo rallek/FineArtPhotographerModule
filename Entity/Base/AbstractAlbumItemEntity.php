@@ -92,6 +92,16 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     protected $imageUrl = '';
     
     /**
+     * You may want to label your image with your copyright.
+     *
+     * @ORM\Column(length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(min="0", max="255")
+     * @var string $copyright
+     */
+    protected $copyright = '';
+    
+    /**
      * @Gedmo\Translatable
      * @ORM\Column(length=255)
      * @Assert\NotNull()
@@ -293,6 +303,30 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     {
         if ($this->imageMeta !== $imageMeta) {
             $this->imageMeta = isset($imageMeta) ? $imageMeta : '';
+        }
+    }
+    
+    /**
+     * Returns the copyright.
+     *
+     * @return string
+     */
+    public function getCopyright()
+    {
+        return $this->copyright;
+    }
+    
+    /**
+     * Sets the copyright.
+     *
+     * @param string $copyright
+     *
+     * @return void
+     */
+    public function setCopyright($copyright)
+    {
+        if ($this->copyright !== $copyright) {
+            $this->copyright = isset($copyright) ? $copyright : '';
         }
     }
     
@@ -508,7 +542,7 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
      */
     public function __toString()
     {
-        return 'Album item ' . $this->getKey() . ': ' . $this->getImageTitle();
+        return 'Album item ' . $this->getKey() . ': ' . $this->getCopyright();
     }
     
     /**

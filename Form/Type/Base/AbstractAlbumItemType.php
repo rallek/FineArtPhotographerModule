@@ -218,6 +218,22 @@ abstract class AbstractAlbumItemType extends AbstractType
             'allowed_extensions' => 'gif, jpeg, jpg, png',
             'allowed_size' => ''
         ]);
+        
+        $builder->add('copyright', TextType::class, [
+            'label' => $this->__('Copyright') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('You may want to label your image with your copyright.')
+            ],
+            'help' => $this->__('You may want to label your image with your copyright.'),
+            'empty_data' => '',
+            'attr' => [
+                'maxlength' => 255,
+                'class' => '',
+                'title' => $this->__('Enter the copyright of the album item')
+            ],
+            'required' => false,
+        ]);
     }
 
     /**

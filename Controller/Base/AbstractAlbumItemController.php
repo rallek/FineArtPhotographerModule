@@ -139,6 +139,7 @@ abstract class AbstractAlbumItemController extends AbstractController
         $sortableColumns->addColumns([
             new Column('workflowState'),
             new Column('image'),
+            new Column('copyright'),
             new Column('imageTitle'),
             new Column('imageDescription'),
             new Column('album'),
@@ -567,7 +568,7 @@ abstract class AbstractAlbumItemController extends AbstractController
             $albumItem = $repository->selectById($id);
             if (null !== $albumItem) {
                 $formattedTitle = $this->get('rk_fineartphotographer_module.entity_display_helper')->getFormattedTitle($albumItem);
-                $searchTerm = $albumItem->getImageTitle();
+                $searchTerm = $albumItem->getCopyright();
             }
         }
         

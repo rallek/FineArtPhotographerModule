@@ -62,6 +62,7 @@ abstract class AbstractAlbumItemRepository extends EntityRepository
         return [
             'workflowState',
             'image',
+            'copyright',
             'imageTitle',
             'imageDescription',
             'createdBy',

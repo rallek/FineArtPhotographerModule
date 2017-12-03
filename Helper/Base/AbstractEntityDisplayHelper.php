@@ -118,7 +118,7 @@ abstract class AbstractEntityDisplayHelper
             return 'albumTitle';
         }
         if ($objectType == 'albumItem') {
-            return 'imageTitle';
+            return 'copyright';
         }
     
         return '';

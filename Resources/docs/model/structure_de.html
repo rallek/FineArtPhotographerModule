@@ -490,7 +490,7 @@
             </tr>
             <tr>
                 <th id="hAlbumBehaviourFormAwareHookProvider" scope="row" headers="hAlbumBehaviourName1">Anbieter für Formular-Hooks</th>
-                <td headers="hAlbumBehaviourFormAwareHookProvider hAlbumBehaviourValue1" class="text-center">ENABLED &ndash; Hook-Anbieter verfügbar</td>
+                <td headers="hAlbumBehaviourFormAwareHookProvider hAlbumBehaviourValue1" class="text-center">DISABLED &ndash; kein Hook-Anbieter verfügbar</td>
                 <th id="hAlbumBehaviourUiHooksProvider" scope="row" headers="hAlbumBehaviourName2">Anbieter für UI-Hooks</th>
                 <td headers="hAlbumBehaviourUiHooksProvider hAlbumBehaviourValue2" class="text-center">ENABLED &ndash; Hook-Anbieter verfügbar</td>
             </tr>
@@ -628,6 +628,24 @@
                     <ul>
                         <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
                         <li>Die hochgeladenen Dateien werden im Unterordner "image" gespeichert und behalten ihren originalen Dateinamen, der bei Bedarf um einen Zähler erweitert wird..</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th id="hEntityAlbumItemFieldCopyright" scope="row" headers="hEntityAlbumItemFieldName">Copyright</th>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldType">Zeichenkette</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldMandatory">false</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldDefault"></td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldDisplayType">ALL</td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldConstraints">
+                    <ul>
+                        <li>Hat eine Länge von 255 Zeichen.</li>
+                    </ul>
+                </td>
+                <td headers="hEntityAlbumItemFieldCopyright hEntityAlbumItemFieldRemarks">
+                    <ul>
+                        <li>You may want to label your image with your copyright. </li>
+                        <li>Dieses Feld ist nicht  eindeutig und erlaubt keine  Null-Werte.</li>
                     </ul>
                 </td>
             </tr>
@@ -1520,7 +1538,7 @@
             </tr>
             <tr>
                 <td headers="hSettingName1">Anbieter für Filter-Hooks</td>
-                <td headers="hSettingValue1" class="text-center">ENABLED &ndash; Hook-Anbieter verfügbar</td>
+                <td headers="hSettingValue1" class="text-center">DISABLED &ndash; kein Hook-Anbieter verfügbar</td>
                 <td headers="hSettingName2">Separate Admin-Templates</td>
                 <td headers="hSettingValue2" class="text-center"><i class="fa fa-check"></i>
                 </td>
