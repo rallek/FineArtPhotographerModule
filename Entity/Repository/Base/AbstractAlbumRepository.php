@@ -40,7 +40,7 @@ abstract class AbstractAlbumRepository extends EntityRepository
     /**
      * @var string The default sorting field/expression
      */
-    protected $defaultSortingField = 'titleImage';
+    protected $defaultSortingField = 'albumTitle';
 
     /**
      * @var CollectionFilterHelper
@@ -61,7 +61,6 @@ abstract class AbstractAlbumRepository extends EntityRepository
     {
         return [
             'workflowState',
-            'titleImage',
             'albumTitle',
             'albumDate',
             'createdBy',

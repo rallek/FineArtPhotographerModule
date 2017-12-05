@@ -33,7 +33,6 @@
                                 <legend>{{ language|languageName|safeHtml }}</legend>
                                 {% if language == app.request.locale %}
                                     {{ form_row(form.albumTitle) }}
-                                    {{ form_row(form.albumDate) }}
                                     {{ form_row(form.albumDescription) }}
                                 {% else %}
                                     {{ form_row(attribute(form, 'translations' ~ language)) }}
@@ -48,13 +47,12 @@
             <fieldset>
                 <legend>{{ language|languageName|safeHtml }}</legend>
                 {{ form_row(form.albumTitle) }}
-                {{ form_row(form.albumDate) }}
                 {{ form_row(form.albumDescription) }}
             </fieldset>
         {% endif %}
         <fieldset>
             <legend>{{ __('Further properties') }}</legend>
-            {{ form_row(form.titleImage) }}
+            {{ form_row(form.albumDate) }}
         </fieldset>
         
         {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
@@ -120,7 +118,6 @@
             ( function($) {
                 $(document).ready(function() {
                     rKFineArtPhotographerInitEditForm('{{ mode }}', '{% if mode != 'create' %}{{ album.id }}{% endif %}');
-                    rKFineArtPhotographerInitUploadField('rkfineartphotographermodule_album_titleImage_titleImage');
                     {% if form.moderationSpecificCreator is defined %}
                         initUserLiveSearch('rkfineartphotographermodule_album_moderationSpecificCreator');
                     {% endif %}

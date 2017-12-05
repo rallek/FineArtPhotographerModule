@@ -34,7 +34,6 @@
                                     <legend>{{ language|languageName|safeHtml }}</legend>
                                     {% if language == app.request.locale %}
                                         {{ form_row(attribute(subFields, 'albumTitle')) }}
-                                        {{ form_row(attribute(subFields, 'albumDate')) }}
                                         {{ form_row(attribute(subFields, 'albumDescription')) }}
                                     {% else %}
                                         {{ form_row(attribute(form, 'translations' ~ language)) }}
@@ -49,13 +48,12 @@
                 <fieldset>
                     <legend>{{ language|languageName|safeHtml }}</legend>
                     {{ form_row(attribute(subFields, 'albumTitle')) }}
-                    {{ form_row(attribute(subFields, 'albumDate')) }}
                     {{ form_row(attribute(subFields, 'albumDescription')) }}
                 </fieldset>
             {% endif %}
             <fieldset>
                 <legend>{{ __('Further properties') }}</legend>
-                {{ form_row(attribute(subFields, 'titleImage')) }}
+                {{ form_row(attribute(subFields, 'albumDate')) }}
             </fieldset>
         {% elseif displayMode == 'choices' %}
             {{ form_row(attribute(form, alias)) }}

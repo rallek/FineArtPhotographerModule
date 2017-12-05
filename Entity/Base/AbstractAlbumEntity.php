@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Zikula\Core\Doctrine\EntityAccess;
 use RK\FineArtPhotographerModule\Traits\StandardFieldsTrait;
@@ -62,42 +61,7 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     protected $workflowState = 'initial';
     
     /**
-     * Title image meta data array.
-     *
-     * @ORM\Column(type="array")
-     * @Assert\Type(type="array")
-     * @var array $titleImageMeta
-     */
-    protected $titleImageMeta = [];
-    
-    /**
-     * should be in landscape 3:1
-     *
-     * @ORM\Column(length=255, nullable=true)
-     * @Assert\Length(min="0", max="255")
-     * @Assert\File(
-     *    mimeTypes = {"image/*"}
-     * )
-     * @Assert\Image(
-     *    minRatio = 2.95,
-     *    maxRatio = 3.05,
-     *    allowSquare = false,
-     *    allowPortrait = false
-     * )
-     * @var string $titleImage
-     */
-    protected $titleImage = null;
-    
-    /**
-     * Full title image path as url.
-     *
-     * @Assert\Type(type="string")
-     * @var string $titleImageUrl
-     */
-    protected $titleImageUrl = '';
-    
-    /**
-     * Choose a title for your album. The event name seem to be a good choice.
+     * Choose a title for your album. The event name seem to be a good choice. Date and creator name will be automatically included.
      *
      * @Gedmo\Translatable
      * @ORM\Column(length=255)
@@ -108,7 +72,8 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     protected $albumTitle = '';
     
     /**
-     * @Gedmo\Translatable
+     * The date will be included in the headline
+     *
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
      * @Assert\Date()
@@ -117,6 +82,8 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     protected $albumDate;
     
     /**
+     * This description is used to give a short introduction about the event. It is not mandatory.
+     *
      * @Gedmo\Translatable
      * @ORM\Column(type="text", length=2000)
      * @Assert\NotNull()
@@ -237,78 +204,6 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     {
         if ($this->workflowState !== $workflowState) {
             $this->workflowState = isset($workflowState) ? $workflowState : '';
-        }
-    }
-    
-    /**
-     * Returns the title image.
-     *
-     * @return string
-     */
-    public function getTitleImage()
-    {
-        return $this->titleImage;
-    }
-    
-    /**
-     * Sets the title image.
-     *
-     * @param string $titleImage
-     *
-     * @return void
-     */
-    public function setTitleImage($titleImage)
-    {
-        if ($this->titleImage !== $titleImage) {
-            $this->titleImage = $titleImage;
-        }
-    }
-    
-    /**
-     * Returns the title image url.
-     *
-     * @return string
-     */
-    public function getTitleImageUrl()
-    {
-        return $this->titleImageUrl;
-    }
-    
-    /**
-     * Sets the title image url.
-     *
-     * @param string $titleImageUrl
-     *
-     * @return void
-     */
-    public function setTitleImageUrl($titleImageUrl)
-    {
-        if ($this->titleImageUrl !== $titleImageUrl) {
-            $this->titleImageUrl = $titleImageUrl;
-        }
-    }
-    
-    /**
-     * Returns the title image meta.
-     *
-     * @return array
-     */
-    public function getTitleImageMeta()
-    {
-        return $this->titleImageMeta;
-    }
-    
-    /**
-     * Sets the title image meta.
-     *
-     * @param array $titleImageMeta
-     *
-     * @return void
-     */
-    public function setTitleImageMeta($titleImageMeta = [])
-    {
-        if ($this->titleImageMeta !== $titleImageMeta) {
-            $this->titleImageMeta = $titleImageMeta;
         }
     }
     
@@ -616,11 +511,6 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     
         // reset workflow
         $this->setWorkflowState('initial');
-    
-        // reset upload fields
-        $this->setTitleImage(null);
-        $this->setTitleImageMeta([]);
-        $this->setTitleImageUrl('');
     
         $this->setCreatedBy(null);
         $this->setCreatedDate(null);

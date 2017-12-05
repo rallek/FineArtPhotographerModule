@@ -146,9 +146,6 @@ abstract class AbstractListEntriesHelper
                 break;
             case 'appSettings':
                 switch ($fieldName) {
-                    case 'thumbnailModeAlbumTitleImage':
-                        $result = false;
-                        break;
                     case 'thumbnailModeAlbumItemImage':
                         $result = false;
                         break;
@@ -195,9 +192,6 @@ abstract class AbstractListEntriesHelper
                 break;
             case 'appSettings':
                 switch ($fieldName) {
-                    case 'thumbnailModeAlbumTitleImage':
-                        $entries = $this->getThumbnailModeAlbumTitleImageEntriesForAppSettings();
-                        break;
                     case 'thumbnailModeAlbumItemImage':
                         $entries = $this->getThumbnailModeAlbumItemImageEntriesForAppSettings();
                         break;
@@ -285,32 +279,6 @@ abstract class AbstractListEntriesHelper
             'value'   => '!approved',
             'text'    => $this->__('All except approved'),
             'title'   => $this->__('Shows all items except these which are approved'),
-            'image'   => '',
-            'default' => false
-        ];
-    
-        return $states;
-    }
-    
-    /**
-     * Get 'thumbnail mode album title image' list entries.
-     *
-     * @return array Array with desired list entries
-     */
-    public function getThumbnailModeAlbumTitleImageEntriesForAppSettings()
-    {
-        $states = [];
-        $states[] = [
-            'value'   => 'inset',
-            'text'    => $this->__('Inset'),
-            'title'   => '',
-            'image'   => '',
-            'default' => true
-        ];
-        $states[] = [
-            'value'   => 'outbound',
-            'text'    => $this->__('Outbound'),
-            'title'   => '',
             'image'   => '',
             'default' => false
         ];

@@ -185,7 +185,6 @@ abstract class AbstractAlbumQuickNavType extends AbstractType
                     'class' => 'input-sm'
                 ],
                 'choices' =>             [
-                    $this->__('Title image') => 'titleImage',
                     $this->__('Album title') => 'albumTitle',
                     $this->__('Album date') => 'albumDate',
                     $this->__('Creation date') => 'createdDate',

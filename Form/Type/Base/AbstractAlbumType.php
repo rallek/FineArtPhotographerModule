@@ -21,11 +21,8 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zikula\CategoriesModule\Form\Type\CategoriesType;
 use Zikula\Common\Translator\TranslatorInterface;
@@ -33,7 +30,6 @@ use Zikula\Common\Translator\TranslatorTrait;
 use Zikula\ExtensionsModule\Api\ApiInterface\VariableApiInterface;
 use RK\FineArtPhotographerModule\Entity\Factory\EntityFactory;
 use RK\FineArtPhotographerModule\Form\Type\Field\TranslationType;
-use RK\FineArtPhotographerModule\Form\Type\Field\UploadType;
 use Zikula\UsersModule\Form\Type\UserLiveSearchType;
 use RK\FineArtPhotographerModule\Helper\CollectionFilterHelper;
 use RK\FineArtPhotographerModule\Helper\EntityDisplayHelper;
@@ -136,23 +132,6 @@ abstract class AbstractAlbumType extends AbstractType
         }
         $this->addModerationFields($builder, $options);
         $this->addSubmitButtons($builder, $options);
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $entity = $event->getData();
-            foreach (['titleImage'] as $uploadFieldName) {
-                $entity[$uploadFieldName] = [
-                    $uploadFieldName => $entity[$uploadFieldName] instanceof File ? $entity[$uploadFieldName]->getPathname() : null
-                ];
-            }
-        });
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            $entity = $event->getData();
-            foreach (['titleImage'] as $uploadFieldName) {
-                if (is_array($entity[$uploadFieldName])) {
-                    $entity[$uploadFieldName] = $entity[$uploadFieldName][$uploadFieldName];
-                }
-            }
-        });
     }
 
     /**
@@ -168,9 +147,9 @@ abstract class AbstractAlbumType extends AbstractType
             'label' => $this->__('Album title') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
-                'title' => $this->__('Choose a title for your album. The event name seem to be a good choice.')
+                'title' => $this->__('Choose a title for your album. The event name seem to be a good choice. Date and creator name will be automatically included.')
             ],
-            'help' => $this->__('Choose a title for your album. The event name seem to be a good choice.'),
+            'help' => $this->__('Choose a title for your album. The event name seem to be a good choice. Date and creator name will be automatically included.'),
             'empty_data' => '',
             'attr' => [
                 'maxlength' => 255,
@@ -180,20 +159,13 @@ abstract class AbstractAlbumType extends AbstractType
             'required' => true,
         ]);
         
-        $builder->add('albumDate', DateType::class, [
-            'label' => $this->__('Album date') . ':',
-            'attr' => [
-                'class' => '',
-                'title' => $this->__('Enter the album date of the album')
-            ],
-            'required' => true,
-            'empty_data' => date('Y-m-d'),
-            'widget' => 'single_text'
-        ]);
-        
         $builder->add('albumDescription', TextareaType::class, [
             'label' => $this->__('Album description') . ':',
-            'help' => $this->__f('Note: this value must not exceed %amount% characters.', ['%amount%' => 2000]),
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('This description is used to give a short introduction about the event. It is not mandatory.')
+            ],
+            'help' => [$this->__('This description is used to give a short introduction about the event. It is not mandatory.'), $this->__f('Note: this value must not exceed %amount% characters.', ['%amount%' => 2000])],
             'empty_data' => '',
             'attr' => [
                 'maxlength' => 2000,
@@ -222,21 +194,20 @@ abstract class AbstractAlbumType extends AbstractType
             }
         }
         
-        $builder->add('titleImage', UploadType::class, [
-            'label' => $this->__('Title image') . ':',
+        $builder->add('albumDate', DateType::class, [
+            'label' => $this->__('Album date') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
-                'title' => $this->__('should be in landscape 3:1')
+                'title' => $this->__('The date will be included in the headline')
             ],
-            'help' => [$this->__('should be in landscape 3:1'), $this->__f('Note: the image aspect ratio (width / height) must be between %min% and %max%.', ['%min%' => 2.95, '%max%' => 3.05]), $this->__('Note: only landscape dimension (no square or portrait) is allowed.')],
+            'help' => $this->__('The date will be included in the headline'),
             'attr' => [
-                'class' => ' validate-upload',
-                'title' => $this->__('Enter the title image of the album')
+                'class' => '',
+                'title' => $this->__('Enter the album date of the album')
             ],
-            'required' => false && $options['mode'] == 'create',
-            'entity' => $options['entity'],
-            'allowed_extensions' => 'gif, jpeg, jpg, png',
-            'allowed_size' => ''
+            'required' => true,
+            'empty_data' => date('Y-m-d'),
+            'widget' => 'single_text'
         ]);
     }
 
@@ -370,7 +341,6 @@ abstract class AbstractAlbumType extends AbstractType
                     return $this->entityFactory->createAlbum();
                 },
                 'error_mapping' => [
-                    'titleImage' => 'titleImage.titleImage',
                 ],
                 'mode' => 'create',
                 'actions' => [],
@@ -379,7 +349,7 @@ abstract class AbstractAlbumType extends AbstractType
                 'filter_by_ownership' => true,
                 'inline_usage' => false
             ])
-            ->setRequired(['entity', 'mode', 'actions'])
+            ->setRequired(['mode', 'actions'])
             ->setAllowedTypes('mode', 'string')
             ->setAllowedTypes('actions', 'array')
             ->setAllowedTypes('has_moderate_permission', 'bool')

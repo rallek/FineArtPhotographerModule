@@ -26,51 +26,29 @@
             {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
                 {{ form_row(finderForm.categories) }}
             {% endif %}
-            {{ form_row(finderForm.onlyImages) }}
-            <div id="imageFieldRow">
-                {{ form_row(finderForm.imageField) }}
-            </div>
             {{ form_row(finderForm.pasteAs) }}
             <br />
             <div class="form-group">
                 <label class="col-sm-3 control-label">{{ __('Album') }}:</label>
                 <div class="col-sm-9">
                     <div id="rkfineartphotographermoduleItemContainer">
-                        {% if not onlyImages %}
-                            <ul>
-                        {% endif %}
+                        <ul>
                             {% for album in items %}
-                                {% if not onlyImages or (attribute(album, imageField) is not empty and attribute(album, imageField ~ 'Meta').isImage) %}
-                                {% if not onlyImages %}
-                                    <li>
-                                {% endif %}
+                                <li>
                                     {% set itemId = album.getKey() %}
                                     <a href="#" data-itemid="{{ itemId }}">
-                                        {% if onlyImages %}
-                                            {% set thumbOptions = attribute(thumbRuntimeOptions, 'album' ~ imageField[:1]|upper ~ imageField[1:]) %}
-                                            <img src="{{ attribute(album, imageField).getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-rounded" />
-                                        {% else %}
-                                            {{ album|rkfineartphotographermodule_formattedTitle }}
-                                        {% endif %}
+                                        {{ album|rkfineartphotographermodule_formattedTitle }}
                                     </a>
                                     <input type="hidden" id="path{{ itemId }}" value="{{ path('rkfineartphotographermodule_album_display', {'id': album.getId()}) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('rkfineartphotographermodule_album_display', {'id': album.getId()}) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if album.albumDescription is not empty %}{{ album.albumDescription }}{% endif %}
                                     {% endset %}{{ description|striptags|e('html_attr') }}" />
-                                    {% if onlyImages %}
-                                        <input type="hidden" id="imagePath{{ itemId }}" value="{{ app.request.basePath }}/{{ attribute(album, imageField).getPathname() }}" />
-                                    {% endif %}
-                                {% if not onlyImages %}
-                                    </li>
-                                {% endif %}
-                                {% endif %}
+                                </li>
                             {% else %}
-                                {% if not onlyImages %}<li>{% endif %}{{ __('No albums found.') }}{% if not onlyImages %}</li>{% endif %}
+                                <li>{{ __('No albums found.') }}</li>
                             {% endfor %}
-                        {% if not onlyImages %}
-                            </ul>
-                        {% endif %}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -78,9 +56,7 @@
             {{ form_row(finderForm.sort) }}
             {{ form_row(finderForm.sortdir) }}
             {{ form_row(finderForm.num) }}
-            <div id="searchTermRow">
-                {{ form_row(finderForm.q) }}
-            </div>
+            {{ form_row(finderForm.q) }}
             <div>
                 {{ pager({display: 'page', rowcount: pager.numitems, limit: pager.itemsperpage, posvar: 'pos', maxpages: 10, route: 'rkfineartphotographermodule_external_finder'}) }}
             </div>

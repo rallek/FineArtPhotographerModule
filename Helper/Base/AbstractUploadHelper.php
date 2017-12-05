@@ -105,7 +105,7 @@ abstract class AbstractUploadHelper
         $this->moduleVars = $moduleVars;
         $this->dataDirectory = $dataDirectory;
 
-        $this->allowedObjectTypes = ['album', 'albumItem'];
+        $this->allowedObjectTypes = ['albumItem'];
         $this->imageFileTypes = ['gif', 'jpeg', 'jpg', 'png', 'swf'];
         $this->forbiddenFileTypes = ['cgi', 'pl', 'asp', 'phtml', 'php', 'php3', 'php4', 'php5', 'exe', 'com', 'bat', 'jsp', 'cfm', 'shtml'];
     }
@@ -317,9 +317,6 @@ abstract class AbstractUploadHelper
         // determine the allowed extensions
         $allowedExtensions = [];
         switch ($objectType) {
-            case 'album':
-                $allowedExtensions = ['gif', 'jpeg', 'jpg', 'png'];
-                    break;
             case 'albumItem':
                 $allowedExtensions = ['gif', 'jpeg', 'jpg', 'png'];
                     break;
@@ -355,9 +352,6 @@ abstract class AbstractUploadHelper
     {
         $namingScheme = 0;
         switch ($objectType) {
-            case 'album':
-                $namingScheme = 0;
-                    break;
             case 'albumItem':
                 $namingScheme = 0;
                     break;
@@ -459,9 +453,6 @@ abstract class AbstractUploadHelper
         $basePath = $this->dataDirectory . '/RKFineArtPhotographerModule/';
     
         switch ($objectType) {
-            case 'album':
-                $basePath .= 'albums/titleimage/';
-                break;
             case 'albumItem':
                 $basePath .= 'albumitems/image/';
                 break;
@@ -519,8 +510,6 @@ abstract class AbstractUploadHelper
     public function checkAndCreateAllUploadFolders()
     {
         $result = true;
-    
-        $result &= $this->checkAndCreateUploadFolder('album', 'titleImage', 'gif, jpeg, jpg, png');
     
         $result &= $this->checkAndCreateUploadFolder('albumItem', 'image', 'gif, jpeg, jpg, png');
     

@@ -4,6 +4,8 @@
 {% block content %}
 <div class="rkfineartphotographermodule-album rkfineartphotographermodule-view">
 
+    <p class="alert alert-info">{{ __('Please add your photos only to your own album.') }}</p>
+
     {{ block('page_nav_links') }}
 
     {{ include('@RKFineArtPhotographerModule/Album/viewQuickNav.html.twig') }}{# see template file for available options #}
@@ -22,7 +24,6 @@
                 {% if routeArea == 'admin' %}
                 <col id="cWorkflowState" />
                 {% endif %}
-                <col id="cTitleImage" />
                 <col id="cAlbumTitle" />
                 <col id="cAlbumDate" />
             </colgroup>
@@ -39,9 +40,6 @@
                     <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
                 </th>
                 {% endif %}
-                <th id="hTitleImage" scope="col" class="text-left">
-                    <a href="{{ sort.titleImage.url }}" title="{{ __f('Sort by %s', {'%s': 'title image'}) }}" class="{{ sort.titleImage.class }}">{{ __('Title image') }}</a>
-                </th>
                 <th id="hAlbumTitle" scope="col" class="text-left">
                     <a href="{{ sort.albumTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'album title'}) }}" class="{{ sort.albumTitle.class }}">{{ __('Album title') }}</a>
                 </th>
@@ -61,27 +59,17 @@
                 {% endif %}
                 <td id="itemActions{{ album.getKey() }}Start" headers="hItemActionsStart" class="actions nowrap z-w02">
                     {% set itemActions = knp_menu_get('RKFineArtPhotographerModule:ItemActionsMenu:menu', [], {entity: album, area: routeArea, context: 'view'}) %}
-                    <div class="btn-group-vertical btn-group-sm item-actions" role="group" aria-label="{{ __('Actions') }}">
+                    <div class="dropdown">
+                        <a id="itemActions{{ album.getKey() }}DropDownToggleStart" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
                         {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
                     </div>
                 </td>
                 {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
                     {{ album.workflowState|rkfineartphotographermodule_objectState }}
                 </td>
-                {% endif %}<td headers="hTitleImage" class="text-left">
-                    {% if album.titleImage is not empty and album.titleImageMeta|default %}
-                                <a href="{{ album.titleImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.titleImageMeta.isImage %} class="image-link"{% endif %}>
-                    {% if album.titleImageMeta.isImage %}
-                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumTitleImage') %}
-                        <img src="{{ album.titleImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
-                    {% else %}
-                        {{ __('Download') }} ({{ album.titleImageMeta.size|rkfineartphotographermodule_fileSize(album.titleImage.getPathname(), false, false) }})
-                    {% endif %}
-                    </a>
-                    {% else %}&nbsp;{% endif %}
-                </td>
-                <td headers="hAlbumTitle" class="text-left">
-                    {{ album.albumTitle }}
+                {% endif %}<td headers="hAlbumTitle" class="text-left">
+                    {{ album.albumTitle }}<br>
+					{{ album|rkfineartphotographermodule_formattedTitle }}
                 </td>
                 <td headers="hAlbumDate" class="text-left">
                     {{ album.albumDate|localizeddate('medium', 'none') }}
@@ -89,7 +77,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}6{% else %}5{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}5{% else %}4{% endif %}">
             {{ __('No albums found.') }}
               </td>
             </tr>

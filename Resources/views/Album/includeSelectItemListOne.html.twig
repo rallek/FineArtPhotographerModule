@@ -5,10 +5,6 @@
 <li id="{{ idPrefixItem }}">
     {{ item|rkfineartphotographermodule_formattedTitle }}
      <a id="{{ idPrefixItem }}Remove" href="javascript:rKFineArtPhotographerRemoveRelatedItem('{{ idPrefix }}', '{{ item.getKey() }}');"><i class="fa fa-trash-o"></i></a>
-    <br />
-    {% if item.titleImage is not empty and item.titleImageMeta.isImage %}
-        <img src="{{ item.titleImage.getPathname()|imagine_filter('zkroot', relationThumbRuntimeOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ relationThumbRuntimeOptions.thumbnail.size[0] }}" height="{{ relationThumbRuntimeOptions.thumbnail.size[1] }}" class="img-rounded" />
-    {% endif %}
 </li>
 {% endif %}
 </ul>

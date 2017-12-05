@@ -402,8 +402,6 @@ abstract class AbstractCollectionFilterHelper
         if ($objectType == 'album') {
             $filters[] = 'tbl.workflowState = :searchWorkflowState';
             $parameters['searchWorkflowState'] = $fragment;
-            $filters[] = 'tbl.titleImage = :searchTitleImage';
-            $parameters['searchTitleImage'] = $fragment;
             $filters[] = 'tbl.albumTitle LIKE :searchAlbumTitle';
             $parameters['searchAlbumTitle'] = '%' . $fragment . '%';
             $filters[] = 'tbl.albumDate = :searchAlbumDate';

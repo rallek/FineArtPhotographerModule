@@ -80,7 +80,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 ]);
                 $menu[$title]->setLinkAttribute('target', '_blank');
                 $menu[$title]->setLinkAttribute('title', $this->__('Open preview page', 'rkfineartphotographermodule'));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-search-plus');
             }
             if ($context != 'display') {
@@ -90,7 +92,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => $entity->createUrlArgs()
                 ]);
                 $menu[$title]->setLinkAttribute('title', str_replace('"', '', $entityDisplayHelper->getFormattedTitle($entity)));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-eye');
             }
             if ($permissionApi->hasPermission($component, $instance, ACCESS_EDIT)) {
@@ -102,7 +106,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                         'routeParameters' => $entity->createUrlArgs()
                     ]);
                     $menu[$title]->setLinkAttribute('title', $this->__('Edit this album', 'rkfineartphotographermodule'));
-                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    if ($context == 'display') {
+                        $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    }
                     $menu[$title]->setAttribute('icon', 'fa fa-pencil-square-o');
                     $title = $this->__('Reuse', 'rkfineartphotographermodule');
                     $menu->addChild($title, [
@@ -110,7 +116,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                         'routeParameters' => ['astemplate' => $entity->getKey()]
                     ]);
                     $menu[$title]->setLinkAttribute('title', $this->__('Reuse for new album', 'rkfineartphotographermodule'));
-                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    if ($context == 'display') {
+                        $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    }
                     $menu[$title]->setAttribute('icon', 'fa fa-files-o');
                 }
             }
@@ -121,7 +129,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => $entity->createUrlArgs()
                 ]);
                 $menu[$title]->setLinkAttribute('title', $this->__('Delete this album', 'rkfineartphotographermodule'));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-danger');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-danger');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-trash-o');
             }
             if ($context == 'display') {
@@ -130,7 +140,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'route' => $routePrefix . $routeArea . 'view'
                 ]);
                 $menu[$title]->setLinkAttribute('title', $title);
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-reply');
             }
             
@@ -145,7 +157,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => ['album' => $entity->getKey()]
                 ]);
                 $menu[$title]->setLinkAttribute('title', $title);
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-plus');
             }
         }
@@ -163,7 +177,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 ]);
                 $menu[$title]->setLinkAttribute('target', '_blank');
                 $menu[$title]->setLinkAttribute('title', $this->__('Open preview page', 'rkfineartphotographermodule'));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-search-plus');
             }
             if ($context != 'display') {
@@ -173,7 +189,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => $entity->createUrlArgs()
                 ]);
                 $menu[$title]->setLinkAttribute('title', str_replace('"', '', $entityDisplayHelper->getFormattedTitle($entity)));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-eye');
             }
             if ($permissionApi->hasPermission($component, $instance, ACCESS_EDIT)) {
@@ -185,7 +203,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                         'routeParameters' => $entity->createUrlArgs()
                     ]);
                     $menu[$title]->setLinkAttribute('title', $this->__('Edit this album item', 'rkfineartphotographermodule'));
-                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    if ($context == 'display') {
+                        $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    }
                     $menu[$title]->setAttribute('icon', 'fa fa-pencil-square-o');
                     $title = $this->__('Reuse', 'rkfineartphotographermodule');
                     $menu->addChild($title, [
@@ -193,7 +213,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                         'routeParameters' => ['astemplate' => $entity->getKey()]
                     ]);
                     $menu[$title]->setLinkAttribute('title', $this->__('Reuse for new album item', 'rkfineartphotographermodule'));
-                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    if ($context == 'display') {
+                        $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                    }
                     $menu[$title]->setAttribute('icon', 'fa fa-files-o');
                 }
             }
@@ -204,7 +226,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => $entity->createUrlArgs()
                 ]);
                 $menu[$title]->setLinkAttribute('title', $this->__('Delete this album item', 'rkfineartphotographermodule'));
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-danger');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-danger');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-trash-o');
             }
             if ($context == 'display') {
@@ -213,7 +237,9 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'route' => $routePrefix . $routeArea . 'view'
                 ]);
                 $menu[$title]->setLinkAttribute('title', $title);
-                $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                if ($context == 'display') {
+                    $menu[$title]->setLinkAttribute('class', 'btn btn-sm btn-default');
+                }
                 $menu[$title]->setAttribute('icon', 'fa fa-reply');
             }
         }

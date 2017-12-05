@@ -1,4 +1,5 @@
 application "FineArtPhotographer" {
+    documentation "Fine Art Photographer Module is offering the possibility to share interesting photos. If you want to share yourself your photos please contact the site administrator and ask for the rights."
     vendor "RK"
     author "Ralf Koester"
     email "ralf@familie-koester.de"
@@ -18,12 +19,14 @@ application "FineArtPhotographer" {
         generateIcsTemplates false
         filterHookProvider DISABLED
         separateAdminTemplates true
-        viewActionsStyle BUTTON_GROUP
+        viewActionsStyle DROPDOWN
         displayActionsStyle BUTTON_GROUP
     skipFiles "README.md"
+    markFiles "Helper/EntityDisplayHelper.php"
     }
     entities {
         entity "album" leading categorisable {
+            documentation "Please add your photos only to your own album."
             nameMultiple "albums"
             displayPattern "#albumDate#, #albumTitle#"
             hasArchive false
@@ -31,22 +34,15 @@ application "FineArtPhotographer" {
             formAwareHookProvider DISABLED
             uiHooksProvider ENABLED
             fields {
-                upload "titleImage" {
-                    documentation "should be in landscape 3:1"
-                    mandatory false
-                    minRatio 2.95
-                    maxRatio 3.05
-                    allowSquare false
-                    allowPortrait false
-                }
-            ,
                 string "albumTitle" translatable {
-                    documentation "Choose a title for your album. The event name seem to be a good choice."
+                    documentation "Choose a title for your album. The event name seem to be a good choice. Date and creator name will be automatically included."
                 },
-                datetime "albumDate" translatable {
+                datetime "albumDate" {
+                    documentation "The date will be included in the headline"
                     components DATE
                 },
                 text "albumDescription" translatable {
+                    documentation "This description is used to give a short introduction about the event. It is not mandatory."
                     mandatory false
                     displayType DISPLAY
                 }
@@ -61,21 +57,26 @@ application "FineArtPhotographer" {
             }
         },
         entity "albumItem" categorisable {
+            documentation "Please add your photos only to your own album."
             nameMultiple "albumItems"
             displayPattern "#imageTitle#"
             ownerPermission true
             fields {
-                upload "image",
+                upload "image" {
+                    documentation "The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator."
+                },
                 string "copyright" {
                     documentation "You may want to label your image with your copyright."
                     mandatory false
                 }
             ,
                 string "imageTitle" translatable {
+                    documentation "sometimes it is nice to give the image a title"
                     mandatory false
                 }
             ,
                 text "imageDescription" translatable {
+                    documentation "You may want to tell a bit about the shooting and the parameters."
                     mandatory false
                 }
             }

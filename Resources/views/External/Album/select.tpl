@@ -45,7 +45,6 @@
             <div class="col-sm-9">
                 <select id="{$baseID}Sort" name="sort" class="form-control">
                     <option value="workflowState"{if $sort eq 'workflowState'} selected="selected"{/if}>{gt text='Workflow state'}</option>
-                    <option value="titleImage"{if $sort eq 'titleImage'} selected="selected"{/if}>{gt text='Title image'}</option>
                     <option value="albumTitle"{if $sort eq 'albumTitle'} selected="selected"{/if}>{gt text='Album title'}</option>
                     <option value="albumDate"{if $sort eq 'albumDate'} selected="selected"{/if}>{gt text='Album date'}</option>
                     <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>

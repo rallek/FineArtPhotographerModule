@@ -20,9 +20,6 @@
                     <a id="imagesTabDrop" class="dropdown-toggle" href="#" data-toggle="dropdown" aria-controls="imagesTabDropSections" aria-expanded="false" title="{{ tabTitle|e('html_attr') }}">{{ tabTitle }}<span class="caret"></span></a>
                     <ul id="imagesTabDropSections" class="dropdown-menu" aria-labelledby="imagesTabDrop">
                     <li>
-                        <a id="imagesAlbumTitleImageTab" href="#tabImagesAlbumTitleImage" role="tab" data-toggle="tab" aria-controls="tabImagesAlbumTitleImage">{{ __('Albums title image') }}</a>
-                    </li>
-                    <li>
                         <a id="imagesAlbumItemImageTab" href="#tabImagesAlbumItemImage" role="tab" data-toggle="tab" aria-controls="tabImagesAlbumItemImage">{{ __('Album items image') }}</a>
                     </li>
                     </ul>
@@ -50,25 +47,6 @@
                         {{ form_row(form.linkOwnAlbumsOnAccountPage) }}
                         {{ form_row(form.albumItemEntriesPerPage) }}
                         {{ form_row(form.linkOwnAlbumItemsOnAccountPage) }}
-                    </fieldset>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="tabImagesAlbumTitleImage" aria-labelledby="imagesAlbumTitleImageTab">
-                    {% set tabTitle = __('Image settings for albums title image') %}
-                    <fieldset>
-                        <legend>{{ tabTitle }}</legend>
-                
-                        {{ form_row(form.enableShrinkingForAlbumTitleImage) }}
-                        <div id="shrinkDetailsAlbumTitleImage">
-                        {{ form_row(form.shrinkWidthAlbumTitleImage) }}
-                        {{ form_row(form.shrinkHeightAlbumTitleImage) }}
-                        </div>
-                        {{ form_row(form.thumbnailModeAlbumTitleImage) }}
-                        {{ form_row(form.thumbnailWidthAlbumTitleImageView) }}
-                        {{ form_row(form.thumbnailHeightAlbumTitleImageView) }}
-                        {{ form_row(form.thumbnailWidthAlbumTitleImageDisplay) }}
-                        {{ form_row(form.thumbnailHeightAlbumTitleImageDisplay) }}
-                        {{ form_row(form.thumbnailWidthAlbumTitleImageEdit) }}
-                        {{ form_row(form.thumbnailHeightAlbumTitleImageEdit) }}
                     </fieldset>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="tabImagesAlbumItemImage" aria-labelledby="imagesAlbumItemImageTab">

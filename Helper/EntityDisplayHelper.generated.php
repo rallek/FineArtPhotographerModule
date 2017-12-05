@@ -12,7 +12,6 @@
 
 namespace RK\FineArtPhotographerModule\Helper;
 
-use RK\FineArtPhotographerModule\Entity\AlbumEntity;
 use RK\FineArtPhotographerModule\Helper\Base\AbstractEntityDisplayHelper;
 
 /**
@@ -20,19 +19,5 @@ use RK\FineArtPhotographerModule\Helper\Base\AbstractEntityDisplayHelper;
  */
 class EntityDisplayHelper extends AbstractEntityDisplayHelper
 {
-     /**
-      * @inheritDoc
-      */
-     protected function formatAlbum(AlbumEntity $entity)
-     {
-         $albumDate = $entity->getAlbumDate()->format('d.m.Y');
-         $creator = $entity->getCreatedBy();
-         $photographerName = $creator->getAttributeValue('zpmpp:realname');
-
-         return $this->translator->__f('%albumDate%, %albumTitle%', [
-             '%albumDate%' => $albumDate,
-             '%albumTitle%' => $entity->getAlbumTitle()
-         ]) . ', ' . $photographerName;
-     }
-
+    // feel free to extend the entity display helper here
 }

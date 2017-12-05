@@ -152,9 +152,6 @@ abstract class AbstractEntityDisplayHelper
      */
     public function getPreviewFieldName($objectType)
     {
-        if ($objectType == 'album') {
-            return 'titleImage';
-        }
         if ($objectType == 'albumItem') {
             return 'image';
         }

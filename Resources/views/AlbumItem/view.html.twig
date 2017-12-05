@@ -4,6 +4,8 @@
 {% block content %}
 <div class="rkfineartphotographermodule-albumitem rkfineartphotographermodule-view">
 
+    <p class="alert alert-info">{{ __('Please add your photos only to your own album.') }}</p>
+
     {{ block('page_nav_links') }}
 
     {{ include('@RKFineArtPhotographerModule/AlbumItem/viewQuickNav.html.twig') }}{# see template file for available options #}
@@ -69,7 +71,8 @@
                 {% endif %}
                 <td id="itemActions{{ albumItem.getKey() }}Start" headers="hItemActionsStart" class="actions nowrap z-w02">
                     {% set itemActions = knp_menu_get('RKFineArtPhotographerModule:ItemActionsMenu:menu', [], {entity: albumItem, area: routeArea, context: 'view'}) %}
-                    <div class="btn-group-vertical btn-group-sm item-actions" role="group" aria-label="{{ __('Actions') }}">
+                    <div class="dropdown">
+                        <a id="itemActions{{ albumItem.getKey() }}DropDownToggleStart" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
                         {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
                     </div>
                 </td>

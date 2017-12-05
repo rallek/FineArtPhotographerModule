@@ -65,11 +65,37 @@ function rKFineArtPhotographerInitMassToggle() {
  * Creates a dropdown menu for the item actions.
  */
 function rKFineArtPhotographerInitItemActions(context) {
-    jQuery('.btn-group-sm.item-actions').each(function (index) {
-        var innerList;
-        innerList = jQuery(this).children('ul.list-inline').first().detach();
-        jQuery(this).append(innerList.find('a.btn'));
-    });
+    if (context == 'display') {
+        jQuery('.btn-group-sm.item-actions').each(function (index) {
+            var innerList;
+            innerList = jQuery(this).children('ul.list-inline').first().detach();
+            jQuery(this).append(innerList.find('a.btn'));
+        });
+    }
+    if (context == 'view') {
+        var containerSelector;
+        var containers;
+        
+        containerSelector = '';
+        if (context == 'view') {
+            containerSelector = '.rkfineartphotographermodule-view';
+        } else if (context == 'display') {
+            containerSelector = 'h2, h3';
+        }
+        
+        if (containerSelector == '') {
+            return;
+        }
+        
+        containers = jQuery(containerSelector);
+        if (containers.length < 1) {
+            return;
+        }
+        
+        containers.find('.dropdown > ul').removeClass('list-inline').addClass('list-unstyled dropdown-menu');
+        containers.find('.dropdown > ul a i').addClass('fa-fw');
+        containers.find('.dropdown-toggle').removeClass('hidden').dropdown();
+    }
 }
 
 /**
@@ -134,6 +160,9 @@ function rKFineArtPhotographerInitQuickViewModals() {
  * Initialises image viewing behaviour.
  */
 function rKFineArtPhotographerInitImageViewer() {
+    if (typeof(magnificPopup) === 'undefined') {
+        return;
+    }
     jQuery('a.image-link').magnificPopup({
         type: 'image',
         closeOnContentClick: true,

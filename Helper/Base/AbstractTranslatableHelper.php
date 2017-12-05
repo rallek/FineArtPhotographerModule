@@ -88,7 +88,7 @@ abstract class AbstractTranslatableHelper
         $fields = [];
         switch ($objectType) {
             case 'album':
-                $fields = ['albumTitle', 'albumDate', 'albumDescription'];
+                $fields = ['albumTitle', 'albumDescription'];
                 break;
             case 'albumItem':
                 $fields = ['imageTitle', 'imageDescription'];

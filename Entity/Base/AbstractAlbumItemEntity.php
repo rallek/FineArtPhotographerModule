@@ -71,6 +71,8 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     protected $imageMeta = [];
     
     /**
+     * The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.
+     *
      * @ORM\Column(length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min="0", max="255")
@@ -102,6 +104,8 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     protected $copyright = '';
     
     /**
+     * sometimes it is nice to give the image a title
+     *
      * @Gedmo\Translatable
      * @ORM\Column(length=255)
      * @Assert\NotNull()
@@ -111,6 +115,8 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     protected $imageTitle = '';
     
     /**
+     * You may want to tell a bit about the shooting and the parameters.
+     *
      * @Gedmo\Translatable
      * @ORM\Column(type="text", length=2000)
      * @Assert\NotNull()

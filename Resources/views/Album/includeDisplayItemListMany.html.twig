@@ -19,6 +19,7 @@
     {% if context == 'hookDisplayView' and hasEditPermission %}
         {% set entityNameTranslated = __('album') %}
         {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.HookAssignment.js'), 99) }}
+        {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.EditFunctions.js'), 99) }}
         {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.InlineEditing.js'), 99) }}
         {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.AutoCompletion.js'), 99) }}
     {% endif %}
@@ -43,11 +44,6 @@
 {% endif %}
 {% endspaceless %}
 </h4>
-{% if item.titleImage is not empty and item.titleImageMeta.isImage %}
-    <p class="list-group-item-text">
-        <img src="{{ item.titleImage.getPathname()|imagine_filter('zkroot', relationThumbRuntimeOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ relationThumbRuntimeOptions.thumbnail.size[0] }}" height="{{ relationThumbRuntimeOptions.thumbnail.size[1] }}" class="img-rounded" />
-    </p>
-{% endif %}
 {% if context == 'hookDisplayView' and hasEditPermission %}
     {% set assignmentId = '' %}
     {% for assignment in assignments if assignment.getAssignedId() == item.getKey() %}
@@ -67,7 +63,7 @@
     {% set addLinkText = __f('Attach %name%', {'%name%': entityNameTranslated}) %}
     <div id="{{ idPrefix }}LiveSearch" class="rkfineartphotographermodule-add-hook-assignment">
         <a id="{{ idPrefix }}AddLink" href="javascript:void(0);" title="{{ addLinkText|e('html_attr') }}" class="attach-rkfineartphotographermodule-object hidden" data-owner="{{ subscriberOwner|e('html_attr') }}" data-area-id="{{ subscriberAreaId|e('html_attr') }}" data-object-id="{{ subscriberObjectId|e('html_attr') }}" data-url="{{ subscriberUrl|e('html_attr') }}" data-assigned-entity="album"><i class="fa fa-link"></i> {{ addLinkText }}</a>
-        <div id="{{ idPrefix }}AddFields" class="rkfineartphotographermodule-autocomplete-with-image">
+        <div id="{{ idPrefix }}AddFields" class="rkfineartphotographermodule-autocomplete">
             <label for="{{ idPrefix }}Selector">{{ __f('Find %name%', {'%name%': entityNameTranslated}) }}</label>
             <br />
             <i class="fa fa-search" title="{{ __f('Search %name%', {'%name%': entityNameTranslated})|e('html_attr') }}"></i>

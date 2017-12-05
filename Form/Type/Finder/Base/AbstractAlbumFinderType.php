@@ -13,7 +13,6 @@
 namespace RK\FineArtPhotographerModule\Form\Type\Finder\Base;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -77,7 +76,6 @@ abstract class AbstractAlbumFinderType extends AbstractType
         if ($this->featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $options['object_type'])) {
             $this->addCategoriesField($builder, $options);
         }
-        $this->addImageFields($builder, $options);
         $this->addPasteAsField($builder, $options);
         $this->addSortingFields($builder, $options);
         $this->addAmountField($builder, $options);
@@ -127,25 +125,6 @@ abstract class AbstractAlbumFinderType extends AbstractType
     }
 
     /**
-     * Adds fields for image insertion options.
-     *
-     * @param FormBuilderInterface $builder The form builder
-     * @param array                $options The options
-     */
-    public function addImageFields(FormBuilderInterface $builder, array $options = [])
-    {
-        $builder->add('onlyImages', CheckboxType::class, [
-            'label' => $this->__('Only images'),
-            'empty_data' => false,
-            'help' => $this->__('Enable this option to insert images'),
-            'required' => false
-        ]);
-        $builder->add('imageField', HiddenType::class, [
-            'data' => 'titleImage'
-        ]);
-    }
-
-    /**
      * Adds a "paste as" field.
      *
      * @param FormBuilderInterface $builder The form builder
@@ -159,11 +138,7 @@ abstract class AbstractAlbumFinderType extends AbstractType
             'choices' => [
                 $this->__('Relative link to the album') => 1,
                 $this->__('Absolute url to the album') => 2,
-                $this->__('ID of album') => 3,
-                $this->__('Relative link to the image') => 6,
-                $this->__('Image') => 7,
-                $this->__('Image with relative link to the album') => 8,
-                $this->__('Image with absolute url to the album') => 9
+                $this->__('ID of album') => 3
             ],
             'choices_as_values' => true,
             'multiple' => false,
@@ -184,7 +159,6 @@ abstract class AbstractAlbumFinderType extends AbstractType
                 'label' => $this->__('Sort by') . ':',
                 'empty_data' => '',
                 'choices' => [
-                    $this->__('Title image') => 'titleImage',
                     $this->__('Album title') => 'albumTitle',
                     $this->__('Album date') => 'albumDate',
                     $this->__('Creation date') => 'createdDate',

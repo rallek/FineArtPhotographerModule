@@ -167,6 +167,11 @@ abstract class AbstractAlbumItemType extends AbstractType
         
         $builder->add('imageTitle', TextType::class, [
             'label' => $this->__('Image title') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('sometimes it is nice to give the image a title')
+            ],
+            'help' => $this->__('sometimes it is nice to give the image a title'),
             'empty_data' => '',
             'attr' => [
                 'maxlength' => 255,
@@ -178,7 +183,11 @@ abstract class AbstractAlbumItemType extends AbstractType
         
         $builder->add('imageDescription', TextareaType::class, [
             'label' => $this->__('Image description') . ':',
-            'help' => $this->__f('Note: this value must not exceed %amount% characters.', ['%amount%' => 2000]),
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('You may want to tell a bit about the shooting and the parameters.')
+            ],
+            'help' => [$this->__('You may want to tell a bit about the shooting and the parameters.'), $this->__f('Note: this value must not exceed %amount% characters.', ['%amount%' => 2000])],
             'empty_data' => '',
             'attr' => [
                 'maxlength' => 2000,
@@ -209,6 +218,11 @@ abstract class AbstractAlbumItemType extends AbstractType
         
         $builder->add('image', UploadType::class, [
             'label' => $this->__('Image') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.')
+            ],
+            'help' => $this->__('The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.'),
             'attr' => [
                 'class' => ' validate-upload',
                 'title' => $this->__('Enter the image of the album item')

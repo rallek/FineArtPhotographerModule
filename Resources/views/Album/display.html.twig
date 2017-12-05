@@ -21,20 +21,6 @@
             <dt>{{ __('State') }}</dt>
             <dd>{{ album.workflowState|rkfineartphotographermodule_listEntry('album', 'workflowState') }}</dd>
         {% endif %}
-        {% if album.titleImage is not empty %}
-            <dt>{{ __('Title image') }}</dt>
-            <dd>{% if album.titleImage is not empty and album.titleImageMeta|default %}
-                        <a href="{{ album.titleImageUrl }}" title="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"{% if album.titleImageMeta.isImage %} class="image-link"{% endif %}>
-            {% if album.titleImageMeta.isImage %}
-                {% set thumbOptions = attribute(thumbRuntimeOptions, 'albumTitleImage') %}
-                <img src="{{ album.titleImage.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ album|rkfineartphotographermodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
-            {% else %}
-                {{ __('Download') }} ({{ album.titleImageMeta.size|rkfineartphotographermodule_fileSize(album.titleImage.getPathname(), false, false) }})
-            {% endif %}
-            </a>
-            {% else %}&nbsp;{% endif %}
-            </dd>
-        {% endif %}
         {% if album.albumTitle is not empty %}
             <dt>{{ __('Album title') }}</dt>
             <dd>{{ album.albumTitle }}</dd>

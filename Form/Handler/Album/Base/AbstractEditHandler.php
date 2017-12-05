@@ -73,7 +73,6 @@ abstract class AbstractEditHandler extends EditHandler
     protected function createForm()
     {
         $options = [
-            'entity' => $this->entityRef,
             'mode' => $this->templateParameters['mode'],
             'actions' => $this->templateParameters['actions'],
             'has_moderate_permission' => $this->permissionApi->hasPermission($this->permissionComponent, $this->idValue . '::', ACCESS_ADMIN),
