@@ -73,6 +73,16 @@
             {items: album.albumItems}
         ) }}
     {% endif %}
+	
+	<script type="text/javascript">
+	$("[data-fancybox]").fancybox({
+		// Options will go here
+		  buttons : [
+			'zoom',
+			'close'
+			]
+	});
+</script>
     
     {% set mayManage = hasPermission('RKFineArtPhotographerModule:AlbumItem:', '::', 'ACCESS_ADD') %}
     {% if mayManage or (currentUser|default and album.createdBy|default and album.createdBy.getUid() == currentUser.uid) %}
