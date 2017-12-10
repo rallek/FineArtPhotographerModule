@@ -69,7 +69,7 @@ class AlbumController extends AbstractAlbumController
      * @inheritDoc
      *
      * @Route("/admin/albums/view/{sort}/{sortdir}/{pos}/{num}.{_format}",
-     *        requirements = {"sortdir" = "asc|desc|ASC|DESC", "pos" = "\d+", "num" = "\d+", "_format" = "html|rss|atom"},
+     *        requirements = {"sortdir" = "asc|desc|ASC|DESC", "pos" = "\d+", "num" = "\d+", "_format" = "html"},
      *        defaults = {"sort" = "", "sortdir" = "asc", "pos" = 1, "num" = 10, "_format" = "html"},
      *        methods = {"GET"}
      * )
@@ -94,7 +94,7 @@ class AlbumController extends AbstractAlbumController
      * @inheritDoc
      *
      * @Route("/albums/view/{sort}/{sortdir}/{pos}/{num}.{_format}",
-     *        requirements = {"sortdir" = "asc|desc|ASC|DESC", "pos" = "\d+", "num" = "\d+", "_format" = "html|rss|atom"},
+     *        requirements = {"sortdir" = "asc|desc|ASC|DESC", "pos" = "\d+", "num" = "\d+", "_format" = "html"},
      *        defaults = {"sort" = "", "sortdir" = "asc", "pos" = 1, "num" = 10, "_format" = "html"},
      *        methods = {"GET"}
      * )

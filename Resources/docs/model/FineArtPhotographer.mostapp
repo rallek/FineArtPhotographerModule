@@ -1,4 +1,4 @@
-application "FineArtPhotographer" {
+application "FineArtPhotographer" targets ZK15 {
     documentation "Fine Art Photographer Module is offering the possibility to share interesting photos. If you want to share yourself your photos please contact the site administrator and ask for the rights."
     vendor "RK"
     author "Ralf Koester"
@@ -6,24 +6,18 @@ application "FineArtPhotographer" {
     url "http://k62.de"
     version "0.1.0"
     prefix "faph"
-    generatorSettings {
-        settingsContainer "Settings"
-        targetCoreVersion ZK15
-        generateModerationBlock false
-        generateModerationPanel false
-        generatePendingContentSupport false
-        generateCsvTemplates false
-        generateXmlTemplates false
-        generateJsonTemplates false
-        generateKmlTemplates false
-        generateIcsTemplates false
-        filterHookProvider DISABLED
-        separateAdminTemplates true
-        viewActionsStyle DROPDOWN
-        displayActionsStyle BUTTON_GROUP
-    skipFiles "README.md"
-    markFiles "Helper/EntityDisplayHelper.php"
-    }
+    generateModerationBlock false
+    generateModerationPanel false
+    generatePendingContentSupport false
+    generateRssTemplates false
+    generateAtomTemplates false
+    generateCsvTemplates false
+    generateXmlTemplates false
+    generateJsonTemplates false
+    generateKmlTemplates false
+    generateIcsTemplates false
+    separateAdminTemplates true
+    displayActionsStyle BUTTON_GROUP
     entities {
         entity "album" leading categorisable {
             documentation "Please add your photos only to your own album."

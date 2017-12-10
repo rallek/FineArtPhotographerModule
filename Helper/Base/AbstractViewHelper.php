@@ -160,16 +160,6 @@ abstract class AbstractViewHelper
             $response = new Response($output);
         }
     
-        // check if we need to set any custom headers
-        switch ($templateExtension) {
-            case 'atom.twig':
-                $response->headers->set('Content-Type', 'application/atom+xml');
-                break;
-            case 'rss.twig':
-                $response->headers->set('Content-Type', 'application/rss+xml');
-                break;
-        }
-    
         return $response;
     }
 
@@ -211,9 +201,9 @@ abstract class AbstractViewHelper
         $hasAdminAccess = $this->permissionApi->hasPermission('RKFineArtPhotographerModule:' . ucfirst($type) . ':', '::', ACCESS_ADMIN);
         if ($func == 'view') {
             if ($hasAdminAccess) {
-                $extensions = ['rss', 'atom'];
+                $extensions = [];
             } else {
-                $extensions = ['rss', 'atom'];
+                $extensions = [];
             }
         } elseif ($func == 'display') {
             if ($hasAdminAccess) {

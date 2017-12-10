@@ -68,8 +68,7 @@
                     {{ album.workflowState|rkfineartphotographermodule_objectState }}
                 </td>
                 {% endif %}<td headers="hAlbumTitle" class="text-left">
-                    {{ album.albumTitle }}<br>
-					{{ album|rkfineartphotographermodule_formattedTitle }}
+                    {{ album.albumTitle }}
                 </td>
                 <td headers="hAlbumDate" class="text-left">
                     {{ album.albumDate|localizeddate('medium', 'none') }}
