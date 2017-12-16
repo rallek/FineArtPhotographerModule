@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <th id="hVersion" scope="row" headers="hBasicField">Version</th>
-                <td headers="hBasicValue hVersion">0.1.0</td>
+                <td headers="hBasicValue hVersion">0.1.2</td>
             </tr>
             <tr>
                 <th id="hLicense" scope="row" headers="hBasicField">Lizenz</th>
@@ -605,7 +605,7 @@
                 </td>
                 <td headers="hEntityAlbumItemFieldImage hEntityAlbumItemFieldRemarks">
                     <ul>
-                        <li>The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator. </li>
+                        <li>The image must fit to the maximum dimension. If shrinking is enabled it will be shrinked automatically. </li>
                         <li>Dieses Feld ist nicht eindeutig und erlaubt keine Null-Werte.</li>
                         <li>Die hochgeladenen Dateien werden im Unterordner "image" gespeichert und behalten ihren originalen Dateinamen, der bei Bedarf um einen Zähler erweitert wird..</li>
                     </ul>
@@ -881,9 +881,58 @@
     </table>
 </div>
 <h2><i class="fa fa-wrench"></i> Variablen zur Konfiguration</h2>
+<h3><i class="fa fa-server"></i> Special album settings</h3>
+<p>Sortierwert: 1</p>
+<p>Kombination: <i class="fa fa-times"></i>
+</p>
+<h4><i class="fa fa-bars"></i> Felder</h4>
+<div class="table-responsive">
+    <table class="table-striped table-bordered table-hover table-condensed">
+        <colgroup>
+            <col id="cVariablesSpecialAlbumSettingsFieldName" />
+            <col id="cVariablesSpecialAlbumSettingsFieldType" />
+            <col id="cVariablesSpecialAlbumSettingsFieldMandatory" />
+            <col id="cVariablesSpecialAlbumSettingsFieldDefault" />
+            <col id="cVariablesSpecialAlbumSettingsFieldDisplayType" />
+            <col id="cVariablesSpecialAlbumSettingsFieldConstraints" />
+            <col id="cVariablesSpecialAlbumSettingsFieldRemarks" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th id="hVariablesSpecialAlbumSettingsFieldName" scope="col">Name</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldType" scope="col">Typ</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldMandatory" scope="col">Pflicht</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldDefault" scope="col">Standardwert</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldDisplayType" scope="col">Anzeige</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldConstraints" scope="col">Beschränkungen</th>
+                <th id="hVariablesSpecialAlbumSettingsFieldRemarks" scope="col">Anmerkungen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th id="hVariablesSpecialAlbumSettingsFieldRowHeight" scope="row" headers="hVariablesSpecialAlbumSettingsFieldName">Row height</th>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldType">Ganzzahl</td>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldMandatory">true</td>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldDefault">190</td>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldDisplayType">ALL</td>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldConstraints">
+                    <ul>
+                        <li>Hat eine Länge von 11.</li>
+                    </ul>
+                </td>
+                <td headers="hVariablesSpecialAlbumSettingsFieldRowHeight hVariablesSpecialAlbumSettingsFieldRemarks">
+                    <ul>
+                        <li>The maximum height of a row in the image album. </li>
+                        <li>Dieses Feld ist nicht eindeutig und erlaubt keine Null-Werte.</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <h3><i class="fa fa-server"></i> List views</h3>
 <p>Here you can configure parameters for list views.</p>
-<p>Sortierwert: 1</p>
+<p>Sortierwert: 2</p>
 <p>Kombination: <i class="fa fa-times"></i>
 </p>
 <h4><i class="fa fa-bars"></i> Felder</h4>
@@ -985,7 +1034,7 @@
 </div>
 <h3><i class="fa fa-server"></i> Images</h3>
 <p>Here you can define several options for image handling.</p>
-<p>Sortierwert: 2</p>
+<p>Sortierwert: 3</p>
 <p>Kombination: <i class="fa fa-times"></i>
 </p>
 <h4><i class="fa fa-bars"></i> Felder</h4>
@@ -1198,7 +1247,7 @@
 </div>
 <h3><i class="fa fa-server"></i> Integration</h3>
 <p>These options allow you to configure integration aspects.</p>
-<p>Sortierwert: 3</p>
+<p>Sortierwert: 4</p>
 <p>Kombination: <i class="fa fa-times"></i>
 </p>
 <h4><i class="fa fa-bars"></i> Felder</h4>

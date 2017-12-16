@@ -220,9 +220,9 @@ abstract class AbstractAlbumItemType extends AbstractType
             'label' => $this->__('Image') . ':',
             'label_attr' => [
                 'class' => 'tooltips',
-                'title' => $this->__('The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.')
+                'title' => $this->__('The image must fit to the maximum dimension. If shrinking is enabled it will be shrinked automatically.')
             ],
-            'help' => $this->__('The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.'),
+            'help' => $this->__('The image must fit to the maximum dimension. If shrinking is enabled it will be shrinked automatically.'),
             'attr' => [
                 'class' => ' validate-upload',
                 'title' => $this->__('Enter the image of the album item')

@@ -4,7 +4,7 @@ application "FineArtPhotographer" targets ZK15 {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.1.0"
+    version "0.1.2"
     prefix "faph"
     generateModerationBlock false
     generateModerationPanel false
@@ -18,6 +18,8 @@ application "FineArtPhotographer" targets ZK15 {
     generateIcsTemplates false
     separateAdminTemplates true
     displayActionsStyle BUTTON_GROUP
+    skipFiles "README.md"
+    markFiles "Helper/EntityDisplayHelper.php,\r\nResources/views/base.html.twig,\r\nResources/views/AlbumItem/includeDisplayItemListMany.html.twig,\r\nResources/views/Album/display.html.twig,\r\nResources/views/Album/view.html.twig,\r\nResources/views/Album/viewQuickNav.html.twig,\r\nEntity/Repository/AlbumRepository.php "
     entities {
         entity "album" leading categorisable {
             documentation "Please add your photos only to your own album."
@@ -57,7 +59,9 @@ application "FineArtPhotographer" targets ZK15 {
             ownerPermission true
             fields {
                 upload "image" {
-                    documentation "The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator."
+                    documentation "The image must fit to the maximum dimension. If shrinking is enabled it will be shrinked automatically."
+                maxWidth 0
+                    maxHeight 0
                 },
                 string "copyright" {
                     documentation "You may want to label your image with your copyright."
@@ -89,6 +93,16 @@ application "FineArtPhotographer" targets ZK15 {
             sourceAlias "album"
             target "albumItem"
             targetAlias "albumItems"
+        }
+    }
+variables {
+        varContainer "SpecialAlbumSettings" {
+            fields {
+                integer "rowHeight" {
+                    documentation "The maximum height of a row in the image album."
+                    defaultValue "190"
+                }
+            }
         }
     }
 }

@@ -116,8 +116,13 @@ function rKFineArtPhotographerSelectHookItem(objectType, idPrefix, selectedListI
 /**
  * Initialises auto completion for a relation field.
  */
-function rKFineArtPhotographerInitAutoCompletion(objectType, idPrefix, includeEditing) {
+function rKFineArtPhotographerInitAutoCompletion(objectType, alias, idPrefix, includeEditing) {
     var acOptions, acDataSet, acUrl, isHookAttacher;
+
+    isHookAttacher = idPrefix.startsWith('hookAssignment');
+    if (isHookAttacher) {
+        idPrefix = alias;
+    }
 
     // update identifier of hidden field for easier usage in JS
     jQuery('#' + idPrefix + 'Multiple').prev().attr('id', idPrefix);
@@ -135,8 +140,6 @@ function rKFineArtPhotographerInitAutoCompletion(objectType, idPrefix, includeEd
     // clear values and ensure starting state
     rKFineArtPhotographerResetAutoCompletion(idPrefix);
 
-
-    isHookAttacher = idPrefix.startsWith('hookAssignment');
     jQuery.each(rKFineArtPhotographerInlineEditHandlers, function (key, editHandler) {
         if (editHandler.prefix !== (idPrefix + 'SelectorDoNew') || editHandler.inputType !== 'autocomplete') {
             return;

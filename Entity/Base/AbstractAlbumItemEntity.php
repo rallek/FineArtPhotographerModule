@@ -71,7 +71,7 @@ abstract class AbstractAlbumItemEntity extends EntityAccess implements Translata
     protected $imageMeta = [];
     
     /**
-     * The image will be shriked automatically right after the upload. The shrink size can be configured by the administrator.
+     * The image must fit to the maximum dimension. If shrinking is enabled it will be shrinked automatically.
      *
      * @ORM\Column(length=255)
      * @Assert\NotBlank()

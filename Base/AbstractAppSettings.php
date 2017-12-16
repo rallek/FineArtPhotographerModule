@@ -27,6 +27,17 @@ abstract class AbstractAppSettings
     protected $variableApi;
     
     /**
+     * The maximum height of a row in the image album.
+     *
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\NotEqualTo(value=0)
+     * @Assert\LessThan(value=100000000000)
+     * @var integer $rowHeight
+     */
+    protected $rowHeight = 190;
+    
+    /**
      * The amount of albums shown per page
      *
      * @Assert\Type(type="integer")
@@ -193,6 +204,30 @@ abstract class AbstractAppSettings
         $this->variableApi = $variableApi;
     
         $this->load();
+    }
+    
+    /**
+     * Returns the row height.
+     *
+     * @return integer
+     */
+    public function getRowHeight()
+    {
+        return $this->rowHeight;
+    }
+    
+    /**
+     * Sets the row height.
+     *
+     * @param integer $rowHeight
+     *
+     * @return void
+     */
+    public function setRowHeight($rowHeight)
+    {
+        if (intval($this->rowHeight) !== intval($rowHeight)) {
+            $this->rowHeight = intval($rowHeight);
+        }
     }
     
     /**
@@ -563,6 +598,9 @@ abstract class AbstractAppSettings
     {
         $moduleVars = $this->variableApi->getAll('RKFineArtPhotographerModule');
     
+        if (isset($moduleVars['rowHeight'])) {
+            $this->setRowHeight($moduleVars['rowHeight']);
+        }
         if (isset($moduleVars['albumEntriesPerPage'])) {
             $this->setAlbumEntriesPerPage($moduleVars['albumEntriesPerPage']);
         }
@@ -615,6 +653,7 @@ abstract class AbstractAppSettings
      */
     public function save()
     {
+        $this->variableApi->set('RKFineArtPhotographerModule', 'rowHeight', $this->getRowHeight());
         $this->variableApi->set('RKFineArtPhotographerModule', 'albumEntriesPerPage', $this->getAlbumEntriesPerPage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'linkOwnAlbumsOnAccountPage', $this->getLinkOwnAlbumsOnAccountPage());
         $this->variableApi->set('RKFineArtPhotographerModule', 'albumItemEntriesPerPage', $this->getAlbumItemEntriesPerPage());

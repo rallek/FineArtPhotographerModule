@@ -67,11 +67,39 @@ abstract class AbstractConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->addSpecialAlbumSettingsFields($builder, $options);
         $this->addListViewsFields($builder, $options);
         $this->addImagesFields($builder, $options);
         $this->addIntegrationFields($builder, $options);
 
         $this->addSubmitButtons($builder, $options);
+    }
+
+    /**
+     * Adds fields for special album settings fields.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     */
+    public function addSpecialAlbumSettingsFields(FormBuilderInterface $builder, array $options = [])
+    {
+        
+        $builder->add('rowHeight', IntegerType::class, [
+            'label' => $this->__('Row height') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('The maximum height of a row in the image album.')
+            ],
+            'help' => $this->__('The maximum height of a row in the image album.'),
+            'empty_data' => '190',
+            'attr' => [
+                'maxlength' => 11,
+                'class' => '',
+                'title' => $this->__('Enter the row height.') . ' ' . $this->__('Only digits are allowed.')
+            ],
+            'required' => true,
+            'scale' => 0
+        ]);
     }
 
     /**

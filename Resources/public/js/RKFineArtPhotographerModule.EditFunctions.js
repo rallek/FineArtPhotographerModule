@@ -114,7 +114,7 @@ function rKFineArtPhotographerInitEditForm(mode, entityId) {
  */
 function rKFineArtPhotographerInitRelationHandling(objectType, alias, idPrefix, includeEditing, inputType, createUrl) {
     if (inputType == 'autocomplete') {
-        rKFineArtPhotographerInitAutoCompletion(objectType, alias, includeEditing);
+        rKFineArtPhotographerInitAutoCompletion(objectType, alias, idPrefix, includeEditing);
     }
     if (includeEditing) {
         rKFineArtPhotographerInitInlineEditingButtons(objectType, alias, idPrefix, inputType, createUrl);

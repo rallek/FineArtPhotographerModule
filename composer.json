@@ -1,6 +1,6 @@
 {
     "name": "rk/fineartphotographer-module",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "description": "Fine Art Photographer Module is offering the possibility to share interesting photos. If you want to share yourself your photos please contact the site administrator and ask for the rights.",
     "type": "zikula-module",
     "license": "LGPL-3.0+",

@@ -64,6 +64,7 @@ abstract class AbstractFineArtPhotographerModuleInstaller extends AbstractExtens
         }
     
         // set up all our vars with initial values
+        $this->setVar('rowHeight', 190);
         $this->setVar('albumEntriesPerPage', 10);
         $this->setVar('linkOwnAlbumsOnAccountPage', true);
         $this->setVar('albumItemEntriesPerPage', 10);

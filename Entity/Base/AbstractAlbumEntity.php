@@ -251,7 +251,7 @@ abstract class AbstractAlbumEntity extends EntityAccess implements Translatable
     public function setAlbumDate($albumDate)
     {
         if ($this->albumDate !== $albumDate) {
-            if (!(null == $albumDate && empty($albumDate)) && !(is_object($albumDate) && $albumDate instanceOf \DateTime)) {
+            if (!(null == $albumDate && empty($albumDate)) && !(is_object($albumDate) && $albumDate instanceOf \DateTimeInterface)) {
                 $albumDate = new \DateTime($albumDate);
             }
             

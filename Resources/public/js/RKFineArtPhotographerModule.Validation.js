@@ -81,13 +81,6 @@ function rKFineArtPhotographerValidateUploadExtension(val, elem) {
  * Runs special validation rules.
  */
 function rKFineArtPhotographerExecuteCustomValidationConstraints(objectType, currentEntityId) {
-    jQuery('.validate-nospace').each(function () {
-        if (!rKFineArtPhotographerValidateNoSpace(jQuery(this).val())) {
-            document.getElementById(jQuery(this).attr('id')).setCustomValidity(Translator.__('This value must not contain spaces.'));
-        } else {
-            document.getElementById(jQuery(this).attr('id')).setCustomValidity('');
-        }
-    });
     jQuery('.validate-upload').each(function () {
         if (!rKFineArtPhotographerValidateUploadExtension(jQuery(this).val(), jQuery(this))) {
             document.getElementById(jQuery(this).attr('id')).setCustomValidity(Translator.__('Please select a valid file extension.'));
