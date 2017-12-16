@@ -22,4 +22,5 @@ use RK\FineArtPhotographerModule\Entity\Repository\Base\AbstractAlbumRepository;
 class AlbumRepository extends AbstractAlbumRepository
 {
     // feel free to add your own methods here, like for example reusable DQL queries
+	protected $defaultSortingField = 'albumDate DESC';
 }

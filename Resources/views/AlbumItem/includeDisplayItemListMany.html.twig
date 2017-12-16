@@ -9,20 +9,19 @@
 
 {% for item in items %}
 {% if item.image is not empty and item.imageMeta.isImage %}
-<a href="{{ item.imageUrl }}" data-fancybox="gallery" data-caption="Beschreibung"  >  
-    <img src="{{ item.image.getPathname()|imagine_filter('zkroot', relationThumbRuntimeOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"  />
+
+{# &lt;b&gt;Corfe Castle Sunrise&lt;/b&gt;&lt;br /&gt; Author: &lt;a href=&quot;https://www.flickr.com/photos/pholroyd66/&quot;&gt;Philip Holroyd&lt;/a&gt; #}
+
+{% set dataCaption = '' %}
+{% if item.copyright is not empty %}
+	{% set dataCaption = 'Copyright: ' ~ item.copyright ~ '&lt;br /&gt;' %}
+{%endif%}
+{% set dataCaption = dataCaption ~ item.imageTitle ~ '&lt;br /&gt;' ~ item.imageDescription%}
+{% set myThumbOptions = {thumbnail: {size: [570, 190], mode: 'inset' }} %} 
+<a href="{{ item.imageUrl }}" data-fancybox="gallery" data-caption="{{dataCaption|raw}}"  >  
+    <img src="{{ item.image.getPathname()|imagine_filter('zkroot', myThumbOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"  height="100%" />
 </a>
 {% endif %}
 {% endfor %}
-
-<script type="text/javascript">
-	$("[data-fancybox]").fancybox({
-		// Options will go here
-		  buttons : [
-			'zoom',
-			'close'
-			]
-	});
-</script>
 
 {% endif %}
