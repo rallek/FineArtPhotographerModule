@@ -1,5 +1,9 @@
 {# purpose of this template: general base layout #}
 {% block header %}
+	{{ pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/vendor/fancybox/dist/jquery.fancybox.min.js')) }}
+	{{ pageAddAsset('stylesheet', asset('../modules/RK/FineArtPhotographerModule/vendor/fancybox/dist/jquery.fancybox.min.css')) }}
+	{# pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/Resources/public/js/RKFineArtPhotographerModule.fancyBox.js')) #}
+
 {% endblock %}
 
 {% block appTitle %}

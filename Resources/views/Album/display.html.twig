@@ -1,6 +1,11 @@
 {# purpose of this template: albums user display view #}
 {% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : 'base' %}
 {% extends 'RKFineArtPhotographerModule::' ~ baseTemplate ~ '.html.twig' %}
+
+{% block appTitle %}
+    
+{% endblock %}
+
 {% block pageTitle %}{{ album|rkfineartphotographermodule_formattedTitle|default(__('Album')) }}{% endblock %}
 {% block title %}
     {% set templateTitle = album|rkfineartphotographermodule_formattedTitle|default(__('Album')) %}
@@ -9,63 +14,81 @@
 {% block content %}
     {% set isQuickView = app.request.query.getBoolean('raw', false) %}
     <div class="rkfineartphotographermodule-album rkfineartphotographermodule-display">
-
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-12">
+
     {% set itemActions = knp_menu_get('RKFineArtPhotographerModule:ItemActionsMenu:menu', [], {entity: album, area: routeArea, context: 'display'}) %}
     <div class="btn-group btn-group-sm item-actions" role="group" aria-label="{{ __('Actions') }}">
         {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
     </div>
+	</div>
+	</div>
+	<div class="row">
+        <div class="col-sm-12">
+	
+	    
+		<div class="panel panel-default">
+            {% if album.albumDescription is not empty %}
+			<div class="panel-body">{{ album.albumDescription|safeHtml }}</div>
+			{% endif %}
+			<div class="panel-footer col-sm-12">
+				<div class="col-sm-6">
+				{% if hookAssignments|length > 0 %}
+					<p>{{ __('This album is assigned to the following data objects:') }}</p>
+					<ul>
+					{% for assignment in hookAssignments %}
+						<li><a href="{{ assignment.url|e('html_attr') }}" title="{{ __('View this object')|e('html_attr') }}">{{ assignment.text }}</a></li>
+					{% endfor %}
+					</ul>
+				{% else %}
+					<p>{{ __('This album is not assigned to any data objects yet.') }}</p>
+				{% endif %}
+				</div>
+			
+				<div class="col-sm-6">
+					
+					{% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
+					
+					{% if album.categories is defined %}
+					<p>{{ __('Categories') }}:</p>
+					<ul class="category-list">
+					{% for catMapping in album.categories %}
+						<li>{{ catMapping.category.display_name[app.request.locale]|default(catMapping.category.name) }}</li>
+					{% endfor %}
+					</ul>
+					
+					
+						
+					{% endif %}
+				</div>	
+			</div>
+        </div>
+		{% endif %}
+
+	{{ block('related_items') }}
     <dl>
         {% if album.workflowState is not empty and routeArea == 'admin' %}
             <dt>{{ __('State') }}</dt>
             <dd>{{ album.workflowState|rkfineartphotographermodule_listEntry('album', 'workflowState') }}</dd>
         {% endif %}
-        {% if album.albumTitle is not empty %}
-            <dt>{{ __('Album title') }}</dt>
-            <dd>{{ album.albumTitle }}</dd>
-        {% endif %}
-        {% if album.albumDate is not empty %}
-            <dt>{{ __('Album date') }}</dt>
-            <dd>{{ album.albumDate|localizeddate('medium', 'none') }}</dd>
-        {% endif %}
-        {% if album.albumDescription is not empty %}
-            <dt>{{ __('Album description') }}</dt>
-            <dd>{{ album.albumDescription|safeHtml }}</dd>
-        {% endif %}
+
+
+
         
     </dl>
 
     {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
         {{ include('@RKFineArtPhotographerModule/Helper/includeCategoriesDisplay.html.twig', {obj: album}) }}
     {% endif %}
-    <h3 class="hook-assignments">{{ __('Hook assignments') }}</h3>
-        {% if hookAssignments|length > 0 %}
-            <p>{{ __('This album is assigned to the following data objects:') }}</p>
-            <ul>
-            {% for assignment in hookAssignments %}
-            	<li><a href="{{ assignment.url|e('html_attr') }}" title="{{ __('View this object')|e('html_attr') }}">{{ assignment.date|localizeddate('medium', 'short') }} - {{ assignment.text }}</a></li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>{{ __('This album is not assigned to any data objects yet.') }}</p>
-        {% endif %}
+
     {{ include('@RKFineArtPhotographerModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: album}) }}
 
     {{ block('display_hooks') }}
-        </div>
-        <div class="col-sm-3">
-            {{ block('related_items') }}
-        </div>
-    </div>
-</div>
+
+</div></div></div>
 {% endblock %}
 {% block related_items %}
-    {% if routeArea == 'admin' %}
-        <h4>{{ __('Album items') }}</h4>
-    {% else %}
-        <h3>{{ __('Album items') }}</h3>
-    {% endif %}
+
     
     {% if album.albumItems|default %}
         {{ include(

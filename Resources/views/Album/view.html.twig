@@ -1,11 +1,13 @@
 {# purpose of this template: albums user list view #}
 {% extends 'RKFineArtPhotographerModule::base.html.twig' %}
 {% block title own ? __('My albums') : __('Albums list') %}
+{% block appTitle %}{% endblock %}
 {% block content %}
 <div class="rkfineartphotographermodule-album rkfineartphotographermodule-view">
-
+	{% if hasPermission('RKFineArtPhotographerModule::', '::', 'ACCESS_EDIT') %}
     <p class="alert alert-info">{{ __('Please add your photos only to your own album.') }}</p>
-
+	{% endif %}
+	
     {{ block('page_nav_links') }}
 
     {{ include('@RKFineArtPhotographerModule/Album/viewQuickNav.html.twig') }}{# see template file for available options #}
@@ -68,8 +70,7 @@
                     {{ album.workflowState|rkfineartphotographermodule_objectState }}
                 </td>
                 {% endif %}<td headers="hAlbumTitle" class="text-left">
-                    {{ album.albumTitle }}<br>
-					{{ album|rkfineartphotographermodule_formattedTitle }}
+                    {{ album|rkfineartphotographermodule_formattedTitle }}
                 </td>
                 <td headers="hAlbumDate" class="text-left">
                     {{ album.albumDate|localizeddate('medium', 'none') }}
