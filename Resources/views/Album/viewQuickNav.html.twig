@@ -1,5 +1,5 @@
 {# purpose of this template: albums view filter form #}
-{% if hasPermission('RKFineArtPhotographerModule:Album:', '::', 'ACCESS_EDIT') %}
+{% if hasPermission('RKFineArtPhotographerModule:Album:', '::', 'ACCESS_READ') %}
     {% form_theme quickNavForm with [
         'bootstrap_3_layout.html.twig'
     ] %}
