@@ -4,7 +4,7 @@ application "FineArtPhotographer" targets ZK15 {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.1.2"
+    version "0.1.3"
     prefix "faph"
     generateModerationBlock false
     generateModerationPanel false
