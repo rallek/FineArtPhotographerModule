@@ -60,6 +60,14 @@
         {% endif %}
         
     </dl>
+	
+<ul>
+    {% for fieldName, fieldValue in albumItem.imageMeta if  fieldName not in ['exif.Unwanted1', 'exif.Unwanted2'] %}
+        <li><strong>{{ fieldName|replace({ 'exif.': '' }) }}:</strong> {% if fieldValue is iterable %}{{ fieldValue|join(', ') }}{% else %}{{ fieldValue }}{% endif %}</li>
+    {% endfor %}
+</ul>
+
+	
 
     {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'albumItem') %}
         {{ include('@RKFineArtPhotographerModule/Helper/includeCategoriesDisplay.html.twig', {obj: albumItem}) }}
