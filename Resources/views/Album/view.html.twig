@@ -87,26 +87,19 @@
             </tbody>
         </table>
         </div>
+		<div>
+		<p>neuer Bereich</p>
+		{% for album in items %}
+		<a href="{{ path('rkfineartphotographermodule_album_' ~ routeArea ~ 'display', {'id': album.getId()}) }}">{% spaceless %}
+                    {{ album|rkfineartphotographermodule_formattedTitle }}
+                  {% endspaceless %}</a>
+		{% endfor %}
+		</div>
         
         {% if all != 1 and pager|default %}
             {{ pager({rowcount: pager.amountOfItems, limit: pager.itemsPerPage, display: 'page', route: 'rkfineartphotographermodule_album_' ~ routeArea ~ 'view'}) }}
         {% endif %}
-    {% if routeArea == 'admin' %}
-            <fieldset>
-                <label for="rKFineArtPhotographerModuleAction" class="col-sm-3 control-label">{{ __('With selected albums') }}</label>
-                <div class="col-sm-6">
-                    <select id="rKFineArtPhotographerModuleAction" name="action" class="form-control input-sm">
-                        <option value="">{{ __('Choose action') }}</option>
-                        <option value="delete" title="{{ __('Delete content permanently.') }}">{{ __('Delete') }}</option>
-                    </select>
-                </div>
-                <div class="col-sm-3">
-                    <input type="submit" value="{{ __('Submit') }}" class="btn btn-default btn-sm" />
-                </div>
-            </fieldset>
-        </div>
-    </form>
-    {% endif %}
+
 
     {{ block('display_hooks') }}
 </div>
