@@ -306,18 +306,50 @@ abstract class AbstractUploadHelper
             $meta['format'] = 'square';
         }
     
-        if (!$includeExif) {
+        if (!$includeExif || $meta['extension'] != 'jpg') {
             return $meta;
         }
     
         // add EXIF data
+        $exifData = $this->readExifData($filePath);
+        $meta = array_merge($meta, $exifData);
+
+        return $meta;
+    }
+
+    /**
+     * Read EXIF data from a certain file.
+     *
+     * @param string  $filePath Path to file to be processed
+     *
+     * @return array Collected meta data
+     */
+    protected function readExifData($filePath)
+    {
         $imagine = new Imagine();
         $image = $imagine
             ->setMetadataReader(new ExifMetadataReader())
             ->open($filePath);
-        $meta = array_merge($meta, $image->metadata());
-    
-        return $meta;
+        $exifData = $image->metadata()->toArray();
+
+        // strip non-utf8 chars to bypass firmware bugs (e.g. Samsung)
+        foreach ($exifData as $k => $v) {
+            if (is_array($v)) {
+                foreach ($v as $kk => $vv) {
+                    $exifData[$k][$kk] = mb_convert_encoding($vv, 'UTF-8', 'UTF-8');
+                    if (false !== strpos($exifData[$k][$kk], '????')) {
+                        unset($exifData[$k][$kk]);
+                    }
+                }
+            } else {
+                $exifData[$k] = mb_convert_encoding($v, 'UTF-8', 'UTF-8');
+                if (false !== strpos($exifData[$k], '????')) {
+                    unset($exifData[$k]);
+                }
+            }
+        }
+
+        return $exifData;
     }
 
     /**
