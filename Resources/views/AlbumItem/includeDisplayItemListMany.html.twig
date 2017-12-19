@@ -6,22 +6,34 @@
 {% endif %}
 {% if items|default and items|length > 0 %}
 
+{% set myThumbOptions = {thumbnail: {size: [570, 190], mode: 'inset' }} %} 
 
+
+
+<div id="rk-album" class="flex-images">
 {% for item in items %}
 {% if item.image is not empty and item.imageMeta.isImage %}
 
-{# &lt;b&gt;Corfe Castle Sunrise&lt;/b&gt;&lt;br /&gt; Author: &lt;a href=&quot;https://www.flickr.com/photos/pholroyd66/&quot;&gt;Philip Holroyd&lt;/a&gt; #}
-
 {% set dataCaption = '' %}
+{% set albumItemUrl = path('rkfineartphotographermodule_albumitem_' ~ routeArea ~ 'display', {'id': item.getId()}) %}
 {% if item.copyright is not empty %}
 	{% set dataCaption = 'Copyright: ' ~ item.copyright ~ '&lt;br /&gt;' %}
 {%endif%}
-{% set dataCaption = dataCaption ~ item.imageTitle ~ '&lt;br /&gt;' ~ item.imageDescription%}
-{% set myThumbOptions = {thumbnail: {size: [570, 190], mode: 'inset' }} %} 
+{% set dataCaption = dataCaption ~ item.imageTitle ~ '&lt;br /&gt;' ~ item.imageDescription ~ '&lt;br /&gt; Mehr: &lt;a href=&quot;' ~ albumItemUrl ~ '&quot;&gt;Detail&lt;/a&gt;' %}
+
 <a href="{{ item.imageUrl }}" data-fancybox="gallery" data-caption="{{dataCaption|raw}}"  >  
-    <img src="{{ item.image.getPathname()|imagine_filter('zkroot', myThumbOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"  height="100%" />
+    <div class="item" data-w="200" data-h="150">
+	<img src="{{ item.image.getPathname()|imagine_filter('zkroot', myThumbOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"  />
+	</div>
 </a>
 {% endif %}
 {% endfor %}
+</div>
+    <script>
+	(function($) {
+        $('rk-album').flexImages({rowHeight: 140});
+	})(jQuery)
+	</script>
 
 {% endif %}
+ 

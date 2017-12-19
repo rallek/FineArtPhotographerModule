@@ -2,7 +2,8 @@
 {% block header %}
 	{{ pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/vendor/fancybox/dist/jquery.fancybox.min.js')) }}
 	{{ pageAddAsset('stylesheet', asset('../modules/RK/FineArtPhotographerModule/vendor/fancybox/dist/jquery.fancybox.min.css')) }}
-	{# pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/Resources/public/js/RKFineArtPhotographerModule.fancyBox.js')) #}
+	{{ pageAddAsset('stylesheet', asset('../modules/RK/FineArtPhotographerModule/Resources/public/css/style2.css')) }}
+	{{ pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/Resources/public/js/RKFineArtPhotographerModule.fancyBox.js')) }}
 
 {% endblock %}
 
@@ -30,4 +31,6 @@
     {{ pageAddAsset('javascript', asset('magnific-popup/jquery.magnific-popup.min.js')) }}
     {{ pageAddAsset('stylesheet', asset('magnific-popup/magnific-popup.css')) }}
     {{ pageAddAsset('javascript', zasset('@RKFineArtPhotographerModule:js/RKFineArtPhotographerModule.js')) }}
+	{{ pageAddAsset('javascript', asset('../modules/RK/FineArtPhotographerModule/vendor/fleximage/jquery.flex-images.js')) }}
+	{{ pageAddAsset('stylesheet', asset('../modules/RK/FineArtPhotographerModule/vendor/fleximage/jquery.flex-images.css')) }}
 {% endblock %}

@@ -1,0 +1,16 @@
+.white {
+	color:#ffffff;
+		
+}
+a.white:hover {
+	text-decoration: underline;
+	color:#ffffff;
+	
+}
+.height80 {
+	min-height:80px;
+}
+
+.height180 {
+	min-height:180px;
+}

@@ -60,9 +60,16 @@
         {% endif %}
         
     </dl>
-	
+<h4>{{ __('EXIF selection') }}</h4>	
 <ul>
-    {% for fieldName, fieldValue in albumItem.imageMeta if  fieldName not in ['exif.Unwanted1', 'exif.Unwanted2'] %}
+    {% for fieldName, fieldValue in albumItem.imageMeta if  fieldName in ['exif.FNumber', 'exif.Flash', 'exif.ISOSpeedRatings', 'exif.FocalLengthIn35mmFilm', 'exif.ExposureTime', 'ifd0.Make', 'ifd0.Model'] %}
+        <li><strong>{{ fieldName|replace({ 'exif.': '' }) }}:</strong> {% if fieldValue is iterable %}{{ fieldValue|join(', ') }}{% else %}{{ fieldValue }}{% endif %}</li>
+    {% endfor %}
+</ul>
+
+<h4>alle EXIF für die Entwicklung (fliegt später wieder raus)</h4>
+<ul>
+    {% for fieldName, fieldValue in albumItem.imageMeta %}
         <li><strong>{{ fieldName|replace({ 'exif.': '' }) }}:</strong> {% if fieldValue is iterable %}{{ fieldValue|join(', ') }}{% else %}{{ fieldValue }}{% endif %}</li>
     {% endfor %}
 </ul>

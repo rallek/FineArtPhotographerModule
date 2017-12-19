@@ -31,6 +31,7 @@
             {% if album.albumDescription is not empty %}
 			<div class="panel-body">{{ album.albumDescription|safeHtml }}</div>
 			{% endif %}
+			<div class="col-sm-6">
 			<div class="panel-footer col-sm-12">
 				<div class="col-sm-6">
 				{% if hookAssignments|length > 0 %}
@@ -50,22 +51,23 @@
 					{% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
 					
 					{% if album.categories is defined %}
-					<p>{{ __('Categories') }}:</p>
-					<ul class="category-list">
+					<p>{{ __('Categories') }}: 
 					{% for catMapping in album.categories %}
-						<li>{{ catMapping.category.display_name[app.request.locale]|default(catMapping.category.name) }}</li>
+						{{ catMapping.category.display_name[app.request.locale]|default(catMapping.category.name) }}
 					{% endfor %}
-					</ul>
-					
-					
-						
+					</p>
 					{% endif %}
 				</div>	
 			</div>
+			</div>
+			<div class="col-sm-6">{{ include('@RKFineArtPhotographerModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: album}) }}</div>
         </div>
 		{% endif %}
-
-	{{ block('related_items') }}
+		<div class="row">
+			<div class="col-sm-12">
+				{{ block('related_items') }}
+			</div>
+		</div>
     <dl>
         {% if album.workflowState is not empty and routeArea == 'admin' %}
             <dt>{{ __('State') }}</dt>
@@ -77,11 +79,8 @@
         
     </dl>
 
-    {% if featureActivationHelper.isEnabled(constant('RK\\FineArtPhotographerModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'album') %}
-        {{ include('@RKFineArtPhotographerModule/Helper/includeCategoriesDisplay.html.twig', {obj: album}) }}
-    {% endif %}
 
-    {{ include('@RKFineArtPhotographerModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: album}) }}
+    
 
     {{ block('display_hooks') }}
 
