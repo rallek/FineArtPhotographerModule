@@ -14,3 +14,7 @@ a.white:hover {
 .height180 {
 	min-height:180px;
 }
+
+.fancybox-thumbs {
+  background: rgba(0, 0, 0, 0.3);
+}

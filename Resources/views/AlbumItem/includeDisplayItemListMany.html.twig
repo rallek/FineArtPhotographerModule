@@ -5,13 +5,26 @@
     {% set noLink = false %}
 {% endif %}
 {% if items|default and items|length > 0 %}
+<div id="flexImageParameters" class="hidden" data-row-height="{{ getModVar('RKFineArtPhotographerModule', 'rowHeight') }}"></div>
+{% if getModVar('RKFineArtPhotographerModule', 'rowHeight') == true %}
+	{% set myRowHeight = getModVar('RKFineArtPhotographerModule', 'rowHeight', '200') %}
+	{% set maxThumbWidth = myRowHeight * 10 %}
+	{% set myThumbOptions = {thumbnail: {size: [maxThumbWidth, myRowHeight], mode: 'inset' }} %}
+{% else %}
+	{% set myThumbOptions = {thumbnail: {size: [570, 180], mode: 'inset' }} %}
+{% endif %}
 
-{% set myThumbOptions = {thumbnail: {size: [570, 190], mode: 'inset' }} %} 
+
+ 
 
 
 
 <div id="rk-album" class="flex-images">
 {% for item in items %}
+
+
+
+
 {% if item.image is not empty and item.imageMeta.isImage %}
 
 {% set dataCaption = '' %}
@@ -20,20 +33,15 @@
 	{% set dataCaption = 'Copyright: ' ~ item.copyright ~ '&lt;br /&gt;' %}
 {%endif%}
 {% set dataCaption = dataCaption ~ item.imageTitle ~ '&lt;br /&gt;' ~ item.imageDescription ~ '&lt;br /&gt; Mehr: &lt;a href=&quot;' ~ albumItemUrl ~ '&quot;&gt;Detail&lt;/a&gt;' %}
-
+{% set myImageWidth = myRowHeight * item.imageMeta.width / item.imageMeta.height %}
 <a href="{{ item.imageUrl }}" data-fancybox="gallery" data-caption="{{dataCaption|raw}}"  >  
-    <div class="item" data-w="200" data-h="150">
+    <div class="item" data-w="{{myImageWidth}}" data-h="{{myRowHeight}}">
 	<img src="{{ item.image.getPathname()|imagine_filter('zkroot', myThumbOptions) }}" alt="{{ item|rkfineartphotographermodule_formattedTitle|e('html_attr') }}"  />
 	</div>
 </a>
 {% endif %}
 {% endfor %}
 </div>
-    <script>
-	(function($) {
-        $('rk-album').flexImages({rowHeight: 140});
-	})(jQuery)
-	</script>
 
 {% endif %}
  
